@@ -152,6 +152,14 @@
   align-items: center;
   gap: 3rem;
   flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 1.2rem;
+  padding: 2rem 3rem;
+  margin: 0 auto;
+  max-width: 60rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .luxury-hero__trust-item {
@@ -159,15 +167,23 @@
   align-items: center;
   gap: 0.8rem;
   font-size: 1.4rem;
-  font-weight: 500;
-  opacity: 0.9;
+  font-weight: 600;
+  opacity: 1;
+  color: #1a1a1a;
+  transition: all 0.3s ease;
+}
+
+.luxury-hero__trust-item:hover {
+  transform: translateY(-1px);
+  color: #000000;
 }
 
 .luxury-hero__icon {
   width: 2.4rem;
   height: 2.4rem;
-  color: rgb(var(--color-accent-1));
+  color: #ffd700;
   flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 /* Mobile Styles */
@@ -208,6 +224,8 @@
   
   .luxury-hero__trust {
     gap: 2rem;
+    padding: 1.5rem 2rem;
+    margin: 0 1rem;
   }
   
   .luxury-hero__trust-item {
@@ -225,6 +243,8 @@
   .luxury-hero__trust {
     flex-direction: column;
     gap: 1.5rem;
+    padding: 1.5rem;
+    margin: 0 0.5rem;
   }
 }
 
