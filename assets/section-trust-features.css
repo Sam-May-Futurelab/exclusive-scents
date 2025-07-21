@@ -23,8 +23,10 @@
 }
 
 .trust-features__subtitle {
-  font-size: 1.8rem;
-  opacity: 0.8;
+  font-size: 2.0rem;
+  opacity: 1;
+  color: rgb(var(--color-foreground));
+  font-weight: 500;
   max-width: 60rem;
   margin: 0 auto;
   line-height: 1.6;

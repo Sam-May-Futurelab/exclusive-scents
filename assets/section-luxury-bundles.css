@@ -23,8 +23,10 @@
 }
 
 .luxury-bundles__subtitle {
-  font-size: 1.8rem;
-  opacity: 0.8;
+  font-size: 2.0rem;
+  opacity: 1;
+  color: rgb(var(--color-foreground));
+  font-weight: 500;
   max-width: 60rem;
   margin: 0 auto;
   line-height: 1.6;
@@ -176,8 +178,9 @@
   align-items: center;
   justify-content: center;
   padding: 1.6rem 3.2rem;
-  background: linear-gradient(135deg, rgb(var(--color-accent-1)) 0%, rgb(var(--color-accent-2)) 100%);
-  color: rgb(var(--color-background));
+  background: rgba(255, 255, 255, 0.9);
+  color: #1a1a1a;
+  border: 2px solid #1a1a1a;
   text-decoration: none;
   border-radius: 1.2rem;
   font-weight: 600;
@@ -185,13 +188,15 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 16px rgba(var(--color-accent-1), 0.2);
+  backdrop-filter: blur(10px);
   margin-top: auto;
 }
 
 .luxury-bundle-card__button:hover {
+  background: rgba(255, 255, 255, 1);
+  color: #000000;
+  border: 2px solid #000000;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(var(--color-accent-1), 0.3);
 }
 
 /* Mobile Styles */
