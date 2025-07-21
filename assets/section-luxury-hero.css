@@ -63,7 +63,7 @@
   text-transform: uppercase;
   margin-bottom: 1rem;
   opacity: 0.9;
-  font-family: var(--font-heading-family);
+  font-family: var(--font-luxury-body);
 }
 
 .luxury-hero__heading {
@@ -71,7 +71,7 @@
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 2rem;
-  font-family: var(--font-heading-family);
+  font-family: var(--font-luxury-display);
   letter-spacing: -0.02em;
 }
 
