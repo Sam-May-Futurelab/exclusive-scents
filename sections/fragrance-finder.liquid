@@ -21,17 +21,17 @@
         <div class="filter-group">
           <h3 class="filter-title">Scent Families</h3>
           <div class="filter-options" data-filter-type="family">
-            <button class="filter-btn" data-filter="citrus">🍊 Citrus</button>
-            <button class="filter-btn" data-filter="floral">🌸 Floral</button>
-            <button class="filter-btn" data-filter="woody">🌲 Woody</button>
-            <button class="filter-btn" data-filter="oriental">🌟 Oriental</button>
-            <button class="filter-btn" data-filter="fresh">💧 Fresh</button>
-            <button class="filter-btn" data-filter="spicy">🌶️ Spicy</button>
+            <button class="filter-btn" data-filter="Citrus">🍊 Citrus</button>
+            <button class="filter-btn" data-filter="Floral Notes">🌸 Floral</button>
+            <button class="filter-btn" data-filter="Woody Notes">🌲 Woody</button>
+            <button class="filter-btn" data-filter="Amber">🌟 Amber</button>
+            <button class="filter-btn" data-filter="Fresh">💧 Fresh</button>
+            <button class="filter-btn" data-filter="Spicy">🌶️ Spicy</button>
           </div>
         </div>
 
         <div class="filter-group">
-          <h3 class="filter-title">Key Notes</h3>
+          <h3 class="filter-title">Popular Notes</h3>
           <div class="filter-options" data-filter-type="notes">
             <button class="filter-btn" data-filter="Vanilla">Vanilla</button>
             <button class="filter-btn" data-filter="Bergamot">Bergamot</button>
@@ -46,8 +46,26 @@
             <button class="filter-btn" data-filter="Orange Blossom">Orange Blossom</button>
             <button class="filter-btn" data-filter="Tonka Bean">Tonka Bean</button>
             <button class="filter-btn" data-filter="Pink Pepper">Pink Pepper</button>
-            <button class="filter-btn" data-filter="Ginger">Ginger</button>
             <button class="filter-btn" data-filter="Saffron">Saffron</button>
+            <button class="filter-btn" data-filter="Oud">Oud</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h3 class="filter-title">Additional Notes</h3>
+          <div class="filter-options" data-filter-type="additional">
+            <button class="filter-btn" data-filter="Cardamom">Cardamom</button>
+            <button class="filter-btn" data-filter="Mandarin Orange">Mandarin Orange</button>
+            <button class="filter-btn" data-filter="Neroli">Neroli</button>
+            <button class="filter-btn" data-filter="Ginger">Ginger</button>
+            <button class="filter-btn" data-filter="Grapefruit">Grapefruit</button>
+            <button class="filter-btn" data-filter="Oakmoss">Oakmoss</button>
+            <button class="filter-btn" data-filter="Lavender">Lavender</button>
+            <button class="filter-btn" data-filter="Vetiver">Vetiver</button>
+            <button class="filter-btn" data-filter="Incense">Incense</button>
+            <button class="filter-btn" data-filter="Cinnamon">Cinnamon</button>
+            <button class="filter-btn" data-filter="Coffee">Coffee</button>
+            <button class="filter-btn" data-filter="Coconut">Coconut</button>
           </div>
         </div>
 
@@ -123,13 +141,14 @@
   .fragrance-finder__title {
     font-size: 4.5rem;
     margin-bottom: 2rem;
-    font-weight: 300;
+    font-weight: 700;
     letter-spacing: -0.02em;
     background: linear-gradient(135deg, #C9B037 0%, #F4E67B 50%, #C9B037 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     position: relative;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .fragrance-finder__title::after {
@@ -420,12 +439,13 @@
 
   .results-title {
     font-size: 2.5rem;
-    font-weight: 400;
+    font-weight: 700;
     letter-spacing: -0.01em;
     background: linear-gradient(135deg, #C9B037 0%, #F4E67B 50%, #C9B037 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   @media screen and (max-width: 768px) {
@@ -692,8 +712,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let selectedFilters = {
     family: [],
     notes: [],
-    intensity: [],
-    occasion: []
+    additional: []
   };
 
   // Handle filter button clicks
@@ -720,8 +739,7 @@ document.addEventListener('DOMContentLoaded', function() {
     selectedFilters = {
       family: [],
       notes: [],
-      intensity: [],
-      occasion: []
+      additional: []
     };
     resultsGrid.innerHTML = '';
     resultsCount.textContent = '';
@@ -737,13 +755,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show loading state
     resultsGrid.innerHTML = '<div class="loading">Finding your perfect fragrances...</div>';
     
-    // Build search query
+    // Build search query with smart category mapping
     let searchTags = [];
     
-    // Add selected filters as search terms
-    Object.values(selectedFilters).forEach(filterArray => {
-      searchTags = searchTags.concat(filterArray);
+    // Smart category mapping - expand generic categories to specific notes
+    const categoryMapping = {
+      'Citrus': ['Citrus', 'Lemon', 'Bergamot', 'Grapefruit', 'Orange', 'Mandarin Orange', 'Sicilian Orange', 'Italian Lemon', 'Calabrian Bergamot', 'Sicilian Mandarin', 'Sicilian Bergamot', 'Amalfi Lemon', 'Green Mandarin', 'Bitter Orange', 'Citron'],
+      'Floral Notes': ['Floral Notes', 'Rose', 'Jasmine', 'Orange Blossom', 'Neroli', 'Ylang-Ylang', 'Lily', 'Peony', 'Tuberose', 'Bulgarian Rose', 'Turkish Rose', 'Damask Rose', 'May Rose', 'Moroccan Rose', 'Egyptian Jasmine', 'Jasmine Sambac', 'Moroccan Jasmine', 'Water Jasmine', 'Lily of the Valley', 'Freesia', 'Gardenia', 'Carnation', 'Orchid', 'Magnolia', 'Osmanthus', 'Hibiscus', 'African Orange Flower', 'Tunisian Orange Blossom', 'Nectarine Blossom'],
+      'Woody Notes': ['Woody Notes', 'Cedar', 'Sandalwood', 'Cedarwood', 'Oakmoss', 'Vetiver', 'Patchouli', 'Guaiac Wood', 'Cashmere Wood', 'Amberwood', 'Indonesian Patchouli Leaf', 'Haitian Vetiver', 'Haitan Vetiver', 'Palo Santo', 'Birch', 'Pine', 'Fir Resin', 'Oak', 'Mahogany', 'Olive Tree'],
+      'Amber': ['Amber', 'Ambergris', 'Ambroxan', 'Ambrofix', 'Labdanum', 'Spanish Labdanum', 'Benzoin', 'Siam Benzoin', 'Opoponax', 'Ambrette', 'Ambrettolide'],
+      'Fresh': ['Fresh', 'Marine Notes', 'Water Notes', 'Sea Notes', 'Mint', 'Peppermint', 'Green Tea', 'Petitgrain', 'Galbanum', 'Basil', 'Rosemary', 'Sage', 'Clary Sage', 'Thyme', 'Oregano'],
+      'Spicy': ['Spicy', 'Pink Pepper', 'Black Pepper', 'Pepper', 'Sichuan Pepper', 'Cardamom', 'Cinnamon', 'Nutmeg', 'Indonesian Nutmeg', 'Ginger', 'Fresh Ginger', 'Ginger Flower', 'Saffron', 'Cloves', 'Star Anise', 'Coriander']
+    };
+    
+    // Process selected filters
+    Object.entries(selectedFilters).forEach(([filterType, filterArray]) => {
+      filterArray.forEach(filter => {
+        if (categoryMapping[filter]) {
+          // If it's a category, add all related notes
+          searchTags = searchTags.concat(categoryMapping[filter]);
+        } else {
+          // If it's a specific note, add it directly
+          searchTags.push(filter);
+        }
+      });
     });
+    
+    // Remove duplicates
+    searchTags = [...new Set(searchTags)];
     
     if (searchTags.length === 0) {
       // If no filters selected, show all products
@@ -753,7 +792,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Search for products with matching tags
     const searchQuery = searchTags.join(' OR ');
-    const searchUrl = `/search?q=${encodeURIComponent(searchQuery)}&view=json`;
+    const searchUrl = `/search?q=${encodeURIComponent(searchQuery)}&section_id=template--product-grid`;
     
     fetch(searchUrl)
       .then(response => response.text())
@@ -761,7 +800,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Parse the HTML to extract product data
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
-        const productCards = doc.querySelectorAll('.product-item, .card-wrapper, .grid__item');
+        // Look for various product card selectors
+        const productCards = doc.querySelectorAll('.card-wrapper, .product-item, .grid__item, [class*="product"], [class*="card"]');
         
         displayResults(productCards);
       })
@@ -772,12 +812,13 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function fetchAllProducts() {
-    fetch('/collections/all?view=json')
+    fetch('/collections/all')
       .then(response => response.text())
       .then(html => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
-        const productCards = doc.querySelectorAll('.product-item, .card-wrapper, .grid__item');
+        // Look for various product card selectors
+        const productCards = doc.querySelectorAll('.card-wrapper, .product-item, .grid__item, [class*="product"], [class*="card"]');
         
         displayResults(productCards);
       })
@@ -796,8 +837,20 @@ document.addEventListener('DOMContentLoaded', function() {
     resultsGrid.innerHTML = '';
     noResults.style.display = 'none';
     
-    // Convert NodeList to Array and take first 12 results
-    const products = Array.from(productCards).slice(0, 12);
+    // Convert NodeList to Array and remove duplicates by URL
+    const seenUrls = new Set();
+    const uniqueProducts = [];
+    
+    Array.from(productCards).forEach(card => {
+      const link = card.querySelector('a')?.href;
+      if (link && !seenUrls.has(link)) {
+        seenUrls.add(link);
+        uniqueProducts.push(card);
+      }
+    });
+    
+    // Take first 12 unique results
+    const products = uniqueProducts.slice(0, 12);
     
     products.forEach(card => {
       const productCard = createProductCard(card);
@@ -811,11 +864,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function createProductCard(originalCard) {
     try {
-      // Extract product information
-      const title = originalCard.querySelector('.card__heading a, .product-title, h3')?.textContent?.trim();
-      const price = originalCard.querySelector('.price, .product-price')?.textContent?.trim();
-      const image = originalCard.querySelector('img')?.src;
-      const link = originalCard.querySelector('a')?.href;
+      // Extract product information with multiple selector options
+      const titleElement = originalCard.querySelector('.card__heading a, .product-title, h3, h2, .card__content h3, [class*="title"]');
+      const title = titleElement?.textContent?.trim();
+      
+      const priceElement = originalCard.querySelector('.price, .product-price, .money, [class*="price"]');
+      const price = priceElement?.textContent?.trim();
+      
+      const imageElement = originalCard.querySelector('img');
+      const image = imageElement?.src || imageElement?.dataset?.src;
+      
+      const linkElement = originalCard.querySelector('a');
+      const link = linkElement?.href;
       
       if (!title || !link) return null;
       
