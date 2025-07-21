@@ -12,6 +12,151 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* Premium About Page Styling */
+  .main-page-title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+    background: linear-gradient(135deg, #C9B037, #FFD700, #F4E67B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  @media screen and (min-width: 750px) {
+    .main-page-title {
+      font-size: 4rem;
+      margin-bottom: 4rem;
+    }
+  }
+
+  /* Enhanced content styling */
+  .rte {
+    font-size: 1.6rem;
+    line-height: 1.7;
+    color: rgba(var(--color-foreground), 0.85);
+  }
+
+  .rte h2 {
+    font-size: 2.4rem;
+    font-weight: 400;
+    margin: 3rem 0 1.5rem 0;
+    color: rgba(var(--color-foreground), 0.9);
+    position: relative;
+  }
+
+  .rte h2::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #C9B037, #FFD700);
+  }
+
+  .rte h3 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin: 2.5rem 0 1rem 0;
+    color: rgba(var(--color-foreground), 0.8);
+  }
+
+  .rte p {
+    margin-bottom: 1.8rem;
+    color: rgba(var(--color-foreground), 0.8);
+  }
+
+  .rte p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Quote styling */
+  .rte blockquote {
+    background: linear-gradient(135deg, rgba(201, 176, 55, 0.1), rgba(244, 230, 123, 0.1));
+    border-left: 4px solid #C9B037;
+    padding: 2rem 3rem;
+    margin: 3rem 0;
+    border-radius: 1rem;
+    font-style: italic;
+    font-size: 1.8rem;
+    position: relative;
+  }
+
+  .rte blockquote::before {
+    content: '"';
+    font-size: 4rem;
+    color: #C9B037;
+    position: absolute;
+    top: -1rem;
+    left: 1rem;
+    font-family: Georgia, serif;
+  }
+
+  /* List styling */
+  .rte ul,
+  .rte ol {
+    margin: 2rem 0;
+    padding-left: 2rem;
+  }
+
+  .rte li {
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+  }
+
+  /* Image styling */
+  .rte img {
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin: 2rem 0;
+  }
+
+  /* Link styling */
+  .rte a {
+    color: #C9B037;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .rte a:hover {
+    border-bottom-color: #C9B037;
+  }
+
+  /* Enhanced container */
+  .page-width--narrow {
+    max-width: 800px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .page-width--narrow {
+      max-width: 900px;
+    }
+  }
+
+  /* Add subtle background pattern */
+  .section {
+    position: relative;
+  }
+
+  .section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(201, 176, 55, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(244, 230, 123, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+  }
 {%- endstyle -%}
 
 <div class="page-width page-width--narrow section-{{ section.id }}-padding">
