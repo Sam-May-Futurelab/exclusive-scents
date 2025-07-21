@@ -31,18 +31,18 @@
     <div class="luxury-hero__content">
       <div class="luxury-hero__content-container page-width">
         {%- if section.settings.subheading != blank -%}
-          <p class="luxury-hero__subheading">{{ section.settings.subheading }}</p>
+          <p class="luxury-hero__subheading{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">{{ section.settings.subheading }}</p>
         {%- endif -%}
         
         {%- if section.settings.heading != blank -%}
-          <h1 class="luxury-hero__heading">{{ section.settings.heading }}</h1>
+          <h1 class="luxury-hero__heading{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">{{ section.settings.heading }}</h1>
         {%- endif -%}
         
         {%- if section.settings.text != blank -%}
-          <div class="luxury-hero__text">{{ section.settings.text }}</div>
+          <div class="luxury-hero__text{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">{{ section.settings.text }}</div>
         {%- endif -%}
         
-        <div class="luxury-hero__buttons">
+        <div class="luxury-hero__buttons{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
           {%- if section.settings.button_label_1 != blank -%}
             <a href="{{ section.settings.button_link_1 }}" class="luxury-hero__button luxury-hero__button--primary">
               {{ section.settings.button_label_1 | escape }}

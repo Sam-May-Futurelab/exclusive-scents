@@ -3,7 +3,7 @@
 <section class="luxury-bundles color-{{ section.settings.color_scheme }} gradient">
   <div class="page-width section-{{ section.id }}-padding">
     {%- unless section.settings.title == blank -%}
-      <div class="luxury-bundles__header">
+      <div class="luxury-bundles__header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <h2 class="luxury-bundles__title">{{ section.settings.title }}</h2>
         {%- if section.settings.subtitle != blank -%}
           <p class="luxury-bundles__subtitle">{{ section.settings.subtitle }}</p>
@@ -13,7 +13,11 @@
     
     <div class="luxury-bundles__grid">
       {%- for block in section.blocks -%}
-        <div class="luxury-bundle-card" {{ block.shopify_attributes }}>
+        <div class="luxury-bundle-card{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" {{ block.shopify_attributes }}
+          {%- if settings.animations_reveal_on_scroll -%}
+            style="--animation-order: {{ forloop.index0 }};"
+          {%- endif -%}
+        >
           <div class="luxury-bundle-card__inner">
             {%- if block.settings.image != blank -%}
               <div class="luxury-bundle-card__media">

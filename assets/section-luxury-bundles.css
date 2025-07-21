@@ -444,3 +444,12 @@
     animation-delay: calc(var(--animation-order, 0) * 0.1s);
   }
 }
+
+/* Scroll Animation Timing */
+.luxury-bundles__header.scroll-trigger {
+  --animation-order: 0;
+}
+
+.luxury-bundle-card.scroll-trigger {
+  animation-delay: calc(var(--animation-order, 0) * 0.15s + 0.2s);
+}

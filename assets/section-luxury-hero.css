@@ -284,3 +284,20 @@
     transform: translateY(0);
   }
 }
+
+/* Scroll Animation Timing for Premium Effect */
+.luxury-hero__subheading.scroll-trigger {
+  --animation-order: 0;
+}
+
+.luxury-hero__heading.scroll-trigger {
+  --animation-order: 1;
+}
+
+.luxury-hero__text.scroll-trigger {
+  --animation-order: 2;
+}
+
+.luxury-hero__buttons.scroll-trigger {
+  --animation-order: 3;
+}
