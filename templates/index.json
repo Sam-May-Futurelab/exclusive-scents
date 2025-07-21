@@ -1,1 +1,226 @@
-{"sections":{"luxury_hero_main":{"type":"luxury-hero","settings":{"subheading":"Designer Inspired Fragrances","heading":"Luxury Scents That <em>Last</em>","text":"<p>Discover our collection of premium Extrait De Parfum - strong, long-lasting, and ethically made for the modern fragrance lover.</p>","button_label_1":"Shop Now","button_link_1":"shopify:\/\/collections\/all","button_label_2":"Explore Collections","button_link_2":"shopify:\/\/collections","trust_badges":true,"desktop_height":70,"mobile_height":60,"overlay_opacity":30,"color_scheme":"background-1"}},"luxury_bundles_main":{"type":"luxury-bundles","blocks":{"bundle_samples":{"type":"bundle","settings":{"title":"Add 5 x 5ml Sample's To Your Cart To Get 25% Off","features":"5 x 5ml Samples, Long Lasting Formula, 25% Discount, Perfect for Discovery","button_label":"Shop Now","button_link":"shopify:\/\/collections\/samples"}},"bundle_extrait":{"type":"bundle","settings":{"title":"Add 3 x 50ml Extrait Spray's To Your Cart To Get 15% Off","features":"3 x 50ml Extrait Sprays, Premium Concentration, 15% Discount, Designer Inspired","button_label":"Shop Now","button_link":"shopify:\/\/collections\/extrait-sprays"}}},"block_order":["bundle_samples","bundle_extrait"],"settings":{"title":"Exclusive <em>Bundle Offers</em>","subtitle":"Save more when you bundle your favorite luxury scents","color_scheme":"background-2","padding_top":40,"padding_bottom":80}},"collection_list_yJhE7U":{"type":"collection-list","blocks":{"featured_collection_zTYztf":{"type":"featured_collection","settings":{"collection":"mens"}},"featured_collection_3BgLCj":{"type":"featured_collection","settings":{"collection":"womens"}},"featured_collection_PkYUDm":{"type":"featured_collection","settings":{"collection":"extrait-sprays"}}},"block_order":["featured_collection_zTYztf","featured_collection_3BgLCj","featured_collection_PkYUDm"],"settings":{"title":"Shop By Category","heading_size":"h2","image_ratio":"adapt","columns_desktop":3,"color_scheme":"background-1","show_view_all":true,"columns_mobile":"2","swipe_on_mobile":false,"padding_top":80,"padding_bottom":40}},"trust_features_main":{"type":"trust-features","blocks":{"trust_reviews":{"type":"feature","settings":{"icon_name":"star","title":"5-Star Reviews","description":"<p>Thousands of happy customers love our long-lasting, premium fragrances that rival designer brands.</p>"}},"trust_vegan":{"type":"feature","settings":{"icon_name":"leaf","title":"Vegan & Cruelty Free","description":"<p>All our fragrances are ethically made with premium ingredients and no animal testing.</p>"}},"trust_lasting":{"type":"feature","settings":{"icon_name":"clock","title":"Long Lasting Formula","description":"<p>Our Extrait De Parfum concentration ensures exceptional performance and all-day fragrance.</p>"}},"trust_shipping":{"type":"feature","settings":{"icon_name":"truck","title":"Fast & Free Shipping","description":"<p>Free UK shipping on orders over £25, with express delivery options available nationwide.</p>"}}},"block_order":["trust_reviews","trust_vegan","trust_lasting","trust_shipping"],"settings":{"title":"Why Choose <em>Exclusive Scents</em>?","subtitle":"Established in 2022, we believe luxury shouldn't cost a fortune","show_testimonial":true,"testimonial_text":"Amazing quality fragrances that last all day. I've tried many expensive brands but these are just as good for a fraction of the price!","testimonial_author":"Sarah M., Verified Customer","color_scheme":"background-1","padding_top":80,"padding_bottom":80}},"featured-collection-0":{"type":"featured-collection","custom_css":[],"settings":{"collection":"extrait-sprays","products_to_show":8,"title":"Discover Our Best Sellers","heading_size":"h2","description":"<p>Hand-picked fragrances loved by our customers worldwide</p>","show_description":true,"description_style":"body","columns_desktop":4,"enable_desktop_slider":false,"full_width":false,"show_view_all":true,"view_all_style":"solid","color_scheme":"background-2","image_ratio":"adapt","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":true,"quick_add":"standard","columns_mobile":"2","swipe_on_mobile":true,"padding_top":80,"padding_bottom":40}},"17501054157be840f6":{"type":"apps","blocks":{"judge_me_reviews_featured_carousel_Q93486":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/featured_carousel\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","settings":{"maxwidth":1080}}},"block_order":["judge_me_reviews_featured_carousel_Q93486"],"settings":{"include_margins":true}}},"order":["luxury_hero_main","luxury_bundles_main","collection_list_yJhE7U","trust_features_main","featured-collection-0","17501054157be840f6"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "luxury_hero_main": {
+      "type": "luxury-hero",
+      "settings": {
+        "image": "shopify://shop_images/Designer_inspired_scents_at_prices_you_ll_love._6.png",
+        "overlay_opacity": 30,
+        "desktop_height": 70,
+        "mobile_height": 60,
+        "subheading": "Designer Inspired Fragrances",
+        "heading": "Luxury Scents That <em>Last</em>",
+        "text": "<p>Discover our collection of premium Extrait De Parfum - strong, long-lasting, and ethically made for the modern fragrance lover.</p>",
+        "button_label_1": "Shop Now",
+        "button_link_1": "shopify://collections/all",
+        "button_label_2": "Explore Collections",
+        "button_link_2": "shopify://collections",
+        "trust_badges": true,
+        "color_scheme": "background-1"
+      }
+    },
+    "luxury_bundles_main": {
+      "type": "luxury-bundles",
+      "blocks": {
+        "bundle_samples": {
+          "type": "bundle",
+          "settings": {
+            "badge": "BEST VALUE",
+            "title": "Add 5 x 5ml Sample's To Your Cart To Get 25% Off",
+            "description": "<p>Perfect for discovering your new signature scent</p>",
+            "features": "5 x 5ml Samples, Long Lasting Formula, 25% Discount, Perfect for Discovery",
+            "original_price": "£40.00",
+            "sale_price": "£30.00",
+            "discount": "Save 25%",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/samples"
+          }
+        },
+        "bundle_extrait": {
+          "type": "bundle",
+          "settings": {
+            "badge": "BEST VALUE",
+            "title": "Add 3 x 50ml Extrait Spray's To Your Cart To Get 15% Off",
+            "description": "<p>Perfect for discovering your new signature scent</p>",
+            "features": "3 x 50ml Extrait Sprays, Premium Concentration, 15% Discount, Designer Inspired",
+            "original_price": "£40.00",
+            "sale_price": "£30.00",
+            "discount": "Save 25%",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/extrait-sprays"
+          }
+        }
+      },
+      "block_order": [
+        "bundle_samples",
+        "bundle_extrait"
+      ],
+      "settings": {
+        "title": "Exclusive <em>Bundle Offers</em>",
+        "subtitle": "Save more when you bundle your favorite luxury scents",
+        "color_scheme": "background-2",
+        "padding_top": 40,
+        "padding_bottom": 80
+      }
+    },
+    "collection_list_yJhE7U": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_zTYztf": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "mens"
+          }
+        },
+        "featured_collection_3BgLCj": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "womens"
+          }
+        },
+        "featured_collection_PkYUDm": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "extrait-sprays"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_zTYztf",
+        "featured_collection_3BgLCj",
+        "featured_collection_PkYUDm"
+      ],
+      "settings": {
+        "title": "Shop By Category",
+        "heading_size": "h2",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "color_scheme": "background-1",
+        "show_view_all": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 80,
+        "padding_bottom": 40
+      }
+    },
+    "trust_features_main": {
+      "type": "trust-features",
+      "blocks": {
+        "trust_reviews": {
+          "type": "feature",
+          "settings": {
+            "icon_type": "svg",
+            "icon_name": "star",
+            "title": "5-Star Reviews",
+            "description": "<p>Thousands of happy customers love our long-lasting, premium fragrances that rival designer brands.</p>"
+          }
+        },
+        "trust_vegan": {
+          "type": "feature",
+          "settings": {
+            "icon_type": "svg",
+            "icon_name": "leaf",
+            "title": "Vegan & Cruelty Free",
+            "description": "<p>All our fragrances are ethically made with premium ingredients and no animal testing.</p>"
+          }
+        },
+        "trust_lasting": {
+          "type": "feature",
+          "settings": {
+            "icon_type": "svg",
+            "icon_name": "clock",
+            "title": "Long Lasting Formula",
+            "description": "<p>Our Extrait De Parfum concentration ensures exceptional performance and all-day fragrance.</p>"
+          }
+        },
+        "trust_shipping": {
+          "type": "feature",
+          "settings": {
+            "icon_type": "svg",
+            "icon_name": "truck",
+            "title": "Fast & Free Shipping",
+            "description": "<p>Free UK shipping on orders over £25, with express delivery options available nationwide.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "trust_reviews",
+        "trust_vegan",
+        "trust_lasting",
+        "trust_shipping"
+      ],
+      "settings": {
+        "title": "Why Choose <em>Exclusive Scents</em>?",
+        "subtitle": "Established in 2022, we believe luxury shouldn't cost a fortune",
+        "show_testimonial": true,
+        "testimonial_text": "Amazing quality fragrances that last all day. I've tried many expensive brands but these are just as good for a fraction of the price!",
+        "testimonial_author": "Sarah M., Verified Customer",
+        "color_scheme": "background-1",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "featured-collection-0": {
+      "type": "featured-collection",
+      "custom_css": [],
+      "settings": {
+        "collection": "extrait-sprays",
+        "products_to_show": 8,
+        "title": "Discover Our Best Sellers",
+        "heading_size": "h2",
+        "description": "<p>Hand-picked fragrances loved by our customers worldwide</p>",
+        "show_description": true,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "background-2",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 80,
+        "padding_bottom": 40
+      }
+    },
+    "17501054157be840f6": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_featured_carousel_Q93486": {
+          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "maxwidth": 1080
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_featured_carousel_Q93486"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "luxury_hero_main",
+    "luxury_bundles_main",
+    "collection_list_yJhE7U",
+    "trust_features_main",
+    "featured-collection-0",
+    "17501054157be840f6"
+  ]
+}
