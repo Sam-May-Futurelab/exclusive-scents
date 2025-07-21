@@ -1,0 +1,555 @@
+{% comment %}
+  Fragrance Finder Section
+  Helps customers discover fragrances based on their preferences
+{% endcomment %}
+
+<div class="fragrance-finder section-{{ section.id }}-padding color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="fragrance-finder__content">
+      {% if section.settings.title != blank %}
+        <div class="fragrance-finder__header">
+          <h1 class="fragrance-finder__title h2">{{ section.settings.title }}</h1>
+          {% if section.settings.description != blank %}
+            <div class="fragrance-finder__description rte">
+              {{ section.settings.description }}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <div class="fragrance-finder__filters">
+        <div class="filter-group">
+          <h3 class="filter-title">Scent Families</h3>
+          <div class="filter-options" data-filter-type="family">
+            <button class="filter-btn" data-filter="citrus">🍊 Citrus</button>
+            <button class="filter-btn" data-filter="floral">🌸 Floral</button>
+            <button class="filter-btn" data-filter="woody">🌲 Woody</button>
+            <button class="filter-btn" data-filter="oriental">🌟 Oriental</button>
+            <button class="filter-btn" data-filter="fresh">💧 Fresh</button>
+            <button class="filter-btn" data-filter="spicy">🌶️ Spicy</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h3 class="filter-title">Key Notes</h3>
+          <div class="filter-options" data-filter-type="notes">
+            <button class="filter-btn" data-filter="Vanilla">Vanilla</button>
+            <button class="filter-btn" data-filter="Bergamot">Bergamot</button>
+            <button class="filter-btn" data-filter="Amber">Amber</button>
+            <button class="filter-btn" data-filter="Patchouli">Patchouli</button>
+            <button class="filter-btn" data-filter="Jasmine">Jasmine</button>
+            <button class="filter-btn" data-filter="Rose">Rose</button>
+            <button class="filter-btn" data-filter="Sandalwood">Sandalwood</button>
+            <button class="filter-btn" data-filter="Musk">Musk</button>
+            <button class="filter-btn" data-filter="Cedar">Cedar</button>
+            <button class="filter-btn" data-filter="Lemon">Lemon</button>
+            <button class="filter-btn" data-filter="Orange Blossom">Orange Blossom</button>
+            <button class="filter-btn" data-filter="Tonka Bean">Tonka Bean</button>
+            <button class="filter-btn" data-filter="Pink Pepper">Pink Pepper</button>
+            <button class="filter-btn" data-filter="Ginger">Ginger</button>
+            <button class="filter-btn" data-filter="Saffron">Saffron</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h3 class="filter-title">Intensity</h3>
+          <div class="filter-options" data-filter-type="intensity">
+            <button class="filter-btn" data-filter="light">Light & Airy</button>
+            <button class="filter-btn" data-filter="medium">Medium</button>
+            <button class="filter-btn" data-filter="strong">Bold & Intense</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h3 class="filter-title">Occasion</h3>
+          <div class="filter-options" data-filter-type="occasion">
+            <button class="filter-btn" data-filter="daytime">Daytime</button>
+            <button class="filter-btn" data-filter="evening">Evening</button>
+            <button class="filter-btn" data-filter="casual">Casual</button>
+            <button class="filter-btn" data-filter="formal">Formal</button>
+          </div>
+        </div>
+
+        <div class="filter-actions">
+          <button class="btn btn-primary" id="find-fragrances">Find My Fragrances</button>
+          <button class="btn btn-secondary" id="clear-filters">Clear All</button>
+        </div>
+      </div>
+
+      <div class="fragrance-finder__results" id="fragrance-results">
+        <div class="results-header">
+          <h3 class="results-title">Recommended Fragrances</h3>
+          <div class="results-count"></div>
+        </div>
+        <div class="results-grid" id="results-grid">
+          <!-- Results will be populated by JavaScript -->
+        </div>
+        <div class="no-results" id="no-results" style="display: none;">
+          <h4>No fragrances found</h4>
+          <p>Try adjusting your filters or browse all our fragrances.</p>
+          <a href="/collections/all" class="btn btn-outline">View All Fragrances</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .fragrance-finder {
+    padding: 4rem 0;
+  }
+
+  .fragrance-finder__header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .fragrance-finder__title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 300;
+  }
+
+  .fragrance-finder__description {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .fragrance-finder__filters {
+    margin-bottom: 4rem;
+  }
+
+  .filter-group {
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    background: rgba(var(--color-foreground), 0.02);
+    border-radius: 1rem;
+    border: 1px solid rgba(var(--color-foreground), 0.08);
+  }
+
+  .filter-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  .filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .filter-btn {
+    padding: 0.8rem 1.5rem;
+    background: rgba(var(--color-foreground), 0.05);
+    border: 1px solid rgba(var(--color-foreground), 0.1);
+    border-radius: 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: rgb(var(--color-foreground));
+  }
+
+  .filter-btn:hover {
+    background: rgba(var(--color-foreground), 0.1);
+    transform: translateY(-2px);
+  }
+
+  .filter-btn.active {
+    background: rgb(var(--color-button));
+    color: rgb(var(--color-button-text));
+    border-color: rgb(var(--color-button));
+  }
+
+  .filter-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .btn {
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+  }
+
+  .btn-primary {
+    background: rgb(var(--color-button));
+    color: rgb(var(--color-button-text));
+  }
+
+  .btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: rgb(var(--color-foreground));
+    border: 1px solid rgba(var(--color-foreground), 0.3);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(var(--color-foreground), 0.05);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: rgb(var(--color-button));
+    border: 1px solid rgb(var(--color-button));
+  }
+
+  .btn-outline:hover {
+    background: rgb(var(--color-button));
+    color: rgb(var(--color-button-text));
+  }
+
+  .fragrance-finder__results {
+    margin-top: 4rem;
+  }
+
+  .results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .results-title {
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  .results-count {
+    font-size: 1.1rem;
+    opacity: 0.7;
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .product-card {
+    background: rgba(var(--color-foreground), 0.02);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(var(--color-foreground), 0.08);
+    transition: all 0.3s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-card__image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .product-card__title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-card__price {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: rgb(var(--color-button));
+    margin-bottom: 1rem;
+  }
+
+  .product-card__notes {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+
+  .product-card__link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+
+  .no-results h4 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .no-results p {
+    font-size: 1.1rem;
+    opacity: 0.7;
+    margin-bottom: 2rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    .fragrance-finder__title {
+      font-size: 2.2rem;
+    }
+
+    .filter-options {
+      gap: 0.5rem;
+    }
+
+    .filter-btn {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+    }
+
+    .filter-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .results-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .results-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const findButton = document.getElementById('find-fragrances');
+  const clearButton = document.getElementById('clear-filters');
+  const resultsGrid = document.getElementById('results-grid');
+  const resultsCount = document.querySelector('.results-count');
+  const noResults = document.getElementById('no-results');
+  
+  let selectedFilters = {
+    family: [],
+    notes: [],
+    intensity: [],
+    occasion: []
+  };
+
+  // Handle filter button clicks
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const filterType = this.closest('.filter-options').dataset.filterType;
+      const filterValue = this.dataset.filter;
+      
+      this.classList.toggle('active');
+      
+      if (this.classList.contains('active')) {
+        if (!selectedFilters[filterType].includes(filterValue)) {
+          selectedFilters[filterType].push(filterValue);
+        }
+      } else {
+        selectedFilters[filterType] = selectedFilters[filterType].filter(f => f !== filterValue);
+      }
+    });
+  });
+
+  // Clear all filters
+  clearButton.addEventListener('click', function() {
+    filterButtons.forEach(btn => btn.classList.remove('active'));
+    selectedFilters = {
+      family: [],
+      notes: [],
+      intensity: [],
+      occasion: []
+    };
+    resultsGrid.innerHTML = '';
+    resultsCount.textContent = '';
+    noResults.style.display = 'none';
+  });
+
+  // Find fragrances
+  findButton.addEventListener('click', function() {
+    findFragrances();
+  });
+
+  function findFragrances() {
+    // Show loading state
+    resultsGrid.innerHTML = '<div class="loading">Finding your perfect fragrances...</div>';
+    
+    // Build search query
+    let searchTags = [];
+    
+    // Add selected filters as search terms
+    Object.values(selectedFilters).forEach(filterArray => {
+      searchTags = searchTags.concat(filterArray);
+    });
+    
+    if (searchTags.length === 0) {
+      // If no filters selected, show all products
+      fetchAllProducts();
+      return;
+    }
+    
+    // Search for products with matching tags
+    const searchQuery = searchTags.join(' OR ');
+    const searchUrl = `/search?q=${encodeURIComponent(searchQuery)}&view=json`;
+    
+    fetch(searchUrl)
+      .then(response => response.text())
+      .then(html => {
+        // Parse the HTML to extract product data
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const productCards = doc.querySelectorAll('.product-item, .card-wrapper, .grid__item');
+        
+        displayResults(productCards);
+      })
+      .catch(error => {
+        console.error('Error fetching products:', error);
+        showNoResults();
+      });
+  }
+
+  function fetchAllProducts() {
+    fetch('/collections/all?view=json')
+      .then(response => response.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const productCards = doc.querySelectorAll('.product-item, .card-wrapper, .grid__item');
+        
+        displayResults(productCards);
+      })
+      .catch(error => {
+        console.error('Error fetching all products:', error);
+        showNoResults();
+      });
+  }
+
+  function displayResults(productCards) {
+    if (productCards.length === 0) {
+      showNoResults();
+      return;
+    }
+
+    resultsGrid.innerHTML = '';
+    noResults.style.display = 'none';
+    
+    // Convert NodeList to Array and take first 12 results
+    const products = Array.from(productCards).slice(0, 12);
+    
+    products.forEach(card => {
+      const productCard = createProductCard(card);
+      if (productCard) {
+        resultsGrid.appendChild(productCard);
+      }
+    });
+    
+    resultsCount.textContent = `${products.length} fragrance${products.length !== 1 ? 's' : ''} found`;
+  }
+
+  function createProductCard(originalCard) {
+    try {
+      // Extract product information
+      const title = originalCard.querySelector('.card__heading a, .product-title, h3')?.textContent?.trim();
+      const price = originalCard.querySelector('.price, .product-price')?.textContent?.trim();
+      const image = originalCard.querySelector('img')?.src;
+      const link = originalCard.querySelector('a')?.href;
+      
+      if (!title || !link) return null;
+      
+      const cardElement = document.createElement('div');
+      cardElement.className = 'product-card';
+      
+      cardElement.innerHTML = `
+        <a href="${link}" class="product-card__link">
+          ${image ? `<img src="${image}" alt="${title}" class="product-card__image" loading="lazy">` : ''}
+          <h4 class="product-card__title">${title}</h4>
+          ${price ? `<div class="product-card__price">${price}</div>` : ''}
+          <div class="product-card__notes">Discover the unique scent profile</div>
+        </a>
+      `;
+      
+      return cardElement;
+    } catch (error) {
+      console.error('Error creating product card:', error);
+      return null;
+    }
+  }
+
+  function showNoResults() {
+    resultsGrid.innerHTML = '';
+    noResults.style.display = 'block';
+    resultsCount.textContent = '0 fragrances found';
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Fragrance Finder",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Find Your Perfect Fragrance"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Discover your signature scent by exploring different fragrance families, notes, and occasions. Our fragrance finder helps you navigate our collection to find the perfect match for your personality and style.</p>"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fragrance Finder"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page"
+    },
+    "fragrance-finder": {
+      "type": "fragrance-finder"
+    }
+  },
+  "order": ["main", "fragrance-finder"]
+}
