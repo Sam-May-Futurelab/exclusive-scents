@@ -124,16 +124,16 @@
         "text_JFTU4q": {
           "type": "text",
           "settings": {
-            "text": "<p>Handcrafted to inspire confidence.</p><p><br/>Explore our designer-inspired perfumes - long-lasting, cruelty-free, and made for those who stand out.</p>",
+            "text": "<p>Handcrafted to inspire confidence.</p><p>Explore our designer-inspired perfumes - long-lasting, cruelty-free, and made for those who stand out.</p>",
             "text_style": "body"
           }
         },
         "button_4AEpeA": {
           "type": "button",
           "settings": {
-            "button_label": "Button label",
-            "button_link": "",
-            "button_style_secondary": false
+            "button_label": "Shop the Collection",
+            "button_link": "shopify://collections/all",
+            "button_style_secondary": true
           }
         }
       },
@@ -151,7 +151,7 @@
         "image_behavior": "none",
         "content_layout": "no-overlap",
         "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
+        "desktop_content_alignment": "center",
         "mobile_content_alignment": "left",
         "section_color_scheme": "",
         "color_scheme": "",
