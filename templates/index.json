@@ -111,6 +111,54 @@
         "padding_bottom": 40
       }
     },
+    "image_with_text_mq8cNC": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_kV9nEG": {
+          "type": "heading",
+          "settings": {
+            "heading": "Discover Your Signature Scent",
+            "heading_size": "h1"
+          }
+        },
+        "text_JFTU4q": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Handcrafted to inspire confidence.</p><p><br/>Explore our designer-inspired perfumes - long-lasting, cruelty-free, and made for those who stand out.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_4AEpeA": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_kV9nEG",
+        "text_JFTU4q",
+        "button_4AEpeA"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/exclusive-scents-floral-notes-fragrance.jpg",
+        "height": "adapt",
+        "desktop_image_width": "small",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "trust_features_main": {
       "type": "trust-features",
       "blocks": {
@@ -237,6 +285,7 @@
     "luxury_hero_main",
     "luxury_bundles_main",
     "collection_list_yJhE7U",
+    "image_with_text_mq8cNC",
     "trust_features_main",
     "featured-collection-0",
     "17501054157be840f6",
