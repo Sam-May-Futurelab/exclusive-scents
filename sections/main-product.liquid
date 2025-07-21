@@ -177,6 +177,70 @@
     .product-form__input .select {
       padding: 0.8rem 1rem;
     }
+    
+    /* Trust & Security Section Styling */
+    .product__trust-security {
+      margin-top: 1rem;
+      padding-top: 1rem;
+    }
+    
+    .trust-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    @media screen and (min-width: 750px) {
+      .trust-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+    }
+    
+    .trust-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    
+    .trust-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    
+    .trust-content h3 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin: 0 0 0.8rem 0;
+      color: rgb(var(--color-foreground));
+    }
+    
+    .trust-content p {
+      margin: 0;
+      font-size: 1.3rem;
+      opacity: 0.8;
+      line-height: 1.5;
+    }
+    
+    .security-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(var(--color-foreground), 0.1);
+    }
+    
+    .security-badge {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(var(--color-foreground), 0.05);
+      padding: 0.8rem 1.5rem;
+      border-radius: 0.5rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      border: 1px solid rgba(var(--color-foreground), 0.1);
+    }
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
@@ -241,6 +305,71 @@
               </div>
             {%- endif -%}
           {%- endfor -%}
+          
+          <!-- Trust & Security Section -->
+          <div class="product__trust-security">
+            <div class="product__accordion accordion">
+              <details id="Trust-Security-{{ section.id }}">
+                <summary>
+                  <div class="summary__title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2L3 7V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h2 class="h4 accordion__title">Trust & Security</h2>
+                  </div>
+                  {{- 'icon-caret.svg' | inline_asset_content -}}
+                </summary>
+                <div class="accordion__content rte">
+                  <div class="trust-grid">
+                    <div class="trust-item">
+                      <div class="trust-icon">🔒</div>
+                      <div class="trust-content">
+                        <h3>Secure Checkout</h3>
+                        <p>256-bit SSL encryption protects your personal information during checkout.</p>
+                      </div>
+                    </div>
+                    
+                    <div class="trust-item">
+                      <div class="trust-icon">🚚</div>
+                      <div class="trust-content">
+                        <h3>Free Shipping</h3>
+                        <p>Free UK delivery on orders over £25. International shipping available.</p>
+                      </div>
+                    </div>
+                    
+                    <div class="trust-item">
+                      <div class="trust-icon">↩️</div>
+                      <div class="trust-content">
+                        <h3>Easy Returns</h3>
+                        <p>30-day satisfaction guarantee. Return unused items for a full refund.</p>
+                      </div>
+                    </div>
+                    
+                    <div class="trust-item">
+                      <div class="trust-icon">🛡️</div>
+                      <div class="trust-content">
+                        <h3>Privacy Protected</h3>
+                        <p>Your data is safe with us. We never share personal information with third parties.</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="security-badges">
+                    <div class="badge-item">
+                      <span class="security-badge">🔐 SSL Secured</span>
+                    </div>
+                    <div class="badge-item">
+                      <span class="security-badge">💳 Payment Protected</span>
+                    </div>
+                    <div class="badge-item">
+                      <span class="security-badge">✅ GDPR Compliant</span>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+          </div>
         </div>
       </div>
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
