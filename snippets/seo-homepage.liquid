@@ -1,0 +1,105 @@
+{%- comment -%} 
+  Homepage SEO Optimization Snippet
+  Add this to your theme.liquid head section for enhanced homepage SEO
+{%- endcomment -%}
+
+{%- if request.page_type == 'index' -%}
+  {%- liquid
+    assign homepage_title = 'Luxury Designer Inspired Fragrances | Premium Extrait De Parfum | Exclusive Scents'
+    assign homepage_description = 'Discover luxury designer-inspired fragrances at Exclusive Scents. Premium Extrait De Parfum collection featuring long-lasting, vegan, and cruelty-free scents. Free UK shipping on orders over £25. Shop samples and full-size bottles.'
+    assign homepage_keywords = 'luxury fragrances, designer inspired perfume, extrait de parfum, long lasting perfume, vegan fragrances, cruelty free perfume, UK fragrance shop, premium scents, designer perfume dupes, luxury perfume collection'
+  -%}
+
+  {%- comment -%} Override default title for homepage {%- endcomment -%}
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.location.pathname === '/' || window.location.pathname === '') {
+        document.title = '{{ homepage_title }}';
+      }
+    });
+  </script>
+
+  {%- comment -%} Enhanced meta description for homepage {%- endcomment -%}
+  <meta name="description" content="{{ homepage_description }}">
+  
+  {%- comment -%} Keywords meta tag for homepage {%- endcomment -%}
+  <meta name="keywords" content="{{ homepage_keywords }}">
+
+  {%- comment -%} Enhanced Open Graph for homepage {%- endcomment -%}
+  <meta property="og:title" content="{{ homepage_title }}">
+  <meta property="og:description" content="{{ homepage_description }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ shop.url }}">
+  <meta property="og:site_name" content="{{ shop.name }}">
+  
+  {%- comment -%} Twitter Card optimization {%- endcomment -%}
+  <meta name="twitter:title" content="{{ homepage_title }}">
+  <meta name="twitter:description" content="{{ homepage_description }}">
+  <meta name="twitter:card" content="summary_large_image">
+
+  {%- comment -%} Business Schema.org Markup {%- endcomment -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "PerfumeShop",
+    "name": "{{ shop.name }}",
+    "description": "{{ homepage_description }}",
+    "url": "{{ shop.url }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ shop.brand.logo | image_url }}"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "GB"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "GBP",
+      "availability": "https://schema.org/InStock"
+    },
+    "brand": {
+      "@type": "Brand",
+      "name": "{{ shop.name }}"
+    },
+    "category": "Luxury Fragrances",
+    "keywords": "{{ homepage_keywords }}",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "{{ shop.url }}/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  {%- comment -%} Product Collection Schema {%- endcomment -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Luxury Designer Inspired Fragrances Collection",
+    "description": "Premium collection of designer-inspired fragrances including Extrait De Parfum, samples, and full-size bottles.",
+    "url": "{{ shop.url }}",
+    "mainEntity": {
+      "@type": "ItemList",
+      "name": "Featured Fragrance Products",
+      "numberOfItems": "50+",
+      "itemListElement": [
+        {
+          "@type": "Product",
+          "name": "5ml Sample Discovery Set",
+          "description": "Try our luxury fragrances with 5ml samples",
+          "category": "Fragrance Samples"
+        },
+        {
+          "@type": "Product", 
+          "name": "50ml Extrait De Parfum",
+          "description": "Full-size luxury fragrance bottles",
+          "category": "Premium Fragrances"
+        }
+      ]
+    }
+  }
+  </script>
+
+{%- endif -%}

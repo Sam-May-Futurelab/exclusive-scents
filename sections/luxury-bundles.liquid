@@ -1,6 +1,6 @@
 {{ 'section-luxury-bundles.css' | asset_url | stylesheet_tag }}
 
-<section class="luxury-bundles color-{{ section.settings.color_scheme }} gradient">
+<section class="luxury-bundles color-{{ section.settings.color_scheme }} gradient" itemscope itemtype="https://schema.org/Product">
   <div class="page-width section-{{ section.id }}-padding">
     {%- unless section.settings.title == blank -%}
       <div class="luxury-bundles__header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
