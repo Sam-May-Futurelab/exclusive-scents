@@ -48,7 +48,7 @@
   text-align: center;
   color: rgb(var(--color-foreground));
   width: 100%;
-  padding: 6rem 2rem;
+  padding: 3rem 2rem;
 }
 
 .luxury-hero__content-container {
@@ -61,7 +61,7 @@
   font-weight: 300;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
   opacity: 0.9;
   font-family: var(--font-luxury-body);
 }
@@ -70,7 +70,7 @@
   font-size: clamp(3.2rem, 8vw, 6.4rem);
   font-weight: 700;
   line-height: 1.1;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   font-family: var(--font-luxury-display);
   letter-spacing: -0.02em;
 }
@@ -84,7 +84,7 @@
 .luxury-hero__text {
   font-size: 1.8rem;
   line-height: 1.6;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
   max-width: 60rem;
   margin-left: auto;
   margin-right: auto;
@@ -96,8 +96,9 @@
   gap: 2rem;
   justify-content: center;
   align-items: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .luxury-hero__button {
@@ -118,27 +119,30 @@
 }
 
 .luxury-hero__button--primary {
-  background: linear-gradient(135deg, rgb(var(--color-accent-1)) 0%, rgb(var(--color-accent-2)) 100%);
-  color: rgb(var(--color-background));
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  color: #ffffff;
   border: 2px solid transparent;
-  box-shadow: 0 8px 32px rgba(var(--color-accent-1), 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .luxury-hero__button--primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(var(--color-accent-1), 0.4);
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  color: #ffffff;
 }
 
 .luxury-hero__button--secondary {
-  background: transparent;
-  color: rgb(var(--color-foreground));
-  border: 2px solid rgb(var(--color-foreground));
+  background: rgba(255, 255, 255, 0.9);
+  color: #1a1a1a;
+  border: 2px solid #1a1a1a;
   backdrop-filter: blur(10px);
 }
 
 .luxury-hero__button--secondary:hover {
-  background: rgb(var(--color-foreground));
-  color: rgb(var(--color-background));
+  background: rgba(255, 255, 255, 1);
+  color: #000000;
+  border: 2px solid #000000;
   transform: translateY(-2px);
 }
 
@@ -169,7 +173,7 @@
 /* Mobile Styles */
 @media screen and (max-width: 749px) {
   .luxury-hero__content {
-    padding: 4rem 1.5rem;
+    padding: 2.5rem 1.5rem;
   }
   
   .luxury-hero__subheading {
@@ -191,10 +195,12 @@
     flex-direction: column;
     gap: 1.5rem;
     margin-bottom: 3rem;
+    align-items: center;
   }
   
   .luxury-hero__button {
-    width: 100%;
+    width: auto;
+    min-width: 28rem;
     max-width: 32rem;
     padding: 1.4rem 2.4rem;
     font-size: 1.4rem;

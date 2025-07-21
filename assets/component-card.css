@@ -486,6 +486,18 @@
   margin-top: 0.4rem;
 }
 
+/* Fix button alignment by ensuring consistent bottom positioning */
+.card-information {
+  display: flex;
+  flex-direction: column;
+  min-height: 12rem; /* Minimum height to ensure consistent card info area */
+}
+
+/* Push quick-add to bottom */
+.card-information + .quick-add {
+  margin-top: auto;
+}
+
 /* Specificity needed due to the changes below */
 .card-information
   > *:not(.visually-hidden:first-child)
