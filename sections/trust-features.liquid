@@ -1,0 +1,314 @@
+{{ 'section-trust-features.css' | asset_url | stylesheet_tag }}
+
+<section class="trust-features color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width section-{{ section.id }}-padding">
+    {%- unless section.settings.title == blank -%}
+      <div class="trust-features__header">
+        <h2 class="trust-features__title">{{ section.settings.title }}</h2>
+        {%- if section.settings.subtitle != blank -%}
+          <p class="trust-features__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+    {%- endunless -%}
+    
+    <div class="trust-features__grid">
+      {%- for block in section.blocks -%}
+        <div class="trust-feature-card" {{ block.shopify_attributes }}>
+          <div class="trust-feature-card__inner">
+            {%- if block.settings.icon_type == 'custom' and block.settings.custom_icon != blank -%}
+              <div class="trust-feature-card__icon">
+                <img
+                  src="{{ block.settings.custom_icon | image_url: width: 80 }}"
+                  alt="{{ block.settings.custom_icon.alt | escape }}"
+                  loading="lazy"
+                  width="80"
+                  height="80"
+                  class="trust-feature-card__icon-image"
+                />
+              </div>
+            {%- elsif block.settings.icon_type == 'svg' -%}
+              <div class="trust-feature-card__icon">
+                {%- case block.settings.icon_name -%}
+                  {%- when 'star' -%}
+                    <svg class="trust-feature-card__icon-svg" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                  {%- when 'shield' -%}
+                    <svg class="trust-feature-card__icon-svg" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11H16V18H8V11H9.2V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.4,8.7 10.4,10V11H13.6V10C13.6,8.7 12.8,8.2 12,8.2Z" />
+                    </svg>
+                  {%- when 'leaf' -%}
+                    <svg class="trust-feature-card__icon-svg" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/>
+                    </svg>
+                  {%- when 'clock' -%}
+                    <svg class="trust-feature-card__icon-svg" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.7L16.2,16.2Z"/>
+                    </svg>
+                  {%- when 'heart' -%}
+                    <svg class="trust-feature-card__icon-svg" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/>
+                    </svg>
+                  {%- when 'truck' -%}
+                    <svg class="trust-feature-card__icon-svg" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M18,18.5A1.5,1.5 0 0,1 16.5,17A1.5,1.5 0 0,1 18,15.5A1.5,1.5 0 0,1 19.5,17A1.5,1.5 0 0,1 18,18.5M19.5,9.5L21.46,12H17V9.5M6,18.5A1.5,1.5 0 0,1 4.5,17A1.5,1.5 0 0,1 6,15.5A1.5,1.5 0 0,1 7.5,17A1.5,1.5 0 0,1 6,18.5M20,8H17V4H3C1.89,4 1,4.89 1,6V17H3A3,3 0 0,0 6,20A3,3 0 0,0 9,17H15A3,3 0 0,0 18,20A3,3 0 0,0 21,17H23V12L20,8Z"/>
+                    </svg>
+                  {%- else -%}
+                    <svg class="trust-feature-card__icon-svg" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                {%- endcase -%}
+              </div>
+            {%- endif -%}
+            
+            {%- if block.settings.title != blank -%}
+              <h3 class="trust-feature-card__title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            
+            {%- if block.settings.description != blank -%}
+              <div class="trust-feature-card__description">{{ block.settings.description }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+    
+    {%- if section.settings.show_testimonial -%}
+      <div class="trust-features__testimonial">
+        <div class="trust-testimonial">
+          <div class="trust-testimonial__stars">
+            {%- for i in (1..5) -%}
+              <svg class="trust-testimonial__star" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          
+          {%- if section.settings.testimonial_text != blank -%}
+            <blockquote class="trust-testimonial__quote">
+              "{{ section.settings.testimonial_text }}"
+            </blockquote>
+          {%- endif -%}
+          
+          {%- if section.settings.testimonial_author != blank -%}
+            <cite class="trust-testimonial__author">— {{ section.settings.testimonial_author }}</cite>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{% schema %}
+{
+  "name": "Trust Features",
+  "tag": "section", 
+  "class": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Why Choose <em>Exclusive Scents</em>?"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Established in 2022, we believe luxury shouldn't cost a fortune"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonial",
+      "label": "Show testimonial",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_text",
+      "label": "Testimonial text",
+      "default": "Amazing quality fragrances that last all day. I've tried many expensive brands but these are just as good for a fraction of the price!"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_author",
+      "label": "Testimonial author",
+      "default": "Sarah M., Verified Customer"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2", 
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Trust Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon type",
+          "options": [
+            {
+              "value": "svg",
+              "label": "Built-in icon"
+            },
+            {
+              "value": "custom",
+              "label": "Custom image"
+            }
+          ],
+          "default": "svg"
+        },
+        {
+          "type": "select",
+          "id": "icon_name",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "star",
+              "label": "Star (Reviews)"
+            },
+            {
+              "value": "shield",
+              "label": "Shield (Quality/Security)"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf (Vegan/Natural)"
+            },
+            {
+              "value": "clock",
+              "label": "Clock (Long lasting)"
+            },
+            {
+              "value": "heart",
+              "label": "Heart (Love/Care)"
+            },
+            {
+              "value": "truck",
+              "label": "Truck (Fast shipping)"
+            }
+          ],
+          "default": "star"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Custom icon image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "5-Star Reviews"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Thousands of happy customers love our long-lasting, premium fragrances.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Features",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon_name": "star",
+            "title": "5-Star Reviews",
+            "description": "<p>Thousands of happy customers love our long-lasting, premium fragrances.</p>"
+          }
+        },
+        {
+          "type": "feature", 
+          "settings": {
+            "icon_name": "leaf",
+            "title": "Vegan & Cruelty Free",
+            "description": "<p>All our fragrances are ethically made with no animal testing.</p>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon_name": "clock",
+            "title": "Long Lasting",
+            "description": "<p>Our Extrait De Parfum concentration ensures all-day fragrance performance.</p>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon_name": "truck",
+            "title": "Fast & Free Shipping",
+            "description": "<p>Free UK shipping on orders over £25, with express options available.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

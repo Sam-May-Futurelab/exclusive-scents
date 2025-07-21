@@ -1,0 +1,262 @@
+{{ 'section-luxury-bundles.css' | asset_url | stylesheet_tag }}
+
+<section class="luxury-bundles color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width section-{{ section.id }}-padding">
+    {%- unless section.settings.title == blank -%}
+      <div class="luxury-bundles__header">
+        <h2 class="luxury-bundles__title">{{ section.settings.title }}</h2>
+        {%- if section.settings.subtitle != blank -%}
+          <p class="luxury-bundles__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+    {%- endunless -%}
+    
+    <div class="luxury-bundles__grid">
+      {%- for block in section.blocks -%}
+        <div class="luxury-bundle-card" {{ block.shopify_attributes }}>
+          <div class="luxury-bundle-card__inner">
+            {%- if block.settings.image != blank -%}
+              <div class="luxury-bundle-card__media">
+                <img
+                  src="{{ block.settings.image | image_url: width: 600 }}"
+                  alt="{{ block.settings.image.alt | escape }}"
+                  loading="lazy"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  class="luxury-bundle-card__image"
+                />
+              </div>
+            {%- endif -%}
+            
+            <div class="luxury-bundle-card__content">
+              {%- if block.settings.badge != blank -%}
+                <div class="luxury-bundle-card__badge">{{ block.settings.badge }}</div>
+              {%- endif -%}
+              
+              {%- if block.settings.title != blank -%}
+                <h3 class="luxury-bundle-card__title">{{ block.settings.title }}</h3>
+              {%- endif -%}
+              
+              {%- if block.settings.description != blank -%}
+                <div class="luxury-bundle-card__description">{{ block.settings.description }}</div>
+              {%- endif -%}
+              
+              {%- if block.settings.features != blank -%}
+                <ul class="luxury-bundle-card__features">
+                  {%- assign features = block.settings.features | split: ',' -%}
+                  {%- for feature in features -%}
+                    <li class="luxury-bundle-card__feature">
+                      <svg class="luxury-bundle-card__feature-icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                      {{ feature | strip }}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+              
+              <div class="luxury-bundle-card__pricing">
+                {%- if block.settings.original_price != blank -%}
+                  <span class="luxury-bundle-card__original-price">{{ block.settings.original_price }}</span>
+                {%- endif -%}
+                {%- if block.settings.sale_price != blank -%}
+                  <span class="luxury-bundle-card__sale-price">{{ block.settings.sale_price }}</span>
+                {%- endif -%}
+                {%- if block.settings.discount != blank -%}
+                  <span class="luxury-bundle-card__discount">{{ block.settings.discount }}</span>
+                {%- endif -%}
+              </div>
+              
+              {%- if block.settings.button_label != blank -%}
+                <a href="{{ block.settings.button_link }}" class="luxury-bundle-card__button">
+                  {{ block.settings.button_label | escape }}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{% schema %}
+{
+  "name": "Luxury Bundle Offers",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Exclusive <em>Bundle Offers</em>"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Save more when you bundle your favorite scents"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "background-2",
+      "label": "Color scheme"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bundle",
+      "name": "Bundle Offer",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge",
+          "default": "BEST VALUE"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Title",
+          "default": "Sample Bundle"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Perfect for discovering your new signature scent</p>"
+        },
+        {
+          "type": "textarea",
+          "id": "features",
+          "label": "Features (comma separated)",
+          "default": "5 x 5ml Samples, Free Shipping, 25% Discount, Try Before You Buy"
+        },
+        {
+          "type": "text",
+          "id": "original_price",
+          "label": "Original Price",
+          "default": "£40.00"
+        },
+        {
+          "type": "text",
+          "id": "sale_price",
+          "label": "Sale Price",
+          "default": "£30.00"
+        },
+        {
+          "type": "text",
+          "id": "discount",
+          "label": "Discount Badge",
+          "default": "Save 25%"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Shop Bundle"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Luxury Bundle Offers",
+      "blocks": [
+        {
+          "type": "bundle",
+          "settings": {
+            "title": "Sample Discovery Set",
+            "description": "<p>Perfect for discovering your new signature scent</p>",
+            "features": "5 x 5ml Samples, Free Shipping, 25% Discount, Try Before You Buy",
+            "original_price": "£40.00",
+            "sale_price": "£30.00",
+            "discount": "Save 25%",
+            "badge": "BEST VALUE"
+          }
+        },
+        {
+          "type": "bundle",
+          "settings": {
+            "title": "Extrait Spray Trio",
+            "description": "<p>Three full-size bottles for the ultimate fragrance collection</p>",
+            "features": "3 x 50ml Extrait Sprays, Premium Gift Box, 15% Discount, Free Express Shipping",
+            "original_price": "£120.00",
+            "sale_price": "£102.00",
+            "discount": "Save 15%",
+            "badge": "PREMIUM"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
