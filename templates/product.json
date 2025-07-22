@@ -1,1 +1,133 @@
-{"sections":{"main":{"type":"main-product","blocks":{"title":{"type":"title","settings":{}},"price":{"type":"price","settings":{}},"variant_picker":{"type":"variant_picker","settings":{"picker_type":"dropdown","swatch_shape":"circle"}},"quantity_selector":{"type":"quantity_selector","settings":{}},"buy_buttons":{"type":"buy_buttons","settings":{"show_dynamic_checkout":true,"show_gift_card_recipient":true}},"description":{"type":"description","settings":{}},"share":{"type":"share","settings":{"share_label":"Share"}},"collapsible_tab_nw9KQd":{"type":"collapsible_tab","settings":{"heading":"Comparative Advertising Disclaimer","icon":"none","content":"<h5>Please be advised that the items listed on our website are only examples and should under no circumstances be construed to represent the actual high street, designer, or niche brand. Used or unused, trademarks and copyrights belong to the companies that created them. To be clear, they aren't ‘exactly’ or ‘identical’ like any other fragrances or originals, they are simply inspirations. To avoid any misunderstanding, Exclusive-Scents do not represent the actual brand, and we have no connection to any of the unidentified designer brand names mentioned above.It is the responsibility of the respective owners of all trademarks, whether they are utilised or not, to ensure that they are protected. Trademark holders cited or not referenced herein are not associated with, maintained, authorised, or sponsored by us. The use of any product name is strictly for identification and reference reasons and does not indicate any affiliation with the trademark holder.<\/h5>","page":""}}},"block_order":["title","price","variant_picker","quantity_selector","buy_buttons","description","share","collapsible_tab_nw9KQd"],"settings":{"enable_sticky_info":false,"color_scheme":"scheme-1","media_size":"small","constrain_to_viewport":true,"media_fit":"contain","gallery_layout":"thumbnail_slider","mobile_thumbnails":"hide","media_position":"left","image_zoom":"none","hide_variants":true,"enable_video_looping":false,"padding_top":0,"padding_bottom":0}},"65b08af6d50845c6d240":{"type":"apps","settings":{"include_margins":true}},"related-products":{"type":"related-products","disabled":true,"settings":{"heading":"You may also like","heading_size":"h2","products_to_show":4,"columns_desktop":4,"columns_mobile":"2","color_scheme":"scheme-1","image_ratio":"portrait","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":false,"padding_top":0,"padding_bottom":60}},"17500186121167c49a":{"type":"apps","settings":{"include_margins":true}},"1750097515c2384e6a":{"type":"apps","settings":{"include_margins":true}}},"order":["main","65b08af6d50845c6d240","related-products","17500186121167c49a","1750097515c2384e6a"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "dropdown",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        },
+        "collapsible_tab_nw9KQd": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Comparative Advertising Disclaimer",
+            "icon": "none",
+            "content": "<h5>Please be advised that the items listed on our website are only examples and should under no circumstances be construed to represent the actual high street, designer, or niche brand. Used or unused, trademarks and copyrights belong to the companies that created them. To be clear, they aren't ‘exactly’ or ‘identical’ like any other fragrances or originals, they are simply inspirations. To avoid any misunderstanding, Exclusive-Scents do not represent the actual brand, and we have no connection to any of the unidentified designer brand names mentioned above.It is the responsibility of the respective owners of all trademarks, whether they are utilised or not, to ensure that they are protected. Trademark holders cited or not referenced herein are not associated with, maintained, authorised, or sponsored by us. The use of any product name is strictly for identification and reference reasons and does not indicate any affiliation with the trademark holder.</h5>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "share",
+        "collapsible_tab_nw9KQd"
+      ],
+      "settings": {
+        "enable_sticky_info": false,
+        "color_scheme": "scheme-1",
+        "media_size": "small",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "none",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 0,
+        "padding_bottom": 40
+      }
+    },
+    "65b08af6d50845c6d240": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 20,
+        "padding_bottom": 0
+      }
+    },
+    "1750097515c2384e6a": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_VLxKgx": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_VLxKgx"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "65b08af6d50845c6d240",
+    "related-products",
+    "1750097515c2384e6a"
+  ]
+}
