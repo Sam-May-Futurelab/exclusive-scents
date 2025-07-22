@@ -48,12 +48,6 @@
               {{ section.settings.button_label_1 | escape }}
             </a>
           {%- endif -%}
-          
-          {%- if section.settings.button_label_2 != blank -%}
-            <a href="{{ section.settings.button_link_2 }}" class="luxury-hero__button luxury-hero__button--secondary">
-              {{ section.settings.button_label_2 | escape }}
-            </a>
-          {%- endif -%}
         </div>
         
         {%- if section.settings.trust_badges -%}
@@ -134,7 +128,7 @@
       "type": "inline_richtext",
       "id": "heading",
       "label": "Heading",
-      "default": "Luxury Scents That <em>Last</em>"
+      "default": "Luxury Scents That <strong>Last</strong>"
     },
     {
       "type": "richtext",

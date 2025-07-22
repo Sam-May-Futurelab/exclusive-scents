@@ -69,25 +69,6 @@
           </div>
         </div>
 
-        <div class="filter-group">
-          <h3 class="filter-title">Intensity</h3>
-          <div class="filter-options" data-filter-type="intensity">
-            <button class="filter-btn" data-filter="light">Light & Airy</button>
-            <button class="filter-btn" data-filter="medium">Medium</button>
-            <button class="filter-btn" data-filter="strong">Bold & Intense</button>
-          </div>
-        </div>
-
-        <div class="filter-group">
-          <h3 class="filter-title">Occasion</h3>
-          <div class="filter-options" data-filter-type="occasion">
-            <button class="filter-btn" data-filter="daytime">Daytime</button>
-            <button class="filter-btn" data-filter="evening">Evening</button>
-            <button class="filter-btn" data-filter="casual">Casual</button>
-            <button class="filter-btn" data-filter="formal">Formal</button>
-          </div>
-        </div>
-
         <div class="filter-actions">
           <button class="btn btn-primary" id="find-fragrances">Find My Fragrances</button>
           <button class="btn btn-secondary" id="clear-filters">Clear All</button>
@@ -755,34 +736,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show loading state
     resultsGrid.innerHTML = '<div class="loading">Finding your perfect fragrances...</div>';
     
-    // Build search query with smart category mapping
+    // Build search query - keep it simple
     let searchTags = [];
     
-    // Smart category mapping - expand generic categories to specific notes
-    const categoryMapping = {
-      'Citrus': ['Citrus', 'Lemon', 'Bergamot', 'Grapefruit', 'Orange', 'Mandarin Orange', 'Sicilian Orange', 'Italian Lemon', 'Calabrian Bergamot', 'Sicilian Mandarin', 'Sicilian Bergamot', 'Amalfi Lemon', 'Green Mandarin', 'Bitter Orange', 'Citron'],
-      'Floral Notes': ['Floral Notes', 'Rose', 'Jasmine', 'Orange Blossom', 'Neroli', 'Ylang-Ylang', 'Lily', 'Peony', 'Tuberose', 'Bulgarian Rose', 'Turkish Rose', 'Damask Rose', 'May Rose', 'Moroccan Rose', 'Egyptian Jasmine', 'Jasmine Sambac', 'Moroccan Jasmine', 'Water Jasmine', 'Lily of the Valley', 'Freesia', 'Gardenia', 'Carnation', 'Orchid', 'Magnolia', 'Osmanthus', 'Hibiscus', 'African Orange Flower', 'Tunisian Orange Blossom', 'Nectarine Blossom'],
-      'Woody Notes': ['Woody Notes', 'Cedar', 'Sandalwood', 'Cedarwood', 'Oakmoss', 'Vetiver', 'Patchouli', 'Guaiac Wood', 'Cashmere Wood', 'Amberwood', 'Indonesian Patchouli Leaf', 'Haitian Vetiver', 'Haitan Vetiver', 'Palo Santo', 'Birch', 'Pine', 'Fir Resin', 'Oak', 'Mahogany', 'Olive Tree'],
-      'Amber': ['Amber', 'Ambergris', 'Ambroxan', 'Ambrofix', 'Labdanum', 'Spanish Labdanum', 'Benzoin', 'Siam Benzoin', 'Opoponax', 'Ambrette', 'Ambrettolide'],
-      'Fresh': ['Fresh', 'Marine Notes', 'Water Notes', 'Sea Notes', 'Mint', 'Peppermint', 'Green Tea', 'Petitgrain', 'Galbanum', 'Basil', 'Rosemary', 'Sage', 'Clary Sage', 'Thyme', 'Oregano'],
-      'Spicy': ['Spicy', 'Pink Pepper', 'Black Pepper', 'Pepper', 'Sichuan Pepper', 'Cardamom', 'Cinnamon', 'Nutmeg', 'Indonesian Nutmeg', 'Ginger', 'Fresh Ginger', 'Ginger Flower', 'Saffron', 'Cloves', 'Star Anise', 'Coriander']
-    };
-    
     // Process selected filters
-    Object.entries(selectedFilters).forEach(([filterType, filterArray]) => {
-      filterArray.forEach(filter => {
-        if (categoryMapping[filter]) {
-          // If it's a category, add all related notes
-          searchTags = searchTags.concat(categoryMapping[filter]);
-        } else {
-          // If it's a specific note, add it directly
-          searchTags.push(filter);
-        }
-      });
+    Object.values(selectedFilters).forEach(filterArray => {
+      searchTags = searchTags.concat(filterArray);
     });
-    
-    // Remove duplicates
-    searchTags = [...new Set(searchTags)];
     
     if (searchTags.length === 0) {
       // If no filters selected, show all products
@@ -790,9 +750,9 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     
-    // Search for products with matching tags
-    const searchQuery = searchTags.join(' OR ');
-    const searchUrl = `/search?q=${encodeURIComponent(searchQuery)}&section_id=template--product-grid`;
+    // Use the first selected tag for search (Shopify search is limited)
+    const searchQuery = searchTags[0];
+    const searchUrl = `/search?q=${encodeURIComponent(searchQuery)}`;
     
     fetch(searchUrl)
       .then(response => response.text())

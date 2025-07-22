@@ -5,6 +5,18 @@
   z-index: 1;
 }
 
+@media screen and (max-width: 749px) {
+  .quick-add {
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 2rem);
+  }
+  
+  .card__content {
+    padding-bottom: 4rem;
+  }
+}
+
 .card--card .quick-add {
   margin: 0 1.3rem 1rem;
 }
