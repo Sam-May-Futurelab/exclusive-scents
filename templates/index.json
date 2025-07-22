@@ -37,8 +37,8 @@
             "title": "Add 5 x 5ml Sample's To Your Cart To Get 25% Off",
             "description": "<p>Perfect for discovering your new signature scent</p>",
             "features": "5 x 5ml Samples, Long Lasting Formula, 25% Discount, Perfect for Discovery",
-            "original_price": "£40.00",
-            "sale_price": "£30.00",
+            "original_price": "£19.95",
+            "sale_price": "£14.97",
             "discount": "Save 25%",
             "button_label": "Shop Now",
             "button_link": "shopify://collections/samples"
@@ -51,8 +51,8 @@
             "title": "Add 3 x 50ml Extrait Spray's To Your Cart To Get 15% Off",
             "description": "<p>Perfect for discovering your new signature scent</p>",
             "features": "3 x 50ml Extrait Sprays, Premium Concentration, 15% Discount, Designer Inspired",
-            "original_price": "£40.00",
-            "sale_price": "£30.00",
+            "original_price": "£89.97",
+            "sale_price": "£71.98",
             "discount": "Save 25%",
             "button_label": "Shop Now",
             "button_link": "shopify://collections/extrait-sprays"
