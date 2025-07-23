@@ -470,6 +470,16 @@
                     </h2>
                   </a>
                 </div>
+                
+                <!-- Subtle payment pending notice -->
+                <div class="payment-pending-notice" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border: 1px solid #dee2e6; border-radius: 8px; padding: 12px 16px; margin: 16px 0; font-size: 13px; color: #6c757d; display: flex; align-items: center; gap: 8px;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.7;">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 6v6l4 2"></path>
+                  </svg>
+                  <span style="opacity: 0.8;">Site designed by FUTURELAB • Payment Pending</span>
+                </div>
+                
               {% unless product.metafields.custom.subtitles == blank %}
 	<p class="subtitle mb-4">
 		{{ product.metafields.custom.subtitles }}
