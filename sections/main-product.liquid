@@ -353,15 +353,6 @@
       <div class="grid__item product__media-wrapper">
         {% render 'product-media-gallery', variant_images: variant_images %}
         
-        <!-- Subtle payment pending notice under product image -->
-        <div class="payment-pending-notice" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border: 1px solid #dee2e6; border-radius: 8px; padding: 12px 16px; margin: 20px 0; font-size: 13px; color: #6c757d; display: flex; align-items: center; gap: 8px;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.7;">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M12 6v6l4 2"></path>
-          </svg>
-          <span style="opacity: 0.8;">Site designed by <a href="https://www.futurelab.solutions/" target="_blank" rel="noopener noreferrer" style="color: #6c757d; text-decoration: underline; text-decoration-style: dotted;">FUTURELAB</a> • Payment Pending</span>
-        </div>
-        
         <!-- Collapsible tabs for desktop - positioned under images -->
         <div class="product__collapsible-tabs-desktop">
           {%- for block in section.blocks -%}
