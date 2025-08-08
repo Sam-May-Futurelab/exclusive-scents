@@ -37,8 +37,8 @@
             "title": "Add 5 x 5ml Sample's To Your Cart To Get 25% Off",
             "description": "<p>Perfect for discovering your new signature scent</p>",
             "features": "5 x 5ml Samples, Long Lasting Formula, 25% Discount, Perfect for Discovery",
-            "original_price": "£19.95",
-            "sale_price": "£15",
+            "original_price": "",
+            "sale_price": "",
             "discount": "Save 25%",
             "button_label": "Shop Now",
             "button_link": "shopify://collections/extrait-sprays"
