@@ -34,12 +34,12 @@
           "type": "bundle",
           "settings": {
             "badge": "BEST VALUE",
-            "title": "Add 5 x 5ml Sample's To Your Cart To Get 25% Off",
+            "title": "Add 5 x 5ml Sample's To Your Cart To Get 20% Off",
             "description": "<p>Perfect for discovering your new signature scent</p>",
-            "features": "5 x 5ml Samples, Long Lasting Formula, 25% Discount, Perfect for Discovery",
+            "features": "5 x 5ml Samples, Long Lasting Formula, 20% Discount, Perfect for Discovery",
             "original_price": "",
             "sale_price": "",
-            "discount": "Save 25%",
+            "discount": "Save 20%",
             "button_label": "Shop Now",
             "button_link": "shopify://collections/extrait-sprays"
           }
