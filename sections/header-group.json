@@ -56,18 +56,6 @@
     },
     "announcement_bar_D6Yf3D": {
       "type": "announcement-bar",
-      "blocks": {
-        "announcement_C9aUki": {
-          "type": "announcement",
-          "settings": {
-            "text": "Bank Holiday Weekend SALE 25% Off Your ENTIRE Cart - Use Code BANK25",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "announcement_C9aUki"
-      ],
       "name": "t:sections.announcement-bar.presets.name",
       "settings": {
         "auto_rotate": false,
