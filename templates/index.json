@@ -350,7 +350,6 @@
         "video_DaqFb6",
         "video_jmyKYF"
       ],
-      "disabled": true,
       "name": "TikTok Grid (Modal)",
       "settings": {
         "heading": "Follow our latest",
@@ -359,7 +358,10 @@
         "gap": 6,
         "radius": 10,
         "pad_y": 24,
-        "bg": "#ffffff"
+        "bg": "#ffffff",
+        "cta_show": true,
+        "cta_label": "Follow on TikTok",
+        "cta_url": ""
       }
     }
   },
