@@ -286,55 +286,57 @@
         "video_RzrftN": {
           "type": "video",
           "settings": {
+            "mp4_url": "https://cdn.shopify.com/videos/c/o/v/cb24bf4a39b541a089259a9300c9ec3e.mp4",
             "tiktok_url": "https://vm.tiktok.com/ZNdqxtoT6/"
           }
         },
         "video_AgzNFB": {
           "type": "video",
           "settings": {
+            "mp4_url": "https://cdn.shopify.com/videos/c/o/v/807733de19fb41809bdc9fbdd7319ccc.mp4",
             "tiktok_url": "https://vm.tiktok.com/ZNdq93vK4/"
           }
         },
         "video_i4BrBL": {
           "type": "video",
           "settings": {
+            "mp4_url": "https://cdn.shopify.com/videos/c/o/v/3b6959cb4cc6438c9b15a2add29de4a4.mp4",
             "tiktok_url": "https://vm.tiktok.com/ZNdq9bJQx/"
           }
         },
         "video_FTjYcw": {
           "type": "video",
           "settings": {
+            "mp4_url": "https://cdn.shopify.com/videos/c/o/v/1cc2070c757542b9bc05d843fac4f135.mp4",
             "tiktok_url": "https://vm.tiktok.com/ZNdq9VLWH/"
           }
         },
         "video_e7effw": {
           "type": "video",
           "settings": {
+            "mp4_url": "https://cdn.shopify.com/videos/c/o/v/c7e7709e59aa49d19c7fea6c90967132.mp4",
             "tiktok_url": "https://vm.tiktok.com/ZNdq93TCS/"
           }
         },
         "video_t7GrVy": {
           "type": "video",
           "settings": {
+            "mp4_url": "https://cdn.shopify.com/videos/c/o/v/fa2ba23c8da54877ac8d986b187bb8e5.mp4",
             "tiktok_url": "https://vm.tiktok.com/ZNdq9gyp4/"
           }
         },
         "video_DaqFb6": {
           "type": "video",
           "settings": {
+            "mp4_url": "https://cdn.shopify.com/videos/c/o/v/a0e112f8e7ed4279a0a0b6514e6e0d72.mp4",
             "tiktok_url": "https://vm.tiktok.com/ZNdq9x9r8/"
           }
         },
         "video_jmyKYF": {
           "type": "video",
           "settings": {
+            "mp4_url": "",
             "tiktok_url": "https://vm.tiktok.com/ZNdq97myB/"
-          }
-        },
-        "video_rqjBah": {
-          "type": "video",
-          "settings": {
-            "tiktok_url": "https://vm.tiktok.com/ZNdq9tgnK/"
           }
         }
       },
@@ -346,8 +348,7 @@
         "video_e7effw",
         "video_t7GrVy",
         "video_DaqFb6",
-        "video_jmyKYF",
-        "video_rqjBah"
+        "video_jmyKYF"
       ],
       "disabled": true,
       "name": "TikTok Grid (Modal)",
@@ -358,9 +359,7 @@
         "gap": 6,
         "radius": 10,
         "pad_y": 24,
-        "bg": "#ffffff",
-        "cta_label": "Follow on TikTok",
-        "cta_url": ""
+        "bg": "#ffffff"
       }
     }
   },
