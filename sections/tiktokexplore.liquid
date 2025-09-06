@@ -1,9 +1,8 @@
 {% comment %}
-  TikTok Grid — Modal player with auto-thumbnails
-  - Pulls thumbnails via TikTok oEmbed (JSONP)
-  - Plays inside modal using TikTok iframe (/embed/v2/video/{id}) when possible
-  - Falls back to blockquote+embed.js, and finally new-tab if embed is blocked
-  - Optional custom thumbnail per block overrides auto thumb
+  TikTok Grid — Reliable modal player + thumbnails
+  - Uses your own thumbnail per block (recommended) so tiles never look blank.
+  - Inline play via iframe when video ID is available (best).
+  - If only a short link is provided, tries TikTok's official embed; falls back to new tab.
 {% endcomment %}
 
 <section id="tt-grid-{{ section.id }}" class="tt-wrap">
@@ -31,18 +30,8 @@
     }
     @supports not (aspect-ratio:1/1){ .tt-card::before{ content:""; display:block; padding-top:100%; } }
 
-    /* media layer + skeleton */
     .tt-media{ position:absolute; inset:0; background:#0f172a; background-size:cover; background-position:center; }
-    .tt-skel{ position:absolute; inset:0; background:linear-gradient(135deg,#111827,#0b1220); }
-    .tt-skel::after{
-      content:""; position:absolute; inset:0;
-      background:linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
-      transform:translateX(-100%); animation:tt-shimmer 1.4s infinite;
-    }
-    @keyframes tt-shimmer{ to{ transform:translateX(100%);} }
-
     .tt-grad{ position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.00) 40%, rgba(0,0,0,.25) 100%); }
-
     .tt-play{
       position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
       display:grid; place-items:center; width:56px; height:56px; border-radius:999px;
@@ -94,13 +83,14 @@
     <div class="tt-grid">
       {% for block in section.blocks %}
         {% assign url = block.settings.tiktok_url | strip %}
-        {% assign thumb = block.settings.thumb | image_url: width: 800 | default: '' %}
-        <button type="button" class="tt-card"
+        {% assign id  = block.settings.video_id  | strip %}
+        {% assign thumb = block.settings.thumb | image_url: width: 900 | default: '' %}
+        <button type="button"
+                class="tt-card"
                 data-url="{{ url | escape }}"
-                data-custom-thumb="{{ thumb | escape }}"
+                data-id="{{ id | escape }}"
                 aria-label="Play TikTok video {{ forloop.index }}">
-          <span class="tt-media" style="background-image:url('');"></span>
-          <span class="tt-skel" aria-hidden="true"></span>
+          <span class="tt-media" style="background-image:url('{{ thumb }}');{% if thumb == '' %}background:linear-gradient(135deg,#1f2937,#0f172a){% endif %}"></span>
           <span class="tt-grad" aria-hidden="true"></span>
           <span class="tt-play" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -142,82 +132,51 @@
     const modal = root.querySelector('[data-modal]');
     const embedBox = root.querySelector('[data-embed]');
     const closeBtn = root.querySelector('[data-close]');
-    let embedScriptLoaded = false;
+    let embedLoaded = false;
 
-    function jsonp(url){
-      return new Promise((resolve, reject) => {
-        const cb = 'ttcb_' + Math.random().toString(36).slice(2);
-        window[cb] = (data) => { resolve(data); cleanup(); };
-        function cleanup(){ try{ delete window[cb]; }catch(e){} script.remove(); }
-        const script = document.createElement('script');
-        script.src = url + (url.includes('?')?'&':'?') + 'callback=' + cb;
-        script.onerror = () => { cleanup(); reject(new Error('JSONP failed')); };
-        document.head.appendChild(script);
-      });
-    }
-
-    function ensureTikTokScript(){
+    function ensureEmbedScript(){
       return new Promise(res=>{
-        if(embedScriptLoaded || window.tiktok){ embedScriptLoaded = true; return res(); }
+        if(embedLoaded || window.tiktok){ embedLoaded = true; return res(); }
         const s = document.createElement('script');
         s.src = 'https://www.tiktok.com/embed.js';
         s.async = true;
-        s.onload = ()=>{ embedScriptLoaded = true; res(); };
+        s.onload = ()=>{ embedLoaded = true; res(); };
         document.body.appendChild(s);
       });
     }
 
-    function extractVideoId(str){
-      const m = String(str||'').match(/\/video\/(\d+)/);
-      return m ? m[1] : null;
+    function extractIdFromUrl(u){
+      const m = String(u||'').match(/\/video\/(\d+)/);
+      return m ? m[1] : '';
     }
 
-    function setThumb(card, url){
-      const custom = card.getAttribute('data-custom-thumb');
-      const media = card.querySelector('.tt-media');
-      const skel = card.querySelector('.tt-skel');
-
-      if(custom){
-        media.style.backgroundImage = 'url(\"'+custom+'\")
-        ';
-        skel.style.display = 'none';
-        return Promise.resolve({ videoId: extractVideoId(url), html: null });
-      }
-
-      // fetch via oEmbed (JSONP) to get thumbnail/canonical url
-      return jsonp('https://www.tiktok.com/oembed?url=' + encodeURIComponent(url))
-        .then(data=>{
-          if(data && data.thumbnail_url){
-            media.style.backgroundImage = 'url(\"'+data.thumbnail_url+'\")';
-            skel.style.display = 'none';
-          }
-          const vid = extractVideoId(data && (data.html || data.author_url || url)) || extractVideoId(url);
-          return { videoId: vid, html: data ? data.html : null };
-        })
-        .catch(()=>{
-          // graceful fallback gradient
-          media.style.background = 'linear-gradient(135deg,#1f2937,#0f172a)';
-          skel.style.display = 'none';
-          return { videoId: extractVideoId(url), html: null };
-        });
-    }
-
-    function openModalWith(url, videoId, oembedHtml){
+    function openModal(){
       modal.classList.add('is-open');
+    }
+    function closeModal(){
+      modal.classList.remove('is-open');
+      embedBox.innerHTML = '';
+    }
+
+    function playInline({ url, id }){
+      openModal();
       embedBox.innerHTML = '';
 
+      const videoId = id || extractIdFromUrl(url);
+
       if(videoId){
+        // Best path: direct iframe
         const ifr = document.createElement('iframe');
-        ifr.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; picture-in-picture');
-        ifr.setAttribute('allowfullscreen','true');
-        ifr.setAttribute('title','TikTok video');
+        ifr.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture';
+        ifr.allowFullscreen = true;
+        ifr.title = 'TikTok video';
         ifr.style.width = '100%'; ifr.style.height = '100%'; ifr.style.border = '0';
         ifr.src = 'https://www.tiktok.com/embed/v2/video/' + videoId + '?lang=en-US&autoplay=1';
         embedBox.appendChild(ifr);
         return;
       }
 
-      // Fallback to blockquote embed if id couldn't be parsed
+      // Fallback: official blockquote embed (works for many full URLs; short vm links may still fail)
       const bq = document.createElement('blockquote');
       bq.className = 'tiktok-embed';
       bq.setAttribute('cite', url);
@@ -226,32 +185,18 @@
       bq.innerHTML = '<section></section>';
       embedBox.appendChild(bq);
 
-      ensureTikTokScript().then(()=>{
+      ensureEmbedScript().then(()=>{
         try{ if(window.tiktok && window.tiktok.embeds && window.tiktok.embeds.load){ window.tiktok.embeds.load(); } }catch(e){}
-        // If still no iframe after a moment, open in new tab
+        // If embed still doesn't render, open in a new tab (no dead clicks)
         setTimeout(()=>{ if(!embedBox.querySelector('iframe')){ window.open(url,'_blank'); closeModal(); } }, 3500);
       });
     }
 
-    function closeModal(){
-      modal.classList.remove('is-open');
-      embedBox.innerHTML = '';
-    }
-
-    // Prepare thumbnails first, then bind clicks
-    const metaPromises = cards.map(card=>{
+    cards.forEach(card=>{
       const url = card.getAttribute('data-url');
-      return setThumb(card, url).then(meta => { card.dataset.videoId = meta.videoId || ''; });
-    });
-
-    Promise.allSettled(metaPromises).then(()=>{
-      cards.forEach(card=>{
-        card.addEventListener('click', ()=>{
-          const url = card.getAttribute('data-url');
-          const vid = card.dataset.videoId || extractVideoId(url);
-          openModalWith(url, vid, null);
-        });
-      });
+      const id  = card.getAttribute('data-id');
+      // If no custom thumbnail was supplied, keep gradient fallback already set in markup.
+      card.addEventListener('click', ()=> playInline({ url, id }));
     });
 
     closeBtn.addEventListener('click', closeModal);
@@ -281,14 +226,15 @@
       "type": "video",
       "name": "TikTok video",
       "settings": [
-        { "type": "text", "id": "tiktok_url", "label": "TikTok URL", "info": "Paste any TikTok link (vm short links OK)." },
-        { "type": "image_picker", "id": "thumb", "label": "Custom thumbnail (optional)" }
+        { "type": "text", "id": "tiktok_url", "label": "TikTok URL", "info": "Best: full URL like https://www.tiktok.com/@user/video/1234567890. Short vm links may open in a new tab." },
+        { "type": "text", "id": "video_id", "label": "TikTok Video ID (optional)", "info": "Paste the numeric ID to force inline playback." },
+        { "type": "image_picker", "id": "thumb", "label": "Custom thumbnail (recommended)" }
       ]
     }
   ],
   "presets": [
     {
-      "name": "TikTok Grid (Modal, Thumbnails)",
+      "name": "TikTok Grid (Modal, Reliable)",
       "blocks": [
         { "type": "video", "settings": { "tiktok_url": "https://vm.tiktok.com/ZNdqxtoT6/" } },
         { "type": "video", "settings": { "tiktok_url": "https://vm.tiktok.com/ZNdq93vK4/" } },
