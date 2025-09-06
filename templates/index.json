@@ -279,6 +279,88 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "tiktokexplore_e6r8mx": {
+      "type": "tiktokexplore",
+      "blocks": {
+        "video_RzrftN": {
+          "type": "video",
+          "settings": {
+            "tiktok_url": "https://vm.tiktok.com/ZNdqxtoT6/"
+          }
+        },
+        "video_AgzNFB": {
+          "type": "video",
+          "settings": {
+            "tiktok_url": "https://vm.tiktok.com/ZNdq93vK4/"
+          }
+        },
+        "video_i4BrBL": {
+          "type": "video",
+          "settings": {
+            "tiktok_url": "https://vm.tiktok.com/ZNdq9bJQx/"
+          }
+        },
+        "video_FTjYcw": {
+          "type": "video",
+          "settings": {
+            "tiktok_url": "https://vm.tiktok.com/ZNdq9VLWH/"
+          }
+        },
+        "video_e7effw": {
+          "type": "video",
+          "settings": {
+            "tiktok_url": "https://vm.tiktok.com/ZNdq93TCS/"
+          }
+        },
+        "video_t7GrVy": {
+          "type": "video",
+          "settings": {
+            "tiktok_url": "https://vm.tiktok.com/ZNdq9gyp4/"
+          }
+        },
+        "video_DaqFb6": {
+          "type": "video",
+          "settings": {
+            "tiktok_url": "https://vm.tiktok.com/ZNdq9x9r8/"
+          }
+        },
+        "video_jmyKYF": {
+          "type": "video",
+          "settings": {
+            "tiktok_url": "https://vm.tiktok.com/ZNdq97myB/"
+          }
+        },
+        "video_rqjBah": {
+          "type": "video",
+          "settings": {
+            "tiktok_url": "https://vm.tiktok.com/ZNdq9tgnK/"
+          }
+        }
+      },
+      "block_order": [
+        "video_RzrftN",
+        "video_AgzNFB",
+        "video_i4BrBL",
+        "video_FTjYcw",
+        "video_e7effw",
+        "video_t7GrVy",
+        "video_DaqFb6",
+        "video_jmyKYF",
+        "video_rqjBah"
+      ],
+      "name": "TikTok Grid (Modal)",
+      "settings": {
+        "heading": "Follow our latest",
+        "subhead": "New drops, behind the scenes, and community moments.",
+        "max_w": 1200,
+        "gap": 6,
+        "radius": 10,
+        "pad_y": 24,
+        "bg": "#ffffff",
+        "cta_label": "Follow on TikTok",
+        "cta_url": ""
+      }
     }
   },
   "order": [
@@ -289,6 +371,7 @@
     "trust_features_main",
     "featured-collection-0",
     "17501054157be840f6",
-    "featured_blog_miVahn"
+    "featured_blog_miVahn",
+    "tiktokexplore_e6r8mx"
   ]
 }
