@@ -1,5 +1,5 @@
 <!-- sections/announcement-bar.liquid -->
-{% comment %} Map LEVEL (1..70) to duration in ms: Level 1 ≈ 1000ms, Level 70 = 600000ms {% endcomment %}
+{% comment %} Speed map: Level 1 = 1000ms (fast), Level 70 = 600000ms (slow) {% endcomment %}
 {% assign lvl = section.settings.speed_level | default: 4 %}
 {% if lvl < 1 %}{% assign lvl = 1 %}{% endif %}
 {% if lvl > 70 %}{% assign lvl = 70 %}{% endif %}
@@ -22,16 +22,19 @@
     overflow: hidden;
     display: flex;
     align-items: center;
-    font-size: 16px;
+    font-size: 15px;           /* slightly smaller for compactness */
     font-weight: 700;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
+    line-height: 1;            /* tighter vertical rhythm */
     padding: 0;
     position: relative;
     z-index: 50;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Optional highlight layers */
+  /* Optional highlight layers (toggle in settings) */
   .announcement-bar.has-highlight::before {
     content: "";
     position: absolute;
@@ -43,30 +46,34 @@
     background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.00) 60%);
   }
   .announcement-bar.gold_sheen::before {
-    background:
-      linear-gradient(120deg,
-        rgba(255, 245, 200, 0.35) 0%,
-        rgba(255, 233, 150, 0.45) 35%,
-        rgba(247, 215, 110, 0.35) 60%,
-        rgba(240, 196, 65, 0.35) 100%);
+    background: linear-gradient(120deg,
+      rgba(255,245,200,0.35) 0%,
+      rgba(255,233,150,0.45) 35%,
+      rgba(247,215,110,0.35) 60%,
+      rgba(240,196,65,0.35) 100%);
   }
 
   .announcement-track-wrapper {
     display: flex;
     width: max-content;
-    animation: scroll-left {{ duration_ms }}ms linear infinite; /* LOWER DURATION = FASTER */
+    animation: scroll-left {{ duration_ms }}ms linear infinite; /* LOWER = FASTER */
     will-change: transform;
-    animation-play-state: running !important;
     direction: rtl;
+    transform: translateZ(0);         /* GPU hint */
+    backface-visibility: hidden;
   }
 
-  .announcement-track { display: flex; direction: ltr; }
+  .announcement-track {
+    display: flex;
+    direction: ltr;
+    contain: content;                 /* isolate layout/paint */
+  }
 
   .announcement-item {
     flex: 0 0 auto;
-    padding: 0 3.25rem;      /* generous spacing between offers */
+    padding: 0 {{ section.settings.item_spacing }}px;
     white-space: nowrap;
-    text-transform: uppercase; /* FORCE ALL CAPS */
+    text-transform: uppercase;        /* ALL CAPS */
   }
 
   .announcement-item strong { font-weight: 800; }
@@ -78,7 +85,7 @@
 
   @media (max-width: 480px) {
     .announcement-bar { font-size: 14px; }
-    .announcement-item { padding: 0 2rem; }
+    .announcement-item { padding: 0 {{ section.settings.item_spacing_mobile }}px; }
   }
 
   /* Accessibility: respect reduced motion */
@@ -91,16 +98,26 @@
   <div class="announcement-track-wrapper">
     <div class="announcement-track">
       {% for i in (1..70) %}
-        <div class="announcement-item">🚚 <strong>FREE</strong> SHIPPING WHEN YOU SPEND £25+ (UK)</div>
-        <div class="announcement-item">🎁 <strong>FREE</strong> SAMPLE WITH A 50ML PURCHASE</div>
-        <div class="announcement-item">☀️ END OF SUMMER SALE — <strong>20% OFF</strong></div>
+        {% assign mod = i | modulo: 3 %}
+        {% if mod == 1 %}
+          <div class="announcement-item">🚚 <strong>FREE</strong> SHIPPING WHEN YOU SPEND £25+ (UK)</div>
+        {% elsif mod == 2 %}
+          <div class="announcement-item">🎁 <strong>FREE</strong> SAMPLE WITH A 50ML PURCHASE</div>
+        {% else %}
+          <div class="announcement-item">☀️ END OF SUMMER SALE — <strong>20% OFF</strong></div>
+        {% endif %}
       {% endfor %}
     </div>
     <div class="announcement-track">
       {% for i in (1..70) %}
-        <div class="announcement-item">🚚 <strong>FREE</strong> SHIPPING WHEN YOU SPEND £25+ (UK)</div>
-        <div class="announcement-item">🎁 <strong>FREE</strong> SAMPLE WITH A 50ML PURCHASE</div>
-        <div class="announcement-item">☀️ END OF SUMMER SALE — <strong>20% OFF</strong></div>
+        {% assign mod = i | modulo: 3 %}
+        {% if mod == 1 %}
+          <div class="announcement-item">🚚 <strong>FREE</strong> SHIPPING WHEN YOU SPEND £25+ (UK)</div>
+        {% elsif mod == 2 %}
+          <div class="announcement-item">🎁 <strong>FREE</strong> SAMPLE WITH A 50ML PURCHASE</div>
+        {% else %}
+          <div class="announcement-item">☀️ END OF SUMMER SALE — <strong>20% OFF</strong></div>
+        {% endif %}
       {% endfor %}
     </div>
   </div>
@@ -114,10 +131,10 @@
     {
       "type": "range",
       "id": "height",
-      "min": 40,
-      "max": 80,
-      "step": 5,
-      "default": 45,
+      "min": 36,
+      "max": 72,
+      "step": 4,
+      "default": 44,
       "label": "Bar Height (px)"
     },
     {
@@ -128,6 +145,24 @@
       "step": 1,
       "default": 4,
       "label": "Speed Level (1 = Fast • 70 = Slowest ≈ 600s)"
+    },
+    {
+      "type": "range",
+      "id": "item_spacing",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "default": 20,
+      "label": "Item Spacing (px, desktop)"
+    },
+    {
+      "type": "range",
+      "id": "item_spacing_mobile",
+      "min": 6,
+      "max": 28,
+      "step": 2,
+      "default": 14,
+      "label": "Item Spacing (px, mobile)"
     },
     {
       "type": "select",
