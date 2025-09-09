@@ -103,6 +103,18 @@
   @media (prefers-reduced-motion: reduce) {
     .announcement-track-wrapper { animation: none !important; }
   }
+
+  /* GOLD GRADIENT (ADDED) */
+  .announcement-bar {
+    background: linear-gradient(135deg,
+      #C9B037 0%,     /* Rich gold start */
+      #E6D365 25%,    /* Lighter gold */
+      #F4E67B 50%,    /* Bright gold center */
+      #E6D365 75%,    /* Back to lighter gold */
+      #C9B037 100%    /* Rich gold end */
+    ) !important;
+    background-attachment: fixed;
+  }
 </style>
 
 <div class="announcement-bar{% if section.settings.highlight_style != 'none' %} has-highlight {{ section.settings.highlight_style }}{% endif %}" role="region" aria-label="Promotions">
@@ -127,7 +139,7 @@
         {% elsif mod == 2 %}
           <div class="announcement-item"><span class="emoji" aria-hidden="true">🎁</span> FREE SAMPLE WITH A 50ML PURCHASE</div>
         {% else %}
-     <div class="announcement-item"><span class="emoji" aria-hidden="true">☀️</span>20% OFF END OF SUMMER SALE </div>
+          <div class="announcement-item"><span class="emoji" aria-hidden="true">☀️</span>20% OFF END OF SUMMER SALE </div>
         {% endif %}
       {% endfor %}
     </div>
