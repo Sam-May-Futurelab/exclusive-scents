@@ -1,9 +1,16 @@
 <!-- sections/announcement-bar.liquid -->
+{% comment %} Compute final duration from base + fine and clamp {% endcomment %}
+{% assign base = section.settings.scroll_speed | default: 30 %}
+{% assign fine = section.settings.scroll_speed_fine | default: 0 %}
+{% assign duration = base | plus: fine %}
+{% if duration < 0.5 %}{% assign duration = 0.5 %}{% endif %}
+{% if duration > 600 %}{% assign duration = 600 %}{% endif %}
+
 <style>
   .announcement-bar {
     width: 100%;
-    background-color: #FAF300;
-    color: #000;
+    background-color: #FAF300; /* promo yellow */
+    color: #000;               /* black text */
     height: {{ section.settings.height }}px;
     overflow: hidden;
     display: flex;
@@ -16,26 +23,32 @@
     z-index: 50;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   }
+
   .announcement-track-wrapper {
     display: flex;
     width: max-content;
-    animation: scroll-left {{ section.settings.scroll_speed }}s linear infinite;
+    animation: scroll-left {{ duration }}s linear infinite; /* LOWER = FASTER */
     will-change: transform;
     animation-play-state: running !important;
     direction: rtl;
   }
+
   .announcement-track { display: flex; direction: ltr; }
+
   .announcement-item {
     flex: 0 0 auto;
-    padding: 0 3.25rem;
+    padding: 0 3.25rem;   /* more space between offers */
     white-space: nowrap;
-    text-transform: uppercase;
+    text-transform: uppercase; /* FORCE ALL CAPS */
   }
+
   .announcement-item strong { font-weight: 800; }
+
   @keyframes scroll-left {
-    0% { transform: translateX(0%); }
+    0%   { transform: translateX(0%); }
     100% { transform: translateX(-50%); }
   }
+
   @media (max-width: 480px) {
     .announcement-bar { font-size: 14px; }
     .announcement-item { padding: 0 2rem; }
@@ -45,7 +58,7 @@
 <div class="announcement-bar" role="region" aria-label="Promotions">
   <div class="announcement-track-wrapper">
     <div class="announcement-track">
-      {% for i in (1..70) %}
+      {% for i in (1..2) %}
         <div class="announcement-item">🚚 <strong>FREE</strong> SHIPPING WHEN YOU SPEND £25+ (UK)</div>
         <div class="announcement-item">🎁 <strong>FREE</strong> SAMPLE WITH A 50ML PURCHASE</div>
         <div class="announcement-item">☀️ END OF SUMMER SALE — <strong>20% OFF</strong></div>
@@ -78,11 +91,20 @@
     {
       "type": "range",
       "id": "scroll_speed",
-      "min": 5,
-      "max": 60,
+      "min": 0,
+      "max": 600,
+      "step": 6,
+      "default": 30,
+      "label": "Base Duration (seconds — LOWER = FASTER)"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed_fine",
+      "min": -5,
+      "max": 5,
       "step": 1,
-      "default": 25,
-      "label": "Scroll Speed (seconds, lower = faster)"
+      "default": 0,
+      "label": "Fine Tune (± seconds)"
     }
   ],
   "presets": [
