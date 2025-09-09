@@ -1,10 +1,17 @@
 <!-- sections/announcement-bar.liquid -->
-{% comment %} Compute final duration from base + fine and clamp {% endcomment %}
-{% assign base = section.settings.scroll_speed | default: 30 %}
-{% assign fine = section.settings.scroll_speed_fine | default: 0 %}
-{% assign duration = base | plus: fine %}
-{% if duration < 0.5 %}{% assign duration = 0.5 %}{% endif %}
-{% if duration > 600 %}{% assign duration = 600 %}{% endif %}
+{% comment %} Map LEVEL (1..70) to duration in ms: Level 1 ≈ 1000ms, Level 70 = 600000ms {% endcomment %}
+{% assign lvl = section.settings.speed_level | default: 4 %}
+{% if lvl < 1 %}{% assign lvl = 1 %}{% endif %}
+{% if lvl > 70 %}{% assign lvl = 70 %}{% endif %}
+{% assign min_ms = 1000 %}
+{% assign max_ms = 600000 %}
+{% assign intervals = 69 %}
+{% assign span_ms = max_ms | minus: min_ms %}
+{% assign step_ms = span_ms | divided_by: intervals %}
+{% assign steps = lvl | minus: 1 %}
+{% assign mult = step_ms | times: steps %}
+{% assign duration_ms = min_ms | plus: mult %}
+{% if lvl == 70 %}{% assign duration_ms = max_ms %}{% endif %}
 
 <style>
   .announcement-bar {
@@ -24,10 +31,30 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   }
 
+  /* Optional highlight layers */
+  .announcement-bar.has-highlight::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+  .announcement-bar.soft_gloss::before {
+    background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.00) 60%);
+  }
+  .announcement-bar.gold_sheen::before {
+    background:
+      linear-gradient(120deg,
+        rgba(255, 245, 200, 0.35) 0%,
+        rgba(255, 233, 150, 0.45) 35%,
+        rgba(247, 215, 110, 0.35) 60%,
+        rgba(240, 196, 65, 0.35) 100%);
+  }
+
   .announcement-track-wrapper {
     display: flex;
     width: max-content;
-    animation: scroll-left {{ duration }}s linear infinite; /* LOWER = FASTER */
+    animation: scroll-left {{ duration_ms }}ms linear infinite; /* LOWER DURATION = FASTER */
     will-change: transform;
     animation-play-state: running !important;
     direction: rtl;
@@ -37,7 +64,7 @@
 
   .announcement-item {
     flex: 0 0 auto;
-    padding: 0 3.25rem;   /* more space between offers */
+    padding: 0 3.25rem;      /* generous spacing between offers */
     white-space: nowrap;
     text-transform: uppercase; /* FORCE ALL CAPS */
   }
@@ -45,17 +72,22 @@
   .announcement-item strong { font-weight: 800; }
 
   @keyframes scroll-left {
-    0%   { transform: translateX(0%); }
-    100% { transform: translateX(-50%); }
+    0%   { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
   }
 
   @media (max-width: 480px) {
     .announcement-bar { font-size: 14px; }
     .announcement-item { padding: 0 2rem; }
   }
+
+  /* Accessibility: respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .announcement-track-wrapper { animation: none !important; }
+  }
 </style>
 
-<div class="announcement-bar" role="region" aria-label="Promotions">
+<div class="announcement-bar{% if section.settings.highlight_style != 'none' %} has-highlight {{ section.settings.highlight_style }}{% endif %}" role="region" aria-label="Promotions">
   <div class="announcement-track-wrapper">
     <div class="announcement-track">
       {% for i in (1..70) %}
@@ -90,21 +122,23 @@
     },
     {
       "type": "range",
-      "id": "scroll_speed",
-      "min": 0,
-      "max": 600,
-      "step": 6,
-      "default": 30,
-      "label": "Base Duration (seconds — LOWER = FASTER)"
+      "id": "speed_level",
+      "min": 1,
+      "max": 70,
+      "step": 1,
+      "default": 4,
+      "label": "Speed Level (1 = Fast • 70 = Slowest ≈ 600s)"
     },
     {
-      "type": "range",
-      "id": "scroll_speed_fine",
-      "min": -5,
-      "max": 5,
-      "step": 1,
-      "default": 0,
-      "label": "Fine Tune (± seconds)"
+      "type": "select",
+      "id": "highlight_style",
+      "label": "Background Highlight",
+      "default": "none",
+      "options": [
+        { "value": "none",       "label": "None" },
+        { "value": "soft_gloss", "label": "Soft Gloss" },
+        { "value": "gold_sheen", "label": "Gold Sheen" }
+      ]
     }
   ],
   "presets": [
