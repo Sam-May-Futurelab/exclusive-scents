@@ -13,10 +13,12 @@
   "sections": {
     "tiktokexplore_Md4w9F": {
       "type": "tiktokexplore",
+      "disabled": true,
       "name": "Promo Ticker",
       "settings": {
         "height": 45,
-        "scroll_speed": 60
+        "scroll_speed": 60,
+        "scroll_speed_fine": 0
       }
     },
     "announcement-bar": {
@@ -33,7 +35,6 @@
       "block_order": [
         "announcement_TtWn73"
       ],
-      "disabled": true,
       "settings": {
         "auto_rotate": true,
         "change_slides_speed": 3,
