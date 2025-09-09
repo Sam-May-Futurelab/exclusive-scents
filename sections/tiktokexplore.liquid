@@ -113,9 +113,9 @@
         {% if mod == 1 %}
           <div class="announcement-item"><span class="emoji" aria-hidden="true">🚚</span> <strong>FREE</strong> SHIPPING WHEN YOU SPEND £25+ (UK)</div>
         {% elsif mod == 2 %}
-          <div class="announcement-item"><span class="emoji" aria-hidden="true">🎁</span> <strong>FREE</strong> SAMPLE WITH A 50ML PURCHASE</div>
+          <div class="announcement-item"><span class="emoji" aria-hidden="true">🎁</span> <strong>FREE </strong> SAMPLE WITH A 50ML PURCHASE</div>
         {% else %}
-          <div class="announcement-item"><span class="emoji" aria-hidden="true">☀️</span> END OF SUMMER SALE — <strong>20% OFF</strong></div>
+          <div class="announcement-item"><span class="emoji" aria-hidden="true">☀️</span>20% OFF END OF SUMMER SALE </div>
         {% endif %}
       {% endfor %}
     </div>
@@ -123,11 +123,11 @@
       {% for i in (1..70) %}
         {% assign mod = i | modulo: 3 %}
         {% if mod == 1 %}
-          <div class="announcement-item"><span class="emoji" aria-hidden="true">🚚</span> <strong>FREE</strong> SHIPPING WHEN YOU SPEND £25+ (UK)</div>
+          <div class="announcement-item"><span class="emoji" aria-hidden="true">📦 </span> <strong>FREE</strong> SHIPPING WHEN YOU SPEND £25+ (UK)</div>
         {% elsif mod == 2 %}
-          <div class="announcement-item"><span class="emoji" aria-hidden="true">🎁</span> <strong>FREE</strong> SAMPLE WITH A 50ML PURCHASE</div>
+          <div class="announcement-item"><span class="emoji" aria-hidden="true">🎁</span> <strong>FREE </strong> SAMPLE WITH A 50ML PURCHASE</div>
         {% else %}
-          <div class="announcement-item"><span class="emoji" aria-hidden="true">☀️</span> END OF SUMMER SALE — <strong>20% OFF</strong></div>
+     <div class="announcement-item"><span class="emoji" aria-hidden="true">☀️</span>20% OFF END OF SUMMER SALE </div>
         {% endif %}
       {% endfor %}
     </div>
