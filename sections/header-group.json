@@ -11,6 +11,14 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
+    "tiktokexplore_Md4w9F": {
+      "type": "tiktokexplore",
+      "name": "Promo Ticker",
+      "settings": {
+        "height": 45,
+        "scroll_speed": 60
+      }
+    },
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
@@ -25,6 +33,7 @@
       "block_order": [
         "announcement_TtWn73"
       ],
+      "disabled": true,
       "settings": {
         "auto_rotate": true,
         "change_slides_speed": 3,
@@ -69,6 +78,7 @@
     }
   },
   "order": [
+    "tiktokexplore_Md4w9F",
     "announcement-bar",
     "header",
     "announcement_bar_D6Yf3D"
