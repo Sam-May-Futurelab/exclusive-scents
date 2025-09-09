@@ -1,267 +1,92 @@
-{% comment %}
-  TikTok MP4 Grid — Auto-thumb (first second), modal player, TikTok badge link, CTA below
-  - Polished play button: responsive size, soft halo on hover, crisp triangle
-  - No thumbnail upload required. Each tile shows a paused <video> at ~0.6s as the thumbnail.
-  - TikTok badge always links to https://www.tiktok.com/@exclusive.scentss
-  - CTA button below; uses editor link if provided, else defaults to the same TikTok profile.
-{% endcomment %}
+<!-- sections/announcement-bar.liquid -->
+<style>
+  .announcement-bar {
+    width: 100%;
+    background-color: #FAF300;
+    color: #000;
+    height: {{ section.settings.height }}px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 0;
+    position: relative;
+    z-index: 50;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  .announcement-track-wrapper {
+    display: flex;
+    width: max-content;
+    animation: scroll-left {{ section.settings.scroll_speed }}s linear infinite;
+    will-change: transform;
+    animation-play-state: running !important;
+    direction: rtl;
+  }
+  .announcement-track { display: flex; direction: ltr; }
+  .announcement-item {
+    flex: 0 0 auto;
+    padding: 0 3.25rem;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+  .announcement-item strong { font-weight: 800; }
+  @keyframes scroll-left {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+  @media (max-width: 480px) {
+    .announcement-bar { font-size: 14px; }
+    .announcement-item { padding: 0 2rem; }
+  }
+</style>
 
-<section id="ttmp4-{{ section.id }}" class="ttmp4-wrap">
-  <style>
-    #ttmp4-{{ section.id }}{
-      --bg: {{ section.settings.bg | default: '#ffffff' }};
-      --gap: {{ section.settings.gap | default: 8 }}px;
-      --radius: {{ section.settings.radius | default: 12 }}px;
-      --btn: #111; --btn-tx:#fff;
-      --play-size: clamp(48px, 6vw, 64px);
-      --play-icon: clamp(18px, 2.1vw, 22px);
-      padding: {{ section.settings.pad_y | default: 28 }}px 0;
-      background: var(--bg);
-    }
-    .ttmp4-container{ max-width: {{ section.settings.max_w | default: 1200 }}px; margin:0 auto; padding:0 16px; }
-    .ttmp4-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:14px; margin-bottom:16px; }
-    .ttmp4-title{ font-size:clamp(22px,2.4vw,28px); font-weight:800; letter-spacing:-.02em; }
-    .ttmp4-sub{ color:#6b7280; max-width:70ch; }
-
-    .ttmp4-grid{ display:grid; gap:var(--gap); grid-template-columns:repeat(2,1fr); }
-    @media (min-width:640px){ .ttmp4-grid{ grid-template-columns:repeat(3,1fr);} }
-    @media (min-width:1024px){ .ttmp4-grid{ grid-template-columns:repeat(4,1fr);} }
-
-    .ttmp4-card{
-      position:relative; border-radius:var(--radius); overflow:hidden; background:#0f172a; cursor:pointer; aspect-ratio:1/1;
-      box-shadow:0 1px 0 rgba(0,0,0,.04);
-    }
-    @supports not (aspect-ratio:1/1){ .ttmp4-card::before{ content:""; display:block; padding-top:100%; } }
-
-    .ttmp4-media, .ttmp4-thumb{
-      position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;
-      display:block; background:linear-gradient(135deg,#1f2937,#0f172a);
-      transition: transform .35s ease, filter .35s ease; filter:saturate(1.05) contrast(1.02);
-    }
-    .ttmp4-card:hover .ttmp4-thumb{ transform:scale(1.035); }
-
-    .ttmp4-grad{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.28) 100%); pointer-events:none; }
-
-    /* Polished play button */
-    .ttmp4-play{
-      position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-      width:var(--play-size); height:var(--play-size); border-radius:999px;
-      display:grid; place-items:center; pointer-events:none;
-      color:#ffffff;
-      background: radial-gradient(120% 120% at 30% 30%, rgba(255,255,255,.20), rgba(0,0,0,.35));
-      border:1px solid rgba(255,255,255,.28);
-      box-shadow: 0 8px 24px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.18);
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .ttmp4-card:hover .ttmp4-play{
-      transform: translate(-50%, -50%) scale(1.06);
-      box-shadow: 0 10px 28px rgba(0,0,0,.30), inset 0 1px 0 rgba(255,255,255,.22);
-    }
-    .ttmp4-play svg{ width:var(--play-icon); height:var(--play-icon); display:block; }
-
-    /* TikTok badge */
-    .ttmp4-tt{
-      position:absolute; right:8px; top:8px; z-index:2;
-      display:inline-flex; align-items:center; gap:6px; padding:6px 8px;
-      font-size:12px; font-weight:800; color:#fff; text-decoration:none;
-      background:rgba(0,0,0,.55); border:1px solid rgba(255,255,255,.18);
-      border-radius:999px; backdrop-filter:saturate(120%) blur(6px);
-    }
-    .ttmp4-tt svg{ width:14px; height:14px; }
-
-    /* CTA */
-    .ttmp4-cta{ display:flex; justify-content:center; margin-top:22px; }
-    .ttmp4-cta a{
-      display:inline-flex; align-items:center; gap:10px; text-decoration:none;
-      background:var(--btn); color:var(--btn-tx);
-      padding:12px 18px; border-radius:12px; font-weight:800; letter-spacing:-.01em;
-      box-shadow:0 10px 30px rgba(0,0,0,.08);
-    }
-    .ttmp4-cta svg{ width:18px; height:18px; }
-
-    /* Modal */
-    .ttmp4-modal{ position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; place-items:center; z-index:9999; padding:20px; }
-    .ttmp4-modal.is-open{ display:grid; }
-    .ttmp4-box{ width:min(920px,92vw); background:#000; border-radius:14px; overflow:hidden; position:relative; box-shadow:0 20px 60px rgba(0,0,0,.45); }
-    .ttmp4-close{
-      position:absolute; top:8px; right:8px; z-index:2; width:36px; height:36px; display:grid; place-items:center;
-      border-radius:999px; background:rgba(255,255,255,.15); color:#fff; border:1px solid rgba(255,255,255,.25); cursor:pointer;
-    }
-    .ttmp4-embed{ background:#000; aspect-ratio:9/16; width:100%; }
-    @supports not (aspect-ratio:9/16){
-      .ttmp4-embed{ position:relative; padding-top:177.78%; }
-      .ttmp4-embed > *{ position:absolute; inset:0; width:100%; height:100%; }
-    }
-
-    @media (prefers-reduced-motion:reduce){
-      .ttmp4-thumb, .ttmp4-play{ transition:none !important; }
-    }
-  </style>
-
-  {% assign PROFILE_URL = 'https://www.tiktok.com/@exclusive.scentss' %}
-  {% assign CTA_HREF = section.settings.cta_url | default: PROFILE_URL %}
-
-  <div class="ttmp4-container">
-    {% if section.settings.heading != blank or section.settings.subhead != blank %}
-      <div class="ttmp4-head">
-        {% if section.settings.heading != blank %}<h2 class="ttmp4-title">{{ section.settings.heading }}</h2>{% endif %}
-        {% if section.settings.subhead != blank %}<div class="ttmp4-sub">{{ section.settings.subhead }}</div>{% endif %}
-      </div>
-    {% endif %}
-
-    <div class="ttmp4-grid">
-      {% for block in section.blocks %}
-        {% assign mp4  = block.settings.mp4_url | strip %}
-        {% if mp4 == blank %}
-          <div class="ttmp4-card" aria-label="Missing video">
-            <div class="ttmp4-media"></div>
-            <div class="ttmp4-grad"></div>
-            <div class="ttmp4-play" aria-hidden="true">
-              <!-- Crisp play triangle -->
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <polygon points="8,6 18,12 8,18"></polygon>
-              </svg>
-            </div>
-          </div>
-        {% else %}
-          <div class="ttmp4-card" role="button" tabindex="0" data-mp4="{{ mp4 | escape }}" aria-label="Play video {{ forloop.index }}">
-            <a class="ttmp4-tt" href="{{ PROFILE_URL }}" target="_blank" rel="noopener" aria-label="Visit TikTok profile">
-              <!-- Cleaner single-color TikTok glyph -->
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M14 2h2c.2 1.9 1.4 3.1 3.4 3.4V7c-1.4.1-2.7-.3-3.9-1v6.1c0 3.7-2.4 5.9-5.7 5.9-2.9 0-5.2-2-5.2-4.9 0-2.7 2-4.5 4.4-4.8v2.6c-1.1.2-1.8.9-1.8 2 0 1.2 1 2.2 2.6 2.2 1.7 0 2.6-1.1 2.6-3.2V2z"/>
-              </svg>
-              TikTok
-            </a>
-
-            <!-- Auto thumbnail: paused video at ~0.6s -->
-            <video class="ttmp4-thumb" src="{{ mp4 | escape }}" muted playsinline preload="metadata"></video>
-
-            <span class="ttmp4-grad" aria-hidden="true"></span>
-            <span class="ttmp4-play" aria-hidden="true">
-              <!-- Crisp play triangle -->
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <polygon points="8,6 18,12 8,18"></polygon>
-              </svg>
-            </span>
-          </div>
-        {% endif %}
+<div class="announcement-bar" role="region" aria-label="Promotions">
+  <div class="announcement-track-wrapper">
+    <div class="announcement-track">
+      {% for i in (1..2) %}
+        <div class="announcement-item">🚚 <strong>FREE</strong> SHIPPING WHEN YOU SPEND £25+ (UK)</div>
+        <div class="announcement-item">🎁 <strong>FREE</strong> SAMPLE WITH A 50ML PURCHASE</div>
+        <div class="announcement-item">☀️ END OF SUMMER SALE — <strong>20% OFF</strong></div>
       {% endfor %}
     </div>
-
-    <!-- CTA always visible (falls back to profile if URL not set) -->
-    <div class="ttmp4-cta">
-      <a href="{{ CTA_HREF }}" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M14 2h2c.2 1.9 1.4 3.1 3.4 3.4V7c-1.4.1-2.7-.3-3.9-1v6.1c0 3.7-2.4 5.9-5.7 5.9-2.9 0-5.2-2-5.2-4.9 0-2.7 2-4.5 4.4-4.8v2.6c-1.1.2-1.8.9-1.8 2 0 1.2 1 2.2 2.6 2.2 1.7 0 2.6-1.1 2.6-3.2V2z"/>
-        </svg>
-        {{ section.settings.cta_label | default: 'Follow on TikTok' }}
-      </a>
+    <div class="announcement-track">
+      {% for i in (1..2) %}
+        <div class="announcement-item">🚚 <strong>FREE</strong> SHIPPING WHEN YOU SPEND £25+ (UK)</div>
+        <div class="announcement-item">🎁 <strong>FREE</strong> SAMPLE WITH A 50ML PURCHASE</div>
+        <div class="announcement-item">☀️ END OF SUMMER SALE — <strong>20% OFF</strong></div>
+      {% endfor %}
     </div>
   </div>
-
-  <!-- Modal -->
-  <div class="ttmp4-modal" data-modal>
-    <div class="ttmp4-box">
-      <button class="ttmp4-close" data-close aria-label="Close">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
-      </button>
-      <div class="ttmp4-embed" data-embed></div>
-    </div>
-  </div>
-
-  <script>
-    (function(){
-      const root = document.getElementById('ttmp4-{{ section.id }}');
-      if(!root) return;
-
-      const cards = Array.from(root.querySelectorAll('.ttmp4-card[data-mp4]'));
-      const modal = root.querySelector('[data-modal]');
-      const embed = root.querySelector('[data-embed]');
-      const closeBtn = root.querySelector('[data-close]');
-
-      function openModal(){ modal.classList.add('is-open'); }
-      function closeModal(){ modal.classList.remove('is-open'); embed.innerHTML=''; }
-
-      // Prepare thumbs: seek each tile's <video> to ~0.6s and pause
-      cards.forEach(card=>{
-        const v = card.querySelector('.ttmp4-thumb');
-        if(!v) return;
-        const seekTo = 0.6;
-
-        v.addEventListener('loadedmetadata', ()=>{
-          try {
-            if(v.duration && v.duration > seekTo){ v.currentTime = seekTo; }
-          } catch(e){}
-        }, { once:true });
-
-        v.addEventListener('loadeddata', ()=>{
-          try { v.pause(); } catch(e){}
-        }, { once:true });
-
-        // Click/keyboard -> play in modal
-        const mp4 = card.getAttribute('data-mp4');
-        const open = ()=>{
-          openModal();
-          embed.innerHTML = '';
-          const player = document.createElement('video');
-          player.src = mp4;
-          player.setAttribute('controls','true');
-          player.setAttribute('playsinline','true');
-          player.setAttribute('preload','metadata');
-          player.muted = false;
-          player.style.width='100%'; player.style.height='100%';
-          embed.appendChild(player);
-          const p = player.play(); if(p && p.catch) p.catch(()=>{});
-        };
-
-        card.addEventListener('click', (e)=>{
-          if(e.target.closest && e.target.closest('.ttmp4-tt')) return; // badge click goes to profile
-          open();
-        });
-        card.addEventListener('keydown', (e)=>{
-          if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(); }
-        });
-      });
-
-      closeBtn.addEventListener('click', closeModal);
-      modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
-      document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
-    })();
-  </script>
-</section>
+</div>
 
 {% schema %}
 {
-  "name": "TikTok MP4 Grid",
-  "class": "section",
+  "name": "Promo Ticker",
+  "class": "section-announcement",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Follow our latest" },
-    { "type": "text", "id": "subhead", "label": "Subtitle", "default": "New drops, behind the scenes, and community moments." },
-    { "type": "range", "id": "max_w", "label": "Max width (px)", "min": 800, "max": 1600, "step": 20, "default": 1200 },
-    { "type": "range", "id": "gap", "label": "Grid gap (px)", "min": 2, "max": 18, "step": 1, "default": 8 },
-    { "type": "range", "id": "radius", "label": "Card radius (px)", "min": 0, "max": 24, "step": 1, "default": 12 },
-    { "type": "range", "id": "pad_y", "label": "Vertical padding", "min": 0, "max": 100, "step": 2, "default": 28 },
-    { "type": "color", "id": "bg", "label": "Background", "default": "#ffffff" },
-
-    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Follow on TikTok" },
-    { "type": "url",  "id": "cta_url",   "label": "CTA link (optional)" }
-  ],
-  "blocks": [
     {
-      "type": "video",
-      "name": "Video",
-      "settings": [
-        { "type": "text", "id": "mp4_url", "label": "MP4 video URL (Shopify CDN)", "info": "Paste the full .mp4 URL from Content > Files." }
-      ]
+      "type": "range",
+      "id": "height",
+      "min": 40,
+      "max": 80,
+      "step": 5,
+      "default": 45,
+      "label": "Bar Height (px)"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "min": 5,
+      "max": 60,
+      "step": 1,
+      "default": 25,
+      "label": "Scroll Speed (seconds, lower = faster)"
     }
   ],
   "presets": [
-    {
-      "name": "TikTok MP4 Grid (Auto-thumb + CTA)",
-      "blocks": [
-        { "type": "video", "settings": { "mp4_url": "https://cdn.shopify.com/videos/c/o/v/cb24bf4a39b541a089259a9300c9ec3e.mp4" } }
-      ]
-    }
+    { "name": "Promo Ticker" }
   ]
 }
 {% endschema %}
