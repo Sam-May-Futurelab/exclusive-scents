@@ -11,40 +11,6 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
-    "tiktokexplore_Md4w9F": {
-      "type": "tiktokexplore",
-      "disabled": true,
-      "name": "Promo Ticker",
-      "settings": {
-        "height": 45,
-        "scroll_speed": 60,
-        "scroll_speed_fine": 0
-      }
-    },
-    "announcement-bar": {
-      "type": "announcement-bar",
-      "blocks": {
-        "announcement_TtWn73": {
-          "type": "announcement",
-          "settings": {
-            "text": "📦📦 FREE SHIPPING WHEN YOU SPEND £25 OR MORE - UK 📦📦",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "announcement_TtWn73"
-      ],
-      "settings": {
-        "auto_rotate": true,
-        "change_slides_speed": 3,
-        "color_scheme": "scheme-2",
-        "show_line_separator": false,
-        "show_social": false,
-        "enable_country_selector": false,
-        "enable_language_selector": false
-      }
-    },
     "header": {
       "type": "header",
       "settings": {
@@ -79,8 +45,6 @@
     }
   },
   "order": [
-    "tiktokexplore_Md4w9F",
-    "announcement-bar",
     "header",
     "announcement_bar_D6Yf3D"
   ]
