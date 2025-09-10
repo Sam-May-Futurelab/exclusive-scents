@@ -11,6 +11,17 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
+    "tiktokexplore_WGjkKW": {
+      "type": "tiktokexplore",
+      "name": "Promo Ticker",
+      "settings": {
+        "height": 44,
+        "speed_level": 45,
+        "item_spacing": 16,
+        "item_spacing_mobile": 12,
+        "highlight_style": "none"
+      }
+    },
     "header": {
       "type": "header",
       "settings": {
@@ -46,6 +57,7 @@
     }
   },
   "order": [
+    "tiktokexplore_WGjkKW",
     "header",
     "announcement_bar_D6Yf3D"
   ]
