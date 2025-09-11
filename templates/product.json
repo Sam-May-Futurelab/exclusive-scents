@@ -139,11 +139,169 @@
             "alt": "Customer review screenshot",
             "caption": ""
           }
+        },
+        "slide_k7TU3b": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5540.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_RyF8TA": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5543.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_AnyHx6": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5523.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_L4ViQn": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5536.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_n7aYey": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5524.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_CTTxKa": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5543_2.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_tfy86C": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5527.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_QzE9dR": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5529.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_zrQXxt": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5548.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_Vr6ReR": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5525.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_XdDAy6": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5531.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_KyiBrx": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5539_2.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_k9EcnG": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5522.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_pgaaVp": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5541_2.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_Dtypjh": {
+          "type": "slide",
+          "settings": {
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_CmY7kT": {
+          "type": "slide",
+          "settings": {
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_bJaRxm": {
+          "type": "slide",
+          "settings": {
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_HfApVJ": {
+          "type": "slide",
+          "settings": {
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
         }
       },
       "block_order": [
         "slide_MGyjTP",
-        "slide_hLVhGc"
+        "slide_hLVhGc",
+        "slide_k7TU3b",
+        "slide_RyF8TA",
+        "slide_AnyHx6",
+        "slide_L4ViQn",
+        "slide_n7aYey",
+        "slide_CTTxKa",
+        "slide_tfy86C",
+        "slide_QzE9dR",
+        "slide_zrQXxt",
+        "slide_Vr6ReR",
+        "slide_XdDAy6",
+        "slide_KyiBrx",
+        "slide_k9EcnG",
+        "slide_pgaaVp",
+        "slide_Dtypjh",
+        "slide_CmY7kT",
+        "slide_bJaRxm",
+        "slide_HfApVJ"
       ],
       "disabled": true,
       "name": "TikTok Reviews Slideshow",
