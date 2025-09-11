@@ -1,9 +1,8 @@
 {% comment %}
-  Section: TikTok Reviews Carousel (adaptive, native scroll)
-  - Title with optional TikTok logo badge
-  - Optional star strip with review count
-  - Cards auto-size to image (no forced aspect ratio)
+  Section: TikTok Reviews Carousel (no logo, advanced stars, adaptive)
+  - Title + star strip with "100+ Reviews"
   - Native horizontal scrollbar (no arrows)
+  - Cards auto-size to image width; height capped
 {% endcomment %}
 
 <section class="rc-wrap" id="reviews-{{ section.id }}" data-section-id="{{ section.id }}">
@@ -11,26 +10,34 @@
 
     {% if section.settings.title != blank %}
       <div class="rc-head">
-        <h2 class="rc-title">
-          {% if section.settings.show_tiktok_logo %}
-            <span class="rc-logo" aria-hidden="true">
-              {% assign mode = section.settings.tiktok_logo_mode %}
-              <svg class="rc-tiktok-svg {% if mode == 'brand' %}rc-brand{% endif %}" viewBox="0 0 256 296" width="28" height="28" role="img">
-                <!-- Simple TikTok mark (path simplified), brand mode uses layered fills via CSS -->
-                <path class="rc-tiktok-core" d="M170.3 0c9.9 17.6 26.6 31.5 47.7 40.2v41.4c-16.9-1.1-33.4-7.1-47.7-17v108.9c0 67.7-56 122.2-125.1 122.2C20.9 296 0 275.7 0 250.9c0-24.8 20.9-45.1 45.2-45.1 6.3 0 12.3 1.3 17.8 3.7a46.3 46.3 0 0 1-1.9-13.2c0-39.8 33-72.1 73.8-72.1 4.6 0 9.1.4 13.4 1.2V0h22z"/>
-              </svg>
-            </span>
-          {% endif %}
-          <span>{{ section.settings.title }}</span>
-        </h2>
+        <h2 class="rc-title">{{ section.settings.title }}</h2>
 
         {% if section.settings.show_stars %}
-          <div class="rc-stars">
-            <span class="rc-star" aria-hidden="true">★</span>
-            <span class="rc-star" aria-hidden="true">★</span>
-            <span class="rc-star" aria-hidden="true">★</span>
-            <span class="rc-star" aria-hidden="true">★</span>
-            <span class="rc-star" aria-hidden="true">★</span>
+          <div class="rc-stars" role="img" aria-label="{{ section.settings.star_copy | default: '100+ Reviews' }}">
+            <!-- Reusable star symbol -->
+            <svg width="0" height="0" style="position:absolute"><defs>
+              <symbol id="rc-star" viewBox="0 0 24 24">
+                <path d="M12 2.4l2.9 5.85 6.46.94-4.68 4.56 1.1 6.42L12 17.92 6.22 20.17l1.1-6.42L2.64 9.19l6.46-.94L12 2.4z"></path>
+              </symbol>
+              <linearGradient id="rc-star-grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="var(--star-a)" />
+                <stop offset="1" stop-color="var(--star-b)" />
+              </linearGradient>
+              <filter id="rc-star-glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="0.6" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs></svg>
+
+            <span class="rc-star-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#rc-star"></use></svg></span>
+            <span class="rc-star-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#rc-star"></use></svg></span>
+            <span class="rc-star-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#rc-star"></use></svg></span>
+            <span class="rc-star-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#rc-star"></use></svg></span>
+            <span class="rc-star-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#rc-star"></use></svg></span>
+
             {% if section.settings.star_copy != blank %}
               <span class="rc-star-copy">{{ section.settings.star_copy }}</span>
             {% endif %}
@@ -78,6 +85,9 @@
   <style>
     .rc-wrap {
       --rc-muted: color-mix(in oklab, #111 60%, white 40%);
+      /* star colors (adjust to brand if desired) */
+      --star-a: #111;
+      --star-b: #111;
       -webkit-font-smoothing: antialiased;
       font-synthesis-weight: none;
     }
@@ -85,7 +95,7 @@
 
     .rc-head{ display: grid; place-items: center; gap: 8px; margin-bottom: 14px; }
 
-    /* Title — premium, uses theme heading font */
+    /* Title — premium, inherits theme heading font */
     .rc-title{
       margin: 0;
       font-size: clamp(26px, 2.6vw, 38px);
@@ -95,33 +105,35 @@
       color: #111;
       text-align: center;
       font-family: inherit;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
     }
 
-    /* TikTok logo modes */
-    .rc-logo{ display: inline-flex; }
-    .rc-tiktok-svg { display: block; }
-    .rc-tiktok-svg .rc-tiktok-core { fill: currentColor; }
-    /* Brand layered effect using text-shadow-like glow (subtle) */
-    .rc-tiktok-svg.rc-brand .rc-tiktok-core {
-      /* dark core */
-      fill: #111;
-      /* optional subtle dual-tone outline illusion */
-      filter: drop-shadow(1px 0 #25F4EE) drop-shadow(-1px 0 #FE2C55);
-    }
-
-    /* Stars row */
+    /* Advanced stars row with perfect alignment */
     .rc-stars{
       display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 14px;
-      color: #111;
+      align-items: baseline; /* aligns text baseline to star baseline */
+      gap: 8px;
+      line-height: 1;
+      user-select: none;
     }
-    .rc-star{ font-size: 14px; line-height: 1; }
-    .rc-star-copy{ color: var(--rc-muted); font-size: 13px; margin-left: 4px; }
+    .rc-star-icon{
+      display: inline-flex;
+      width: 18px; height: 18px;
+      filter: url(#rc-star-glow);
+    }
+    .rc-star-icon svg{
+      width: 100%; height: 100%;
+      fill: url(#rc-star-grad);
+      paint-order: stroke;
+      stroke: rgba(0,0,0,.06);
+      stroke-width: 0.25;
+    }
+    .rc-star-copy{
+      font-size: 13px;
+      color: var(--rc-muted);
+      margin-left: 2px;
+      position: relative;
+      top: 1px; /* micro-nudge for perfect optical alignment */
+    }
 
     /* Native horizontal scroll with visible bottom scrollbar */
     .rc-scroll{
@@ -152,7 +164,7 @@
       box-shadow: var(--rc-shadow);
       background: #f6f7f8;
       width: max-content;
-      max-width: 90vw; /* guard on small screens */
+      max-width: 90vw; /* guard for very wide images on mobile */
     }
     .rc-media img{
       height: auto;
@@ -190,8 +202,8 @@
     .rc-scroll:hover::-webkit-scrollbar-thumb{ background: #b5b5b5; }
 
     @media (max-width: 480px){
-      .rc-stars{ font-size: 13px; }
-      .rc-star{ font-size: 13px; }
+      .rc-star-icon{ width: 17px; height: 17px; }
+      .rc-star-copy{ font-size: 12.5px; top: 1px; }
       .rc-scroll{ padding-bottom: 8px; }
     }
   </style>
@@ -204,19 +216,8 @@
   "class": "section",
   "settings": [
     { "type": "text", "id": "title", "label": "Title", "default": "Check Out Our TikTok Reviews" },
-    { "type": "checkbox", "id": "show_tiktok_logo", "label": "Show TikTok logo", "default": true },
-    {
-      "type": "select",
-      "id": "tiktok_logo_mode",
-      "label": "TikTok logo style",
-      "default": "brand",
-      "options": [
-        { "value": "brand", "label": "Brand accent" },
-        { "value": "mono", "label": "Monochrome" }
-      ]
-    },
     { "type": "checkbox", "id": "show_stars", "label": "Show stars row", "default": true },
-    { "type": "text", "id": "star_copy", "label": "Star row copy", "default": "100+ reviews" },
+    { "type": "text", "id": "star_copy", "label": "Star row copy", "default": "100+ Reviews" },
     { "type": "text", "id": "max_height", "label": "Max image height (px)", "default": "380" },
     { "type": "text", "id": "gap", "label": "Gap between cards (px)", "default": "12" },
     { "type": "text", "id": "radius", "label": "Corner radius (px)", "default": "14" },
