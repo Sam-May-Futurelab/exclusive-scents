@@ -123,6 +123,28 @@
     },
     "tiktokreviews_NNez8r": {
       "type": "Tiktokreviews",
+      "blocks": {
+        "slide_MGyjTP": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5521.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_hLVhGc": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5542.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_MGyjTP",
+        "slide_hLVhGc"
+      ],
       "disabled": true,
       "name": "TikTok Reviews Slideshow",
       "settings": {}
