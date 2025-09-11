@@ -1,6 +1,6 @@
 {% comment %}
-  Section: TikTok Reviews Carousel (no logo, advanced stars, adaptive)
-  - Title + star strip with "100+ Reviews"
+  Section: TikTok Reviews Carousel (centered stars, gold, adaptive)
+  - Title + star strip with "100+ Reviews" (centered)
   - Native horizontal scrollbar (no arrows)
   - Cards auto-size to image width; height capped
 {% endcomment %}
@@ -14,17 +14,17 @@
 
         {% if section.settings.show_stars %}
           <div class="rc-stars" role="img" aria-label="{{ section.settings.star_copy | default: '100+ Reviews' }}">
-            <!-- Reusable star symbol -->
+            <!-- Reusable star symbol + gradient + glow -->
             <svg width="0" height="0" style="position:absolute"><defs>
               <symbol id="rc-star" viewBox="0 0 24 24">
-                <path d="M12 2.4l2.9 5.85 6.46.94-4.68 4.56 1.1 6.42L12 17.92 6.22 20.17l1.1-6.42L2.64 9.19l6.46-.94L12 2.4z"></path>
+                <path d="M12 2.4l2.9 5.85 6.46.94-4.68 4.56 1.1 6.42L12 17.92 6.22 20.17l1.1-6.42L2.64 9.19l6.46-.94L12 2.4z"/>
               </symbol>
               <linearGradient id="rc-star-grad" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0" stop-color="var(--star-a)" />
                 <stop offset="1" stop-color="var(--star-b)" />
               </linearGradient>
               <filter id="rc-star-glow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="0.6" result="blur"/>
+                <feGaussianBlur in="SourceGraphic" stdDeviation="0.5" result="blur"/>
                 <feMerge>
                   <feMergeNode in="blur"/>
                   <feMergeNode in="SourceGraphic"/>
@@ -85,15 +85,21 @@
   <style>
     .rc-wrap {
       --rc-muted: color-mix(in oklab, #111 60%, white 40%);
-      /* star colors (adjust to brand if desired) */
-      --star-a: #111;
-      --star-b: #111;
+      /* Gold stars */
+      --star-a: #F5C542;
+      --star-b: #DDAF2B;
       -webkit-font-smoothing: antialiased;
       font-synthesis-weight: none;
     }
     .rc-inner { width: 100%; margin: 0 auto; }
 
-    .rc-head{ display: grid; place-items: center; gap: 8px; margin-bottom: 14px; }
+    .rc-head{
+      display: grid;
+      place-items: center;
+      gap: 8px; /* tighter space between title and stars */
+      margin-bottom: 14px;
+      text-align: center;
+    }
 
     /* Title — premium, inherits theme heading font */
     .rc-title{
@@ -103,36 +109,36 @@
       letter-spacing: -0.01em;
       line-height: 1.15;
       color: #111;
-      text-align: center;
       font-family: inherit;
     }
 
-    /* Advanced stars row with perfect alignment */
+    /* Stars row — perfectly centered and tighter spacing */
     .rc-stars{
-      display: inline-flex;
-      align-items: baseline; /* aligns text baseline to star baseline */
-      gap: 8px;
+      display: flex;
+      justify-content: center;   /* center horizontally */
+      align-items: center;       /* align icons and text vertically */
+      gap: 6px;                  /* reduced space between stars */
       line-height: 1;
       user-select: none;
+      width: 100%;
     }
     .rc-star-icon{
       display: inline-flex;
-      width: 18px; height: 18px;
+      width: 18px; height: 18px; /* star size */
       filter: url(#rc-star-glow);
     }
     .rc-star-icon svg{
       width: 100%; height: 100%;
       fill: url(#rc-star-grad);
       paint-order: stroke;
-      stroke: rgba(0,0,0,.06);
-      stroke-width: 0.25;
+      stroke: rgba(0,0,0,.15);
+      stroke-width: 0.3;
     }
     .rc-star-copy{
-      font-size: 13px;
-      color: var(--rc-muted);
-      margin-left: 2px;
-      position: relative;
-      top: 1px; /* micro-nudge for perfect optical alignment */
+      margin-left: 6px;          /* space after last star */
+      font-size: 14px;
+      font-weight: 600;          /* more apparent */
+      color: #111;               /* black label as requested */
     }
 
     /* Native horizontal scroll with visible bottom scrollbar */
@@ -203,7 +209,7 @@
 
     @media (max-width: 480px){
       .rc-star-icon{ width: 17px; height: 17px; }
-      .rc-star-copy{ font-size: 12.5px; top: 1px; }
+      .rc-star-copy{ font-size: 13.5px; }
       .rc-scroll{ padding-bottom: 8px; }
     }
   </style>
