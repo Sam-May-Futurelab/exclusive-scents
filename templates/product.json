@@ -125,18 +125,7 @@
       "type": "Tiktokreviews",
       "disabled": true,
       "name": "TikTok Reviews Slideshow",
-      "settings": {
-        "title": "Check out our TikTok reviews — 100+ (5★) Reviews",
-        "show_arrows": true,
-        "show_dots": true,
-        "autoplay": true,
-        "autoplay_interval": 3500,
-        "loop": true,
-        "radius": 16,
-        "aspect_w": 4,
-        "aspect_h": 3,
-        "section_class": ""
-      }
+      "settings": {}
     },
     "1753193282b23ee83d": {
       "type": "apps",
