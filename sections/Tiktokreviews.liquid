@@ -1,14 +1,42 @@
 {% comment %}
-  Section: TikTok Reviews Carousel
-  - Adaptive sizing, no forced aspect ratio
-  - Native horizontal scroll + scrollbar
-  - Premium title styling
+  Section: TikTok Reviews Carousel (adaptive, native scroll)
+  - Title with optional TikTok logo badge
+  - Optional star strip with review count
+  - Cards auto-size to image (no forced aspect ratio)
+  - Native horizontal scrollbar (no arrows)
 {% endcomment %}
 
 <section class="rc-wrap" id="reviews-{{ section.id }}" data-section-id="{{ section.id }}">
   <div class="rc-inner page-width">
+
     {% if section.settings.title != blank %}
-      <h2 class="rc-title">{{ section.settings.title }}</h2>
+      <div class="rc-head">
+        <h2 class="rc-title">
+          {% if section.settings.show_tiktok_logo %}
+            <span class="rc-logo" aria-hidden="true">
+              {% assign mode = section.settings.tiktok_logo_mode %}
+              <svg class="rc-tiktok-svg {% if mode == 'brand' %}rc-brand{% endif %}" viewBox="0 0 256 296" width="28" height="28" role="img">
+                <!-- Simple TikTok mark (path simplified), brand mode uses layered fills via CSS -->
+                <path class="rc-tiktok-core" d="M170.3 0c9.9 17.6 26.6 31.5 47.7 40.2v41.4c-16.9-1.1-33.4-7.1-47.7-17v108.9c0 67.7-56 122.2-125.1 122.2C20.9 296 0 275.7 0 250.9c0-24.8 20.9-45.1 45.2-45.1 6.3 0 12.3 1.3 17.8 3.7a46.3 46.3 0 0 1-1.9-13.2c0-39.8 33-72.1 73.8-72.1 4.6 0 9.1.4 13.4 1.2V0h22z"/>
+              </svg>
+            </span>
+          {% endif %}
+          <span>{{ section.settings.title }}</span>
+        </h2>
+
+        {% if section.settings.show_stars %}
+          <div class="rc-stars">
+            <span class="rc-star" aria-hidden="true">★</span>
+            <span class="rc-star" aria-hidden="true">★</span>
+            <span class="rc-star" aria-hidden="true">★</span>
+            <span class="rc-star" aria-hidden="true">★</span>
+            <span class="rc-star" aria-hidden="true">★</span>
+            {% if section.settings.star_copy != blank %}
+              <span class="rc-star-copy">{{ section.settings.star_copy }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
     {% endif %}
 
     <div
@@ -55,18 +83,47 @@
     }
     .rc-inner { width: 100%; margin: 0 auto; }
 
-    /* Title — premium feel */
+    .rc-head{ display: grid; place-items: center; gap: 8px; margin-bottom: 14px; }
+
+    /* Title — premium, uses theme heading font */
     .rc-title{
-      margin: 0 0 18px 0;
+      margin: 0;
       font-size: clamp(26px, 2.6vw, 38px);
       font-weight: 700;
       letter-spacing: -0.01em;
       line-height: 1.15;
       color: #111;
       text-align: center;
-      font-family: inherit; /* pulls your theme’s heading font */
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
     }
 
+    /* TikTok logo modes */
+    .rc-logo{ display: inline-flex; }
+    .rc-tiktok-svg { display: block; }
+    .rc-tiktok-svg .rc-tiktok-core { fill: currentColor; }
+    /* Brand layered effect using text-shadow-like glow (subtle) */
+    .rc-tiktok-svg.rc-brand .rc-tiktok-core {
+      /* dark core */
+      fill: #111;
+      /* optional subtle dual-tone outline illusion */
+      filter: drop-shadow(1px 0 #25F4EE) drop-shadow(-1px 0 #FE2C55);
+    }
+
+    /* Stars row */
+    .rc-stars{
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #111;
+    }
+    .rc-star{ font-size: 14px; line-height: 1; }
+    .rc-star-copy{ color: var(--rc-muted); font-size: 13px; margin-left: 4px; }
+
+    /* Native horizontal scroll with visible bottom scrollbar */
     .rc-scroll{
       overflow-x: auto;
       overflow-y: visible;
@@ -74,6 +131,8 @@
       -webkit-overflow-scrolling: touch;
       scrollbar-gutter: stable both-edges;
     }
+
+    /* Content-sized columns; each card width = its content width */
     .rc-track{
       display: grid;
       grid-auto-flow: column;
@@ -82,8 +141,10 @@
       gap: var(--rc-gap);
       scroll-snap-type: x mandatory;
     }
+
     .rc-card{ scroll-snap-align: start; margin: 0; width: max-content; }
 
+    /* Frame adapts to image: no forced aspect ratio, no crop */
     .rc-media{
       display: block;
       border-radius: var(--rc-radius);
@@ -91,7 +152,7 @@
       box-shadow: var(--rc-shadow);
       background: #f6f7f8;
       width: max-content;
-      max-width: 90vw;
+      max-width: 90vw; /* guard on small screens */
     }
     .rc-media img{
       height: auto;
@@ -112,18 +173,27 @@
         linear-gradient(315deg, #f2f2f2 25%, transparent 25%) 0px 0/20px 20px,
         linear-gradient(45deg, #f2f2f2 25%, transparent 25%) 0px 0/20px 20px;
     }
+
     .rc-cap{
       margin-top: 8px;
       font-size: 12px;
       line-height: 1.4;
       color: var(--rc-muted);
       text-align: center;
+      text-wrap: balance;
     }
 
+    /* Minimal scrollbar styling (WebKit) */
     .rc-scroll::-webkit-scrollbar{ height: 8px; }
     .rc-scroll::-webkit-scrollbar-track{ background: #ececec; border-radius: 999px; }
     .rc-scroll::-webkit-scrollbar-thumb{ background: #c7c7c7; border-radius: 999px; }
     .rc-scroll:hover::-webkit-scrollbar-thumb{ background: #b5b5b5; }
+
+    @media (max-width: 480px){
+      .rc-stars{ font-size: 13px; }
+      .rc-star{ font-size: 13px; }
+      .rc-scroll{ padding-bottom: 8px; }
+    }
   </style>
 </section>
 
@@ -133,12 +203,20 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Check Out Our TikTok Reviews" },
+    { "type": "checkbox", "id": "show_tiktok_logo", "label": "Show TikTok logo", "default": true },
     {
-      "type": "text",
-      "id": "title",
-      "label": "Title",
-      "default": "Check Out Our TikTok Reviews"
+      "type": "select",
+      "id": "tiktok_logo_mode",
+      "label": "TikTok logo style",
+      "default": "brand",
+      "options": [
+        { "value": "brand", "label": "Brand accent" },
+        { "value": "mono", "label": "Monochrome" }
+      ]
     },
+    { "type": "checkbox", "id": "show_stars", "label": "Show stars row", "default": true },
+    { "type": "text", "id": "star_copy", "label": "Star row copy", "default": "100+ reviews" },
     { "type": "text", "id": "max_height", "label": "Max image height (px)", "default": "380" },
     { "type": "text", "id": "gap", "label": "Gap between cards (px)", "default": "12" },
     { "type": "text", "id": "radius", "label": "Corner radius (px)", "default": "14" },
@@ -160,11 +238,7 @@
     {
       "name": "TikTok Reviews Carousel",
       "category": "Media",
-      "blocks": [
-        { "type": "slide" },
-        { "type": "slide" },
-        { "type": "slide" }
-      ]
+      "blocks": [ { "type": "slide" }, { "type": "slide" }, { "type": "slide" } ]
     }
   ]
 }
