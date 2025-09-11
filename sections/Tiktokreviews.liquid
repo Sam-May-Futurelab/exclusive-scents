@@ -1,8 +1,9 @@
 {% comment %}
-  Section: TikTok Reviews Carousel (centered stars, gold, adaptive)
-  - Title + star strip with "100+ Reviews" (centered)
-  - Native horizontal scrollbar (no arrows)
-  - Cards auto-size to image width; height capped
+  Section: TikTok Reviews Carousel (adaptive, no arrows, gold stars + gold scrollbar)
+  - Title: refined, client-friendly default
+  - Stars row: centered, gold gradient, bold "100+ Reviews"
+  - Native horizontal scrollbar (thumb in gold)
+  - Images auto-size; only height is capped (no cropping)
 {% endcomment %}
 
 <section class="rc-wrap" id="reviews-{{ section.id }}" data-section-id="{{ section.id }}">
@@ -14,7 +15,7 @@
 
         {% if section.settings.show_stars %}
           <div class="rc-stars" role="img" aria-label="{{ section.settings.star_copy | default: '100+ Reviews' }}">
-            <!-- Reusable star symbol + gradient + glow -->
+            <!-- Hidden defs: star symbol, gold gradient, subtle glow -->
             <svg width="0" height="0" style="position:absolute"><defs>
               <symbol id="rc-star" viewBox="0 0 24 24">
                 <path d="M12 2.4l2.9 5.85 6.46.94-4.68 4.56 1.1 6.42L12 17.92 6.22 20.17l1.1-6.42L2.64 9.19l6.46-.94L12 2.4z"/>
@@ -85,9 +86,11 @@
   <style>
     .rc-wrap {
       --rc-muted: color-mix(in oklab, #111 60%, white 40%);
-      /* Gold stars */
+      /* Gold theme (stars + scrollbar) */
       --star-a: #F5C542;
       --star-b: #DDAF2B;
+      --scrollbar-color: #F5C542; /* thumb */
+      --scrollbar-track: #ececec;  /* track */
       -webkit-font-smoothing: antialiased;
       font-synthesis-weight: none;
     }
@@ -96,12 +99,12 @@
     .rc-head{
       display: grid;
       place-items: center;
-      gap: 8px; /* tighter space between title and stars */
+      gap: 8px;            /* compact spacing between title and stars */
       margin-bottom: 14px;
       text-align: center;
     }
 
-    /* Title — premium, inherits theme heading font */
+    /* Title — premium, uses theme heading font */
     .rc-title{
       margin: 0;
       font-size: clamp(26px, 2.6vw, 38px);
@@ -112,19 +115,19 @@
       font-family: inherit;
     }
 
-    /* Stars row — perfectly centered and tighter spacing */
+    /* Stars row — perfectly centered and tight spacing */
     .rc-stars{
       display: flex;
-      justify-content: center;   /* center horizontally */
-      align-items: center;       /* align icons and text vertically */
-      gap: 6px;                  /* reduced space between stars */
+      justify-content: center;
+      align-items: center;
+      gap: 6px;          /* reduced gap between stars */
       line-height: 1;
       user-select: none;
       width: 100%;
     }
     .rc-star-icon{
       display: inline-flex;
-      width: 18px; height: 18px; /* star size */
+      width: 18px; height: 18px;
       filter: url(#rc-star-glow);
     }
     .rc-star-icon svg{
@@ -135,20 +138,30 @@
       stroke-width: 0.3;
     }
     .rc-star-copy{
-      margin-left: 6px;          /* space after last star */
+      margin-left: 6px;      /* space after last star */
       font-size: 14px;
-      font-weight: 600;          /* more apparent */
-      color: #111;               /* black label as requested */
+      font-weight: 600;      /* more apparent */
+      color: #111;           /* black label */
     }
 
-    /* Native horizontal scroll with visible bottom scrollbar */
+    /* Native horizontal scroll with gold scrollbar */
     .rc-scroll{
       overflow-x: auto;
       overflow-y: visible;
       padding-bottom: 10px;
       -webkit-overflow-scrolling: touch;
       scrollbar-gutter: stable both-edges;
+      /* Firefox */
+      scrollbar-color: var(--scrollbar-color) var(--scrollbar-track);
     }
+    /* WebKit */
+    .rc-scroll::-webkit-scrollbar{ height: 8px; }
+    .rc-scroll::-webkit-scrollbar-track{ background: var(--scrollbar-track); border-radius: 999px; }
+    .rc-scroll::-webkit-scrollbar-thumb{
+      background: var(--scrollbar-color);
+      border-radius: 999px;
+    }
+    .rc-scroll:hover::-webkit-scrollbar-thumb{ background: #DDAF2B; }
 
     /* Content-sized columns; each card width = its content width */
     .rc-track{
@@ -201,12 +214,6 @@
       text-wrap: balance;
     }
 
-    /* Minimal scrollbar styling (WebKit) */
-    .rc-scroll::-webkit-scrollbar{ height: 8px; }
-    .rc-scroll::-webkit-scrollbar-track{ background: #ececec; border-radius: 999px; }
-    .rc-scroll::-webkit-scrollbar-thumb{ background: #c7c7c7; border-radius: 999px; }
-    .rc-scroll:hover::-webkit-scrollbar-thumb{ background: #b5b5b5; }
-
     @media (max-width: 480px){
       .rc-star-icon{ width: 17px; height: 17px; }
       .rc-star-copy{ font-size: 13.5px; }
@@ -221,7 +228,12 @@
   "tag": "section",
   "class": "section",
   "settings": [
-    { "type": "text", "id": "title", "label": "Title", "default": "Check Out Our TikTok Reviews" },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "What Our TikTok Customers Are Saying"
+    },
     { "type": "checkbox", "id": "show_stars", "label": "Show stars row", "default": true },
     { "type": "text", "id": "star_copy", "label": "Star row copy", "default": "100+ Reviews" },
     { "type": "text", "id": "max_height", "label": "Max image height (px)", "default": "380" },
