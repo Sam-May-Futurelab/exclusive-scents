@@ -1,7 +1,8 @@
 {% comment %}
-  Section: Reviews Carousel (adaptive size, native scroll, no arrows)
-  - Cards size to content (image) -> no forced aspect ratio
-  - Images never crop; width varies by image; height capped via setting
+  Section: TikTok Reviews Carousel
+  - Adaptive sizing, no forced aspect ratio
+  - Native horizontal scroll + scrollbar
+  - Premium title styling
 {% endcomment %}
 
 <section class="rc-wrap" id="reviews-{{ section.id }}" data-section-id="{{ section.id }}">
@@ -16,7 +17,7 @@
         --rc-gap: {{ section.settings.gap | default: 12 }}px;
         --rc-radius: {{ section.settings.radius | default: 14 }}px;
         --rc-shadow: {{ section.settings.shadow | default: '0 6px 18px rgba(0,0,0,.06)' }};
-        --rc-max-h: {{ section.settings.max_height | default: 380 }}px; /* height cap */
+        --rc-max-h: {{ section.settings.max_height | default: 380 }}px;
       "
     >
       <div class="rc-track">
@@ -54,25 +55,25 @@
     }
     .rc-inner { width: 100%; margin: 0 auto; }
 
-    /* Title "Reviews" — refined but theme-safe */
+    /* Title — premium feel */
     .rc-title{
-      margin: 0 0 12px 0;
-      font-size: clamp(22px, 2.2vw, 32px);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
+      margin: 0 0 18px 0;
+      font-size: clamp(26px, 2.6vw, 38px);
       font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      color: #111;
+      text-align: center;
+      font-family: inherit; /* pulls your theme’s heading font */
     }
 
-    /* Native horizontal scroll with visible bottom scrollbar */
     .rc-scroll{
       overflow-x: auto;
       overflow-y: visible;
-      padding-bottom: 10px; /* space for scrollbar */
+      padding-bottom: 10px;
       -webkit-overflow-scrolling: touch;
       scrollbar-gutter: stable both-edges;
     }
-
-    /* Content-sized columns; each card width = its content width */
     .rc-track{
       display: grid;
       grid-auto-flow: column;
@@ -81,14 +82,8 @@
       gap: var(--rc-gap);
       scroll-snap-type: x mandatory;
     }
+    .rc-card{ scroll-snap-align: start; margin: 0; width: max-content; }
 
-    .rc-card{
-      scroll-snap-align: start;
-      margin: 0;
-      width: max-content; /* let content define width */
-    }
-
-    /* Frame adapts to image: no forced aspect ratio, no crop */
     .rc-media{
       display: block;
       border-radius: var(--rc-radius);
@@ -96,7 +91,7 @@
       box-shadow: var(--rc-shadow);
       background: #f6f7f8;
       width: max-content;
-      max-width: 90vw; /* safety for very wide images on mobile */
+      max-width: 90vw;
     }
     .rc-media img{
       height: auto;
@@ -110,41 +105,40 @@
       display: grid; place-items: center;
       width: 260px; height: 180px;
       font-size: 12px; color: var(--rc-muted);
+      border-radius: var(--rc-radius);
       background:
         linear-gradient(135deg, #f2f2f2 25%, transparent 25%) -10px 0/20px 20px,
         linear-gradient(225deg, #f2f2f2 25%, transparent 25%) -10px 0/20px 20px,
         linear-gradient(315deg, #f2f2f2 25%, transparent 25%) 0px 0/20px 20px,
         linear-gradient(45deg, #f2f2f2 25%, transparent 25%) 0px 0/20px 20px;
-      border-radius: var(--rc-radius);
     }
-
     .rc-cap{
       margin-top: 8px;
       font-size: 12px;
       line-height: 1.4;
       color: var(--rc-muted);
-      text-wrap: balance;
+      text-align: center;
     }
 
-    /* Minimal scrollbar styling (WebKit) */
     .rc-scroll::-webkit-scrollbar{ height: 8px; }
     .rc-scroll::-webkit-scrollbar-track{ background: #ececec; border-radius: 999px; }
     .rc-scroll::-webkit-scrollbar-thumb{ background: #c7c7c7; border-radius: 999px; }
     .rc-scroll:hover::-webkit-scrollbar-thumb{ background: #b5b5b5; }
-
-    @media (max-width: 480px){
-      .rc-scroll{ padding-bottom: 8px; }
-    }
   </style>
 </section>
 
 {% schema %}
 {
-  "name": "Reviews Carousel",
+  "name": "TikTok Reviews Carousel",
   "tag": "section",
   "class": "section",
   "settings": [
-    { "type": "text", "id": "title", "label": "Title", "default": "Reviews" },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Check Out Our TikTok Reviews"
+    },
     { "type": "text", "id": "max_height", "label": "Max image height (px)", "default": "380" },
     { "type": "text", "id": "gap", "label": "Gap between cards (px)", "default": "12" },
     { "type": "text", "id": "radius", "label": "Corner radius (px)", "default": "14" },
@@ -163,7 +157,15 @@
   ],
   "max_blocks": 100,
   "presets": [
-    { "name": "Reviews – Adaptive Carousel", "category": "Media", "blocks": [ { "type": "slide" }, { "type": "slide" }, { "type": "slide" } ] }
+    {
+      "name": "TikTok Reviews Carousel",
+      "category": "Media",
+      "blocks": [
+        { "type": "slide" },
+        { "type": "slide" },
+        { "type": "slide" }
+      ]
+    }
   ]
 }
 {% endschema %}
