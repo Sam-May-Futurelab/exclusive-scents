@@ -254,6 +254,7 @@
         },
         "slide_Dtypjh": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "alt": "Customer review screenshot",
             "caption": ""
@@ -261,6 +262,7 @@
         },
         "slide_CmY7kT": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "alt": "Customer review screenshot",
             "caption": ""
@@ -268,6 +270,15 @@
         },
         "slide_bJaRxm": {
           "type": "slide",
+          "disabled": true,
+          "settings": {
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_rJbpVB": {
+          "type": "slide",
+          "disabled": true,
           "settings": {
             "alt": "Customer review screenshot",
             "caption": ""
@@ -275,6 +286,7 @@
         },
         "slide_HfApVJ": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "alt": "Customer review screenshot",
             "caption": ""
@@ -301,6 +313,7 @@
         "slide_Dtypjh",
         "slide_CmY7kT",
         "slide_bJaRxm",
+        "slide_rJbpVB",
         "slide_HfApVJ"
       ],
       "name": "TikTok Reviews Slideshow",
