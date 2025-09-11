@@ -1,73 +1,64 @@
 {% comment %}
-  TikTok Reviews — Pro Carousel (Polished, schema-safe)
-  - Title → "100+" → ★★★★★ → "reviews"
-  - One-at-a-time snap carousel with optional autoplay
+  Reviews Panel Carousel (Pro)
+  - Matches modern "big panel + 5 gold stars" aesthetic
+  - Desktop shows up to 3 review cards in the panel view; mobile shows 1
+  - Uses scroll-snap + JS for single-step, stable navigation
 {% endcomment %}
 
-<section class="ttx {{ section.settings.section_class }}" id="ttx-{{ section.id }}" data-section-id="{{ section.id }}">
-  <div class="ttx__inner page-width">
-    <header class="ttx__head">
-      <h2 class="ttx__title">
-        {{ section.settings.title | default: "Check out our TikTok reviews" }}
-      </h2>
+<section id="reviews-panel-{{ section.id }}" class="rvp {{ section.settings.section_class }}">
+  <div class="rvp__inner page-width">
 
-      <div class="ttx__meta" aria-label="Social proof: reviews">
-        <span class="ttx__subtitle">{{ section.settings.subtitle | default: "100+" }}</span>
-
-        <span class="ttx__stars" aria-label="Five star rating">
-          {% capture star_svg %}
-            <svg class="star" viewBox="0 0 24 24" aria-hidden="true">
-              <defs>
-                <linearGradient id="ttx-gold-{{ section.id }}" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#FDE68A"/>
-                  <stop offset="50%" stop-color="#F59E0B"/>
-                  <stop offset="100%" stop-color="#B45309"/>
-                </linearGradient>
-              </defs>
-              <path fill="url(#ttx-gold-{{ section.id }})" d="M12 2.5l2.77 5.61 6.19.9-4.48 4.36 1.06 6.18L12 16.9l-5.54 2.9 1.06-6.18-4.48-4.36 6.19-.9L12 2.5z"/>
-            </svg>
-          {% endcapture %}
-          {{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}
-        </span>
-
-        <span class="ttx__reviews-word">reviews</span>
+    <!-- Header -->
+    <header class="rvp__head">
+      <h2 class="rvp__title">{{ section.settings.title | default: "Customer reviews" }}</h2>
+      <div class="rvp__stars" aria-label="Five star rating">
+        {% capture star_svg %}
+          <svg class="rvp__star" viewBox="0 0 24 24" aria-hidden="true">
+            <defs>
+              <linearGradient id="rvp-gold-{{ section.id }}" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="{{ section.settings.star_light | default: '#FDE68A' }}"/>
+                <stop offset="50%" stop-color="{{ section.settings.star_mid | default: '#F59E0B' }}"/>
+                <stop offset="100%" stop-color="{{ section.settings.star_dark | default: '#B45309' }}"/>
+              </linearGradient>
+            </defs>
+            <path fill="url(#rvp-gold-{{ section.id }})" d="M12 2.2l2.8 5.7 6.3.9-4.6 4.4 1.1 6.3L12 16.9l-5.6 2.9 1.1-6.3-4.6-4.4 6.3-.9L12 2.2z"/>
+          </svg>
+        {% endcapture %}
+        {{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}
       </div>
     </header>
 
-    <div class="ttx__viewport" role="region" aria-label="TikTok reviews carousel">
+    <!-- Panel -->
+    <div class="rvp__viewport" role="region" aria-label="Customer reviews">
       {% if section.settings.show_arrows %}
-      <button class="ttx__nav ttx__nav--prev" aria-label="Previous review" type="button">
+      <button class="rvp__nav rvp__nav--prev" type="button" aria-label="Previous">
         <span aria-hidden="true">‹</span>
       </button>
       {% endif %}
 
-      <ul class="ttx__track"
+      <ul class="rvp__track"
           data-autoplay="{{ section.settings.autoplay | json }}"
-          data-interval="{{ section.settings.autoplay_interval | default: 3800 }}"
+          data-interval="{{ section.settings.autoplay_interval | default: 3600 }}"
           data-loop="{{ section.settings.loop | json }}">
         {% for block in section.blocks %}
           {% if block.type == 'review' %}
-          <li class="ttx__slide" {{ block.shopify_attributes }}>
-            <figure class="ttx__card">
+          <li class="rvp__slide" {{ block.shopify_attributes }}>
+            <figure class="rvp__card">
               {% if block.settings.image != blank %}
                 {% assign img = block.settings.image %}
                 <img
-                  class="ttx__img"
+                  class="rvp__img"
                   src="{{ img | image_url: width: 1200 }}"
                   srcset="
                     {{ img | image_url: width: 600 }} 600w,
                     {{ img | image_url: width: 900 }} 900w,
                     {{ img | image_url: width: 1200 }} 1200w
                   "
-                  sizes="(max-width: 740px) 100vw, 760px"
+                  sizes="(max-width: 740px) 100vw, 320px"
                   alt="{{ block.settings.alt | escape }}"
                   loading="lazy" decoding="async">
               {% else %}
-                <div class="ttx__ph" aria-hidden="true">Add review image</div>
-              {% endif %}
-
-              {% if block.settings.caption != blank %}
-              <figcaption class="ttx__caption">{{ block.settings.caption }}</figcaption>
+                <div class="rvp__ph" aria-hidden="true">Add review image</div>
               {% endif %}
             </figure>
           </li>
@@ -76,159 +67,163 @@
       </ul>
 
       {% if section.settings.show_arrows %}
-      <button class="ttx__nav ttx__nav--next" aria-label="Next review" type="button">
+      <button class="rvp__nav rvp__nav--next" type="button" aria-label="Next">
         <span aria-hidden="true">›</span>
       </button>
       {% endif %}
     </div>
 
     {% if section.settings.show_dots %}
-    <div class="ttx__dots" aria-hidden="true"></div>
+    <div class="rvp__dots" aria-hidden="true"></div>
     {% endif %}
+
   </div>
 
   <style>
-    /* ======= THEME TOKENS ======= */
-    .ttx {
-      --bg: radial-gradient(1200px 600px at 20% -10%, #ffffff 30%, #f8fafc 70%),
-            linear-gradient(#ffffff, #ffffff);
-      --txt: #0f172a;          /* slate-900 */
-      --muted: #64748b;        /* slate-500 */
+    .rvp {
+      --txt: #0f172a;
+      --muted: #64748b;
       --edge: color-mix(in oklab, #000 7%, #fff);
-      --shadow: 0 10px 30px rgba(2,6,23,.06);
-      --card-bg: rgba(255,255,255,0.82);
-      --cap-grad: linear-gradient(to top, rgba(0,0,0,.58), rgba(0,0,0,0));
-      --radius: {{ section.settings.radius | default: 18 }}px;
+      --panel-bg: #fff;
+      --panel-shadow: 0 18px 60px rgba(2,6,23,.10);
+      --radius: {{ section.settings.radius | default: 20 }}px;
       --dot: #e5e7eb;
       --dot-active: #0f172a;
-      --font: var(--font-body-family, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial, sans-serif);
+      --card-edge: color-mix(in oklab, #000 6%, #fff);
+      --aspect-w: {{ section.settings.aspect_w | default: 16 }};
+      --aspect-h: {{ section.settings.aspect_h | default: 9 }};
+      font-family: var(--font-body-family, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter, Roboto, Arial, sans-serif);
     }
-    .ttx__inner { padding: clamp(12px, 2vw, 20px) 0; background: var(--bg); border-radius: max(0px, var(--radius) - 6px); font-family: var(--font); }
 
-    /* ======= HEADER ======= */
-    .ttx__head { margin-bottom: 14px; text-align: left; }
-    .ttx__title {
-      font-weight: 800;
-      letter-spacing: -0.01em;
+    .rvp__head { text-align:center; margin-bottom: 14px; }
+    .rvp__title {
+      margin: 0 0 6px;
+      font-weight: 800; letter-spacing: -.01em;
+      font-size: clamp(22px, 2.6vw, 36px);
       color: var(--txt);
-      font-size: clamp(22px, 2.4vw, 34px);
-      line-height: 1.1;
-      margin: 0 0 6px 0;
     }
-    .ttx__meta {
-      display: inline-flex; align-items: center; flex-wrap: wrap;
-      gap: 10px; row-gap: 6px;
-      color: var(--muted);
-      font-size: clamp(13px, 1.2vw, 15px);
-    }
-    .ttx__subtitle {
-      font-weight: 700; color: var(--txt);
-      padding: 2px 10px; border: 1px solid var(--edge);
-      border-radius: 999px; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.04);
-    }
-    .ttx__stars { display: inline-flex; gap: 4px; transform: translateY(1px); }
-    .ttx__stars .star { width: 16px; height: 16px; display:block; }
-    .ttx__reviews-word { color: var(--muted); }
+    .rvp__stars { display:flex; gap:8px; justify-content:center; }
+    .rvp__star { width: 18px; height: 18px; display:block; }
 
-    /* ======= VIEWPORT / TRACK ======= */
-    .ttx__viewport { position: relative; overflow: hidden; padding: 8px 0; }
-    .ttx__track {
-      --gap: 16px;
-      display: grid; grid-auto-flow: column; grid-auto-columns: 100%;
+    /* Panel viewport */
+    .rvp__viewport {
+      position: relative;
+      background: var(--panel-bg);
+      border: 1px solid var(--edge);
+      box-shadow: var(--panel-shadow);
+      border-radius: var(--radius);
+      padding: clamp(14px, 2vw, 22px);
+      overflow: hidden;
+    }
+
+    /* Track shows multiple cards inside the single big panel */
+    .rvp__track {
+      display: grid;
+      grid-auto-flow: column;
+      /* Each snap slide is a single review CARD; we allow 1–3 visible at once via column width */
+      grid-auto-columns: calc((100% - var(--gap) * 2) / 3);
+      --gap: clamp(10px, 1.6vw, 16px);
       gap: var(--gap);
       overflow-x: auto;
+      padding: 4px;
+      margin: 0;
+      list-style: none;
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
-      padding: 6px; margin: 0; list-style: none;
     }
-    @media (min-width: 980px){
-      .ttx__track { grid-auto-columns: min(760px, 88%); }
+
+    /* Mobile: 1-up; Tablet: 2-up; Desktop: 3-up */
+    @media (max-width: 980px) {
+      .rvp__track { grid-auto-columns: calc((100% - var(--gap)) / 2); }
     }
-    .ttx__track::-webkit-scrollbar { height: 8px; }
-    .ttx__track::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 8px; }
+    @media (max-width: 640px) {
+      .rvp__track { grid-auto-columns: 100%; }
+    }
 
-    .ttx__slide { scroll-snap-align: center; scroll-snap-stop: always; }
+    .rvp__track::-webkit-scrollbar { height: 8px; }
+    .rvp__track::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 8px; }
 
-    /* ======= CARD ======= */
-    .ttx__card {
-      position: relative;
-      border-radius: var(--radius);
+    .rvp__slide {
+      scroll-snap-align: center;
+      scroll-snap-stop: always;
+    }
+
+    /* Review card (your screenshot framed like a quote card) */
+    .rvp__card {
+      border-radius: calc(var(--radius) - 8px);
+      background: #fff;
+      border: 1px solid var(--card-edge);
+      box-shadow: 0 6px 22px rgba(2,6,23,.06);
       overflow: hidden;
-      background: var(--card-bg);
-      backdrop-filter: saturate(1.2) blur(2px);
-      box-shadow: var(--shadow);
-      border: 1px solid var(--edge);
+      position: relative;
     }
-    .ttx__img {
+    .rvp__img {
       width: 100%; display: block;
-      aspect-ratio: {{ section.settings.aspect_w | default: 16 }} / {{ section.settings.aspect_h | default: 9 }};
+      aspect-ratio: var(--aspect-w) / var(--aspect-h);
       object-fit: cover;
       transform: translateZ(0);
-      transition: transform 240ms ease;
+      transition: transform 220ms ease;
     }
-    .ttx__card:hover .ttx__img { transform: scale(1.012); }
+    .rvp__card:hover .rvp__img { transform: scale(1.01); }
 
-    .ttx__ph {
+    .rvp__ph {
       display:flex; align-items:center; justify-content:center;
-      min-height: 300px; background:#f3f4f6; color:#9ca3af; font-size:14px;
-    }
-    .ttx__caption {
-      position: absolute; left: 0; right: 0; bottom: 0;
-      padding: 12px 14px; color: #fff;
-      font-size: 14px; line-height: 1.25;
-      background: var(--cap-grad);
-      text-shadow: 0 1px 2px rgba(0,0,0,.35);
+      min-height: 240px; background:#f3f4f6; color:#9ca3af; font-size:14px;
     }
 
-    /* ======= NAV & DOTS ======= */
-    .ttx__nav {
+    /* Arrows like your ref: circular pills on panel edges */
+    .rvp__nav {
       position: absolute; top: 50%; transform: translateY(-50%);
-      z-index: 2; border: 0; background: rgba(255,255,255,0.92);
-      width: 40px; height: 40px; border-radius: 999px;
-      box-shadow: var(--shadow); display:grid; place-items:center; cursor:pointer;
-      transition: background 120ms ease, transform 120ms ease;
+      width: 46px; height: 46px; border-radius: 999px;
+      border: 1px solid var(--edge);
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(2,6,23,.08);
+      display:grid; place-items:center;
+      cursor:pointer; z-index: 2;
+      transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
     }
-    .ttx__nav:hover { background: #fff; transform: translateY(-50%) scale(1.03); }
-    .ttx__nav--prev { left: 8px; }
-    .ttx__nav--next { right: 8px; }
+    .rvp__nav:hover { transform: translateY(-50%) scale(1.04); box-shadow: 0 10px 30px rgba(2,6,23,.12); }
+    .rvp__nav--prev { left: 10px; }
+    .rvp__nav--next { right: 10px; }
+    .rvp__nav span { font-size: 22px; line-height: 1; color: var(--txt); }
 
-    .ttx__dots { display:flex; gap:8px; justify-content:center; margin-top: 12px; }
-    .ttx__dots button {
-      width: 8px; height: 8px; border-radius: 999px; border: 0; cursor: pointer;
-      background: var(--dot); transition: width 160ms ease, background 160ms ease;
+    /* Dots */
+    .rvp__dots { display:flex; gap:8px; justify-content:center; padding: 12px 0 0; }
+    .rvp__dots button {
+      width: 8px; height: 8px; border-radius: 999px; border: 0;
+      background: var(--dot); cursor: pointer;
+      transition: width 160ms ease, background 160ms ease;
     }
-    .ttx__dots button[aria-current="true"]{ background: var(--dot-active); width: 18px; border-radius: 6px; }
+    .rvp__dots button[aria-current="true"] { background: var(--dot-active); width: 18px; border-radius: 6px; }
 
-    /* ======= ACCESSIBILITY ======= */
-    @media (prefers-reduced-motion: reduce){
-      .ttx__track { scroll-behavior: auto; }
-      .ttx__img, .ttx__nav { transition: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .rvp__track { scroll-behavior: auto; }
+      .rvp__img, .rvp__nav { transition: none; }
     }
   </style>
 
   <script>
     (() => {
-      const section = document.getElementById("ttx-{{ section.id }}");
+      const section = document.getElementById("reviews-panel-{{ section.id }}");
       if (!section) return;
 
-      const viewport = section.querySelector(".ttx__viewport");
-      const track = section.querySelector(".ttx__track");
-      const slides = Array.from(section.querySelectorAll(".ttx__slide"));
+      const track = section.querySelector(".rvp__track");
+      const slides = Array.from(section.querySelectorAll(".rvp__slide"));
       if (!track || slides.length === 0) return;
 
-      const btnPrev = section.querySelector(".ttx__nav--prev");
-      const btnNext = section.querySelector(".ttx__nav--next");
-      const dotsWrap = section.querySelector(".ttx__dots");
+      const btnPrev = section.querySelector(".rvp__nav--prev");
+      const btnNext = section.querySelector(".rvp__nav--next");
+      const dotsWrap = section.querySelector(".rvp__dots");
 
-      // Build dots if enabled
+      // Build dots once (based on number of "pages" = number of slides)
       const buildDots = () => {
         if (!dotsWrap) return [];
         dotsWrap.innerHTML = "";
         return slides.map((_, i) => {
           const b = document.createElement("button");
           b.type = "button";
-          b.setAttribute("aria-label", "Go to review " + (i+1));
+          b.setAttribute("aria-label", "Go to slide " + (i+1));
           b.addEventListener("click", () => goTo(i, true));
           dotsWrap.appendChild(b);
           return b;
@@ -240,11 +235,10 @@
       const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
       const loop = track.dataset.loop === "true";
       const autoplay = track.dataset.autoplay === "true";
-      const interval = parseInt(track.dataset.interval || "3800", 10);
+      const interval = parseInt(track.dataset.interval || "3600", 10);
 
       const snapTo = (i) => {
-        const el = slides[i];
-        el?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+        slides[i]?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
         setDots(i);
       };
 
@@ -270,7 +264,7 @@
       btnNext?.addEventListener("click", next);
       btnPrev?.addEventListener("click", prev);
 
-      // Keep index in sync on swipe/scroll
+      // Keep index synced when user scrolls/swipes
       const io = new IntersectionObserver((entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting && e.intersectionRatio > 0.6) {
@@ -279,9 +273,9 @@
           }
         });
       }, { root: track, threshold: [0.6] });
-      slides.forEach(slide => io.observe(slide));
+      slides.forEach(s => io.observe(s));
 
-      // Autoplay with safety
+      // Autoplay (pause on hover & when hidden)
       let timer = null;
       const startAutoplay = () => {
         if (!autoplay || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -294,8 +288,8 @@
       const stopAutoplay = () => { if (timer) { clearInterval(timer); timer = null; } };
       const resetAutoplay = () => { stopAutoplay(); startAutoplay(); };
 
-      viewport?.addEventListener("mouseenter", stopAutoplay);
-      viewport?.addEventListener("mouseleave", startAutoplay);
+      section.querySelector(".rvp__viewport")?.addEventListener("mouseenter", stopAutoplay);
+      section.querySelector(".rvp__viewport")?.addEventListener("mouseleave", startAutoplay);
       document.addEventListener("visibilitychange", () => { document.hidden ? stopAutoplay() : startAutoplay(); });
 
       // Init
@@ -305,20 +299,27 @@
 
   {% schema %}
   {
-    "name": "TikTok Reviews Carousel",
+    "name": "Reviews Panel ",
     "tag": "section",
-    "class": "tiktok-reviews-pro",
+    "class": "reviews-panel-carousel",
     "settings": [
-      { "type": "text", "id": "title", "label": "Title", "default": "Check out our TikTok reviews" },
-      { "type": "text", "id": "subtitle", "label": "Subtitle (e.g., '100+')", "default": "100+" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Customer reviews" },
+
+      { "type": "color", "id": "star_light", "label": "Star gradient (light)", "default": "#FDE68A" },
+      { "type": "color", "id": "star_mid",   "label": "Star gradient (mid)",   "default": "#F59E0B" },
+      { "type": "color", "id": "star_dark",  "label": "Star gradient (dark)",  "default": "#B45309" },
+
       { "type": "checkbox", "id": "show_arrows", "label": "Show arrows", "default": true },
-      { "type": "checkbox", "id": "show_dots", "label": "Show dots", "default": true },
-      { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": true },
-      { "type": "range", "id": "autoplay_interval", "label": "Autoplay interval (ms)", "min": 1500, "max": 8000, "step": 100, "default": 3800 },
+      { "type": "checkbox", "id": "show_dots",   "label": "Show dots",   "default": true },
+      { "type": "checkbox", "id": "autoplay",    "label": "Autoplay",    "default": true },
+      { "type": "range", "id": "autoplay_interval", "label": "Autoplay interval (ms)", "min": 1500, "max": 8000, "step": 100, "default": 3600 },
       { "type": "checkbox", "id": "loop", "label": "Loop slides", "default": true },
-      { "type": "range", "id": "radius", "label": "Card corner radius", "min": 8, "max": 28, "step": 1, "default": 18 },
-      { "type": "number", "id": "aspect_w", "label": "Aspect width", "default": 16 },
-      { "type": "number", "id": "aspect_h", "label": "Aspect height", "default": 9 },
+
+      { "type": "range", "id": "radius", "label": "Panel corner radius", "min": 12, "max": 28, "step": 1, "default": 20 },
+
+      { "type": "number", "id": "aspect_w", "label": "Card aspect width", "default": 16 },
+      { "type": "number", "id": "aspect_h", "label": "Card aspect height", "default": 9 },
+
       { "type": "text", "id": "section_class", "label": "Custom CSS class" }
     ],
     "blocks": [
@@ -326,15 +327,14 @@
         "type": "review",
         "name": "Review image",
         "settings": [
-          { "type": "image_picker", "id": "image", "label": "Review screenshot (rectangle)" },
-          { "type": "text", "id": "alt", "label": "Alt text (accessibility)", "default": "Customer TikTok review" },
-          { "type": "text", "id": "caption", "label": "Caption (optional)" }
+          { "type": "image_picker", "id": "image", "label": "Screenshot (rectangle)" },
+          { "type": "text", "id": "alt", "label": "Alt text", "default": "Customer review screenshot" }
         ]
       }
     ],
-    "max_blocks": 50,
+    "max_blocks": 60,
     "presets": [
-      { "name": "TikTok Reviews — Pro Carousel", "category": "Testimonials" }
+      { "name": "Reviews Panel Carousel (Pro)", "category": "Testimonials" }
     ]
   }
   {% endschema %}
