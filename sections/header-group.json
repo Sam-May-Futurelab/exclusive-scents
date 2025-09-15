@@ -54,11 +54,37 @@
         "enable_country_selector": false,
         "enable_language_selector": false
       }
+    },
+    "announcement_bar_gFGELc": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_UUctAA": {
+          "type": "announcement",
+          "settings": {
+            "text": "END OF SUMMER SALE 20% OFF YOUR ENTIRE CART",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement_UUctAA"
+      ],
+      "name": "t:sections.announcement-bar.presets.name",
+      "settings": {
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "color_scheme": "",
+        "show_line_separator": true,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
     }
   },
   "order": [
     "tiktokexplore_WGjkKW",
     "header",
-    "announcement_bar_D6Yf3D"
+    "announcement_bar_D6Yf3D",
+    "announcement_bar_gFGELc"
   ]
 }
