@@ -33,7 +33,7 @@
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
-            "picker_type": "dropdown",
+            "picker_type": "button",
             "swatch_shape": "circle"
           }
         },
@@ -319,6 +319,8 @@
       "name": "TikTok Reviews Slideshow",
       "settings": {
         "title": "TikTok Shop Reviews",
+        "show_stars": true,
+        "star_copy": "100+ Reviews",
         "max_height": "380",
         "gap": "12",
         "radius": "14",
