@@ -49,7 +49,7 @@
       rgba(255,245,200,0.35) 0%,
       rgba(255,233,150,0.45) 35%,
       rgba(247,215,110,0.35) 60%,
-      rgba(240,196,65,0.35) 100%);
+      rgba{240,196,65,0.35} 100%);
   }
 
   .announcement-track-wrapper {
@@ -107,11 +107,11 @@
   /* GOLD GRADIENT (ADDED) */
   .announcement-bar {
     background: linear-gradient(135deg,
-      #C9B037 0%,     /* Rich gold start */
-      #E6D365 25%,    /* Lighter gold */
-      #F4E67B 50%,    /* Bright gold center */
-      #E6D365 75%,    /* Back to lighter gold */
-      #C9B037 100%    /* Rich gold end */
+      #C9B037 0%,
+      #E6D365 25%,
+      #F4E67B 50%,
+      #E6D365 75%,
+      #C9B037 100%
     ) !important;
     background-attachment: fixed;
   }
@@ -123,11 +123,9 @@
       {% for i in (1..70) %}
         {% assign mod = i | modulo: 3 %}
         {% if mod == 1 %}
-          <div class="announcement-item"><span class="emoji" aria-hidden="true">📦 </span> FREE SHIPPING WHEN YOU SPEND £25+ (UK)</div>
+          <div class="announcement-item"><span class="emoji" aria-hidden="true">📦 </span> FREE EXPRESS SHIPPING (UK)</div>
         {% elsif mod == 2 %}
           <div class="announcement-item"><span class="emoji" aria-hidden="true">🎁</span> FREE SAMPLE WITH A 50ML PURCHASE</div>
-        {% else %}
-          <div class="announcement-item"><span class="emoji" aria-hidden="true">☀️</span>20% OFF END OF SUMMER SALE </div>
         {% endif %}
       {% endfor %}
     </div>
@@ -135,11 +133,9 @@
       {% for i in (1..70) %}
         {% assign mod = i | modulo: 3 %}
         {% if mod == 1 %}
-          <div class="announcement-item"><span class="emoji" aria-hidden="true">📦 </span> FREE SHIPPING WHEN YOU SPEND £25+ (UK)</div>
+          <div class="announcement-item"><span class="emoji" aria-hidden="true">📦 </span> FREE EXPRESS SHIPPING (UK)</div>
         {% elsif mod == 2 %}
           <div class="announcement-item"><span class="emoji" aria-hidden="true">🎁</span> FREE SAMPLE WITH A 50ML PURCHASE</div>
-        {% else %}
-          <div class="announcement-item"><span class="emoji" aria-hidden="true">☀️</span>20% OFF END OF SUMMER SALE </div>
         {% endif %}
       {% endfor %}
     </div>
@@ -151,56 +147,22 @@
   "name": "Promo Ticker",
   "class": "section-announcement",
   "settings": [
-    {
-      "type": "range",
-      "id": "height",
-      "min": 36,
-      "max": 72,
-      "step": 4,
-      "default": 44,
-      "label": "Bar Height (px)"
-    },
-    {
-      "type": "range",
-      "id": "speed_level",
-      "min": 1,
-      "max": 70,
-      "step": 1,
-      "default": 4,
-      "label": "Speed Level (1 = Fast • 70 = Slowest ≈ 600s)"
-    },
-    {
-      "type": "range",
-      "id": "item_spacing",
-      "min": 8,
-      "max": 40,
-      "step": 2,
-      "default": 16,
-      "label": "Item Spacing (px, desktop)"
-    },
-    {
-      "type": "range",
-      "id": "item_spacing_mobile",
-      "min": 6,
-      "max": 28,
-      "step": 2,
-      "default": 12,
-      "label": "Item Spacing (px, mobile)"
-    },
+    { "type": "range", "id": "height", "min": 36, "max": 72, "step": 4, "default": 44, "label": "Bar Height (px)" },
+    { "type": "range", "id": "speed_level", "min": 1, "max": 70, "step": 1, "default": 4, "label": "Speed Level (1 = Fast • 70 = Slowest ≈ 600s)" },
+    { "type": "range", "id": "item_spacing", "min": 8, "max": 40, "step": 2, "default": 16, "label": "Item Spacing (px, desktop)" },
+    { "type": "range", "id": "item_spacing_mobile", "min": 6, "max": 28, "step": 2, "default": 12, "label": "Item Spacing (px, mobile)" },
     {
       "type": "select",
       "id": "highlight_style",
       "label": "Background Highlight",
       "default": "none",
       "options": [
-        { "value": "none",       "label": "None" },
+        { "value": "none", "label": "None" },
         { "value": "soft_gloss", "label": "Soft Gloss" },
         { "value": "gold_sheen", "label": "Gold Sheen" }
       ]
     }
   ],
-  "presets": [
-    { "name": "Promo Ticker" }
-  ]
+  "presets": [{ "name": "Promo Ticker" }]
 }
 {% endschema %}
