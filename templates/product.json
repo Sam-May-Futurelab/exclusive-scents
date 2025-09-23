@@ -338,7 +338,22 @@
     "samplesection_NaMbCr": {
       "type": "samplesection",
       "name": "Sample Bundle + 50ml Carousel (scoped)",
-      "settings": {}
+      "settings": {
+        "heading": "Explore our 50ml collection",
+        "subheading": "Get inspired, then choose the scents you want to test in 2ml samples.",
+        "banner_title": "Build Your Own Discovery Set 5 x 2ml",
+        "banner_text": "Browse the 50ml range below, then pick any five as 2ml samples.",
+        "banner_cta": "Build your 5 x 2ml set",
+        "bundle_handle": "build-your-own-discovery-set-5x2ml",
+        "collection": "extrait-sprays",
+        "filter_mode": "title",
+        "filter_value": "",
+        "show_price": false,
+        "autoplay": true,
+        "autoplay_ms": 3500,
+        "color_scheme": "",
+        "accent": "#111111"
+      }
     },
     "1753193282b23ee83d": {
       "type": "apps",
