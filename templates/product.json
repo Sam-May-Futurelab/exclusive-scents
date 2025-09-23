@@ -335,6 +335,11 @@
         "shadow": "0 6px 18px rgba(0,0,0,.06)"
       }
     },
+    "samplesection_NaMbCr": {
+      "type": "samplesection",
+      "name": "Sample Bundle + 50ml Carousel (scoped)",
+      "settings": {}
+    },
     "1753193282b23ee83d": {
       "type": "apps",
       "blocks": {
@@ -352,34 +357,13 @@
       "settings": {
         "include_margins": true
       }
-    },
-    "samplesection_NaMbCr": {
-      "type": "samplesection",
-      "disabled": true,
-      "name": "Sample Bundle + 50ml Carousel (scoped)",
-      "settings": {
-        "heading": "Unsure which 50ml to purchase?",
-        "subheading": "Try five 2ml samples and discover your favourite.",
-        "banner_title": "Sample Bundle",
-        "banner_text": "Build your own discovery set with any five fragrances in 2ml vials.",
-        "banner_cta": "Build your 5 x 2ml set",
-        "bundle_handle": "build-your-own-discovery-set-5-x-2ml-sprays",
-        "collection": "extrait-sprays",
-        "filter_mode": "title",
-        "filter_value": "50ml",
-        "show_price": false,
-        "autoplay": true,
-        "autoplay_ms": 3500,
-        "color_scheme": "",
-        "accent": "#C7A86B"
-      }
     }
   },
   "order": [
     "main",
     "related-products",
     "tiktokreviews_NNez8r",
-    "1753193282b23ee83d",
-    "samplesection_NaMbCr"
+    "samplesection_NaMbCr",
+    "1753193282b23ee83d"
   ]
 }
