@@ -337,8 +337,24 @@
     },
     "samplesection_NaMbCr": {
       "type": "samplesection",
+      "disabled": true,
       "name": "Sample Bundle + 50ml Carousel (scoped)",
-      "settings": {}
+      "settings": {
+        "heading": "Unsure which 50ml to purchase?",
+        "subheading": "Try five 2ml samples and discover your favourite.",
+        "banner_title": "Sample Bundle",
+        "banner_text": "Build your own discovery set with any five fragrances in 2ml vials.",
+        "banner_cta": "Build your 5 x 2ml set",
+        "bundle_handle": "build-your-own-discovery-set-5x2ml",
+        "collection": "",
+        "filter_mode": "title",
+        "filter_value": "",
+        "show_price": false,
+        "autoplay": true,
+        "autoplay_ms": 3500,
+        "color_scheme": "",
+        "accent": "#111111"
+      }
     },
     "1753193282b23ee83d": {
       "type": "apps",
