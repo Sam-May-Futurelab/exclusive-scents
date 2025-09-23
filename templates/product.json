@@ -337,6 +337,7 @@
     },
     "samplesection_NaMbCr": {
       "type": "samplesection",
+      "disabled": true,
       "name": "Sample Bundle + 50ml Carousel (scoped)",
       "settings": {}
     },
