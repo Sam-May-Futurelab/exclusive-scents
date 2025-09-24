@@ -1,4 +1,3 @@
-
 {% comment %} Sample Bundle Promo + 50ml Carousel (Dawn-compatible) {% endcomment %}
 <section id="sample-bundle-50ml-{{ section.id }}" class="sample-50ml color-{{ section.settings.color_scheme }}">
   <div class="page-width">
@@ -44,7 +43,8 @@
             {%- endif -%}
 
             {% if include_card %}
-              <a class="sample-50ml__card" href="{{ product.url }}">
+              <!-- Changed ONLY this href to point to the bundle product -->
+              <a class="sample-50ml__card" href="{{ routes.root_url }}products/{{ section.settings.bundle_handle | escape }}">
                 {% if product.featured_image %}
                   <div class="sample-50ml__media">
                     <img
