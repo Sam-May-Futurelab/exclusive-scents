@@ -33,14 +33,15 @@
         "bundle_samples": {
           "type": "bundle",
           "settings": {
-            "badge": "BEST VALUE",
-            "title": "Add 5 x 2ml Sample's To Your Cart To Get 20% Off",
+            "image": "shopify://shop_images/Untitled_design-18.png",
+            "badge": "",
+            "title": "<strong>Sample Bundle 5 x 2ml</strong>",
             "description": "<p>Perfect for discovering your new signature scent</p>",
-            "features": "5 x 2ml Samples, Long Lasting Formula, 20% Discount, Perfect for Discovery",
+            "features": "5 x 2ml Samples, Long Lasting Formula, Great Way To Try, Perfect for Discovery",
             "original_price": "",
             "sale_price": "",
-            "discount": "Save 20%",
-            "button_label": "Shop Now",
+            "discount": "5x2ml Sample bundle for £12.99 Free Shipping",
+            "button_label": "Sample bundle",
             "button_link": "shopify://products/tropical-kirkee-copy"
           }
         },
