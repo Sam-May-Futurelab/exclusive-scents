@@ -1,4 +1,3 @@
-
 {% comment %} Sample Bundle Promo + 50ml Carousel (Dawn-compatible) {% endcomment %}
 <section id="sample-bundle-50ml-{{ section.id }}" class="sample-50ml color-{{ section.settings.color_scheme }}">
   <div class="page-width">
@@ -15,9 +14,10 @@
         <strong>{{ section.settings.banner_title | escape }}</strong>
         <span>{{ section.settings.banner_text | escape }}</span>
       </div>
-      {% if section.settings.bundle_handle != blank %}
+      {% if section.settings.bundle_handle != blank or section.settings.cta_link != blank %}
+        {% assign _fallback_product_url = routes.root_url | append: 'products/' | append: section.settings.bundle_handle %}
         <a class="sample-50ml__banner-cta button button--primary"
-           href="{{ routes.root_url }}products/{{ section.settings.bundle_handle | escape }}">
+           href="{% if section.settings.cta_link != blank %}{{ section.settings.cta_link | escape }}{% else %}{{ _fallback_product_url | escape }}{% endif %}">
           {{ section.settings.banner_cta | default: 'Build your 5 x 2ml set' }}
         </a>
       {% endif %}
@@ -205,6 +205,8 @@
       { "type": "text", "id": "banner_title", "label": "Banner title", "default": "Build Your Own Discovery Set 5 x 2ml" },
       { "type": "text", "id": "banner_text", "label": "Banner text", "default": "Browse the 50ml range below, then pick any five as 2ml samples." },
       { "type": "text", "id": "banner_cta", "label": "Banner button text", "default": "Build your 5 x 2ml set" },
+
+      { "type": "url",  "id": "cta_link", "label": "CTA link (optional)", "info": "Overrides bundle handle when set" },
       { "type": "text", "id": "bundle_handle", "label": "Sample bundle product handle", "default": "build-your-own-discovery-set-5x2ml" },
 
       { "type": "collection", "id": "collection", "label": "Collection source" },
