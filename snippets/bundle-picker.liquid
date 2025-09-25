@@ -1,0 +1,118 @@
+{%- comment -%}
+  Bundle Picker Snippet
+  Renders N dropdowns to let customers choose scents from a collection.
+  Writes selected names into the main product's line item properties (properties[Label 1..N]).
+
+  Parameters:
+  - slot_count (number): how many picks to show (default 3)
+  - label_prefix (string): label for each slot (default 'Bottle')
+  - collection_handle (string): collection to source options from (default 'extrait-sprays')
+  - allow_duplicates (boolean): whether duplicate selections are allowed (default true)
+  - show_thumbs (boolean): whether to show image thumbnails next to selects (default false)
+{%- endcomment -%}
+
+{%- assign slot_count       = slot_count       | default: 3 -%}
+{%- assign label_prefix     = label_prefix     | default: 'Bottle' -%}
+{%- assign collection_handle = collection_handle | default: 'extrait-sprays' -%}
+{%- assign allow_duplicates = allow_duplicates | default: true -%}
+{%- assign show_thumbs      = show_thumbs      | default: false -%}
+
+{%- assign col = collections[collection_handle] -%}
+{%- assign picker_uid = 'bp-' | append: request.path | replace: '/', '-' | replace: '.', '-' -%}
+
+{%- capture options_html -%}
+  <option value="">Select a scent…</option>
+  {%- if col and col.products_count > 0 -%}
+    {%- for p in col.products -%}
+      {%- assign fav = p.first_available_variant -%}
+      {%- if fav -%}
+        <option value="{{ fav.id }}" data-title="{{ p.title | escape }}" data-image="{{ p.featured_image | img_url: '120x120', crop: 'center' }}">{{ p.title }}</option>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+<style>
+  #{{ picker_uid }}{ --ink:#111; --muted:#6b7280; --bg:#fff; --br:#e5e7eb; --pill:#f9fafb; }
+  #{{ picker_uid }} .bp-wrap{ max-width: 700px; margin: 0 auto; padding: 12px 0; }
+  #{{ picker_uid }} .bp-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 700px){ #{{ picker_uid }} .bp-grid{ grid-template-columns: 1fr; } }
+  #{{ picker_uid }} .bp-slot{ background: var(--bg); border:1px solid var(--br); border-radius: 14px; padding: 12px; display: grid; gap: 8px; }
+  #{{ picker_uid }} .bp-label{ font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--muted); }
+  #{{ picker_uid }} .bp-row{ display:flex; align-items:center; gap:10px; }
+  #{{ picker_uid }} .bp-select{ width:100%; padding: 10px 12px; border-radius: 12px; background: var(--pill); border:1px solid var(--br); font-size: 15px; color: var(--ink); }
+  #{{ picker_uid }} .bp-thumb{ width:34px; height:34px; border-radius: 8px; overflow:hidden; background:#f7f7f7; display:none; }
+  #{{ picker_uid }} .bp-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  {% if show_thumbs %}
+    #{{ picker_uid }} .bp-thumb{ display:block; }
+  {% endif %}
+</style>
+
+<div id="{{ picker_uid }}" class="bundle-picker" data-allow-dupes="{{ allow_duplicates }}" data-slot-count="{{ slot_count }}" data-label-prefix="{{ label_prefix }}">
+  <div class="bp-wrap">
+    <div class="bp-grid">
+      {%- for i in (1..slot_count) -%}
+        <div class="bp-slot">
+          <div class="bp-label">{{ label_prefix }} {{ i }}</div>
+          <div class="bp-row">
+            {% if show_thumbs %}<div class="bp-thumb" aria-hidden="true"><img alt=""></div>{% endif %}
+            <select class="bp-select" aria-label="{{ label_prefix }} {{ i }}">{{ options_html }}</select>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const root = document.getElementById('{{ picker_uid }}');
+  if (!root) return;
+  const productForm = document.querySelector('form[action*="/cart/add"]');
+  const allowDupes = root.dataset.allowDupes === 'true' || root.dataset.allowDupes === '1';
+  const labelPrefix = root.dataset.labelPrefix || 'Pick';
+  const slotCount = parseInt(root.dataset.slotCount || '0', 10) || 0;
+  const selects = [...root.querySelectorAll('.bp-select')];
+
+  // Prepare hidden inputs for line item properties
+  if (productForm) {
+    for (let i = 1; i <= slotCount; i++) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = `properties[${labelPrefix} ${i}]`;
+      input.value = '';
+      input.dataset.bpProp = String(i);
+      productForm.appendChild(input);
+    }
+  }
+
+  const currentSelections = () => selects.map(s => s.value).filter(Boolean);
+  const updateHidden = () => {
+    if (!productForm) return;
+    selects.forEach((sel, idx) => {
+      const input = productForm.querySelector(`input[data-bp-prop="${idx+1}"]`);
+      if (!input) return;
+      const opt = sel.selectedOptions && sel.selectedOptions[0];
+      input.value = (opt && opt.value) ? (opt.dataset.title || opt.textContent.trim()) : '';
+    });
+  };
+
+  const refresh = () => {
+    if (!allowDupes) {
+      const chosen = new Set(currentSelections());
+      selects.forEach(sel => {
+        [...sel.options].forEach(o => {
+          if (!o.value) return;
+          o.disabled = (chosen.has(o.value) && sel.value !== o.value);
+        });
+      });
+    }
+    updateHidden();
+  };
+
+  root.addEventListener('change', (e) => {
+    if (e.target.classList.contains('bp-select')) refresh();
+  });
+  refresh();
+})();
+</script>
