@@ -45,6 +45,21 @@
             "button_link": "shopify://products/tropical-kirkee-copy"
           }
         },
+        "bundle_15ml": {
+          "type": "bundle",
+          "settings": {
+            "image": "",
+            "badge": "",
+            "title": "15ml Extrait Spray Bundle",
+            "description": "<p>Perfect for discovering your new signature scent</p>",
+            "features": "3 x 15ml Extrait Sprays, Premium Concentration, Designer Inspired",
+            "original_price": "",
+            "sale_price": "",
+            "discount": "",
+            "button_label": "Shop 15ml Bundle",
+            "button_link": "https://www.exclusive-scents.co.uk/products/15ml-extrait-spray-bundle"
+          }
+        },
         "bundle_extrait": {
           "type": "bundle",
           "settings": {
@@ -62,6 +77,7 @@
       },
       "block_order": [
         "bundle_samples",
+        "bundle_15ml",
         "bundle_extrait"
       ],
       "settings": {
