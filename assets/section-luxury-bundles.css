@@ -102,21 +102,19 @@
   gap: 3rem;
 }
 
-.luxury-bundles__grid--split > .luxury-bundle-card:nth-child(1) {
-  grid-row: span 2;
-}
-
-.luxury-bundles__grid--split > .luxury-bundle-card:nth-child(2),
-.luxury-bundles__grid--split > .luxury-bundle-card:nth-child(3) {
-  align-self: stretch;
+.luxury-bundles__col--right {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 3rem;
 }
 
 @media (max-width: 990px) {
   .luxury-bundles__grid--split {
     grid-template-columns: 1fr;
   }
-  .luxury-bundles__grid--split > .luxury-bundle-card:nth-child(1) {
-    grid-row: auto;
+  .luxury-bundles__col--right {
+    grid-template-rows: none;
+    grid-auto-rows: auto;
   }
 }
 

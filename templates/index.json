@@ -56,7 +56,7 @@
             "sale_price": "",
             "discount": "Save 15%",
             "button_label": "Shop 15ml Bundle",
-            "button_link": "shopify://collections/15ml-extrait-sprays"
+            "button_link": "https://www.exclusive-scents.co.uk/products/15ml-extrait-spray-bundle"
           }
         },
         "bundle_extrait": {
@@ -70,7 +70,7 @@
             "sale_price": "",
             "discount": "Save 15%",
             "button_label": "Shop 50ml Bundle",
-            "button_link": "shopify://collections/extrait-sprays"
+            "button_link": "https://www.exclusive-scents.co.uk/products/50ml-extrait-spray-bundle"
           }
         }
       },
