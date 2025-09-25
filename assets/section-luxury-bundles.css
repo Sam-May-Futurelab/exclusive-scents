@@ -89,72 +89,24 @@
 
 .luxury-bundles__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+  grid-template-columns: 1fr;
   gap: 3rem;
   align-items: stretch;
   position: relative;
   z-index: 1;
 }
 
-/* Option A: CSS-only split when there are exactly 3 cards
-   - Left: first card (column 1, spans rows 1-2)
-   - Right: two stacked cards (column 2, rows 1 and 2)
-   - Grid auto-sizes rows to content */
-/* Two-row layout when there are exactly 3 cards
-   - Row 1: first card spans full width
-   - Row 2: second and third cards side-by-side */
-.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child),
-.luxury-bundles__grid.luxury-bundles__grid--3 {
-  grid-template-columns: 1fr 1fr;
-  /* Prevent items from stretching to row height in split layout */
-  align-items: start;
-}
-
-.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(1),
-.luxury-bundles__grid.luxury-bundles__grid--3 > .luxury-bundle-card:nth-child(1) {
-  grid-column: 1 / -1; /* span both columns */
-  grid-row: 1;
-}
-
-.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(2),
-.luxury-bundles__grid.luxury-bundles__grid--3 > .luxury-bundle-card:nth-child(2) {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(3),
-.luxury-bundles__grid.luxury-bundles__grid--3 > .luxury-bundle-card:nth-child(3) {
-  grid-column: 2;
-  grid-row: 2;
-}
-
-/* In split layout, let cards size to their content instead of filling rows */
-.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) .luxury-bundle-card,
-.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) .luxury-bundle-card__inner,
-.luxury-bundles__grid.luxury-bundles__grid--3 .luxury-bundle-card,
-.luxury-bundles__grid.luxury-bundles__grid--3 .luxury-bundle-card__inner {
-  height: auto;
-}
-
-.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) .luxury-bundle-card__content,
-.luxury-bundles__grid.luxury-bundles__grid--3 .luxury-bundle-card__content {
-  align-content: start;
-}
-
-/* Responsive: revert to single-column on small screens */
-@media (max-width: 990px) {
-  .luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child),
-  .luxury-bundles__grid.luxury-bundles__grid--3 {
-    grid-template-columns: 1fr;
+/* Desktop: force three cards in a row */
+@media (min-width: 990px) {
+  .luxury-bundles__grid {
+    grid-template-columns: repeat(3, 1fr);
   }
-  .luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(1),
-  .luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(2),
-  .luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(3),
-  .luxury-bundles__grid.luxury-bundles__grid--3 > .luxury-bundle-card:nth-child(1),
-  .luxury-bundles__grid.luxury-bundles__grid--3 > .luxury-bundle-card:nth-child(2),
-  .luxury-bundles__grid.luxury-bundles__grid--3 > .luxury-bundle-card:nth-child(3) {
-    grid-column: auto;
-    grid-row: auto;
+}
+
+/* Tablet and below: 1 column (mobile), 2 columns on medium screens if there's space */
+@media (min-width: 750px) and (max-width: 989px) {
+  .luxury-bundles__grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
