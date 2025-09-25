@@ -64,13 +64,13 @@
           "type": "bundle",
           "settings": {
             "badge": "BEST VALUE",
-            "title": "Add 3 x 50ml Extrait Spray's To Your Cart To Get 20% Off",
+            "title": "50ml Extrait Spray Bundle",
             "description": "<p>Perfect for discovering your new signature scent</p>",
-            "features": "3 x 50ml Extrait Sprays, Premium Concentration, 15% Discount, Designer Inspired",
+            "features": "3 x 50ml Extrait Sprays, Premium Concentration, Designer Inspired",
             "original_price": "",
             "sale_price": "",
             "discount": "Save 15%",
-            "button_label": "Shop Now",
+            "button_label": "Find Your Perfect Bundle",
             "button_link": "shopify://collections/extrait-sprays"
           }
         }
