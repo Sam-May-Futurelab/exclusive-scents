@@ -97,18 +97,19 @@
 }
 
 /* Option A: CSS-only split when there are exactly 3 cards
-   - Left: first card (column 1, row 1)
+   - Left: first card (column 1, spans rows 1-2)
    - Right: two stacked cards (column 2, rows 1 and 2)
-   - No spanning on the left, so it won't stretch to the height of both right cards combined */
+   - Grid auto-sizes rows to content */
 .luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) {
   grid-template-columns: 1.15fr 0.85fr;
+  grid-template-rows: auto auto;
   /* Prevent items from stretching to row height in split layout */
   align-items: start;
 }
 
 .luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(1) {
   grid-column: 1;
-  grid-row: 1;
+  grid-row: 1 / -1;
 }
 
 .luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(2) {
