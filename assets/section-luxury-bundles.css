@@ -14,29 +14,31 @@
   height: 200%;
   background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.03) 50%, transparent 70%);
   transform: rotate(-15deg);
-/* Two-row layout when there are exactly 3 cards
-   - Row 1: first card spans full width
-   - Row 2: second and third cards side-by-side */
-.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) {
-  grid-template-columns: 1fr 1fr;
-  /* Prevent items from stretching to row height in split layout */
-  align-items: start;
+  pointer-events: none;
 }
 
-.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(1) {
-  grid-column: 1 / -1; /* span both columns */
-  grid-row: 1;
+.luxury-bundles::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.4) 2px, transparent 2px),
+    radial-gradient(circle at 60% 70%, rgba(255, 215, 0, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.5) 2px, transparent 2px),
+    radial-gradient(circle at 30% 80%, rgba(255, 215, 0, 0.2) 1px, transparent 1px),
+    radial-gradient(circle at 70% 50%, rgba(255, 215, 0, 0.4) 2px, transparent 2px);
+  background-size: 350px 350px, 250px 250px, 400px 400px, 300px 300px, 320px 320px;
+  animation: bundleParticleFloat 20s linear infinite;
+  z-index: 0;
 }
 
-.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(2) {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(3) {
-  grid-column: 2;
-  grid-row: 2;
-}
+@keyframes bundleParticleFloat {
+  0% {
+    background-position: 
       0% 100%, 
       100% 0%, 
       50% 100%, 
@@ -98,46 +100,59 @@
    - Left: first card (column 1, spans rows 1-2)
    - Right: two stacked cards (column 2, rows 1 and 2)
    - Grid auto-sizes rows to content */
-.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) {
-  grid-template-columns: 1.15fr 0.85fr;
-  grid-template-rows: auto auto;
+/* Two-row layout when there are exactly 3 cards
+   - Row 1: first card spans full width
+   - Row 2: second and third cards side-by-side */
+.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child),
+.luxury-bundles__grid.luxury-bundles__grid--3 {
+  grid-template-columns: 1fr 1fr;
   /* Prevent items from stretching to row height in split layout */
   align-items: start;
 }
 
-.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(1) {
-  grid-column: 1;
-  grid-row: 1 / -1;
-}
-
-.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(2) {
-  grid-column: 2;
+.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(1),
+.luxury-bundles__grid.luxury-bundles__grid--3 > .luxury-bundle-card:nth-child(1) {
+  grid-column: 1 / -1; /* span both columns */
   grid-row: 1;
 }
 
-.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(3) {
+.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(2),
+.luxury-bundles__grid.luxury-bundles__grid--3 > .luxury-bundle-card:nth-child(2) {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(3),
+.luxury-bundles__grid.luxury-bundles__grid--3 > .luxury-bundle-card:nth-child(3) {
   grid-column: 2;
   grid-row: 2;
 }
 
 /* In split layout, let cards size to their content instead of filling rows */
 .luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) .luxury-bundle-card,
-.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) .luxury-bundle-card__inner {
+.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) .luxury-bundle-card__inner,
+.luxury-bundles__grid.luxury-bundles__grid--3 .luxury-bundle-card,
+.luxury-bundles__grid.luxury-bundles__grid--3 .luxury-bundle-card__inner {
   height: auto;
 }
 
-.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) .luxury-bundle-card__content {
+.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) .luxury-bundle-card__content,
+.luxury-bundles__grid.luxury-bundles__grid--3 .luxury-bundle-card__content {
   align-content: start;
 }
 
 /* Responsive: revert to single-column on small screens */
 @media (max-width: 990px) {
-  .luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) {
+  .luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child),
+  .luxury-bundles__grid.luxury-bundles__grid--3 {
     grid-template-columns: 1fr;
   }
   .luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(1),
   .luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(2),
-  .luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(3) {
+  .luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(3),
+  .luxury-bundles__grid.luxury-bundles__grid--3 > .luxury-bundle-card:nth-child(1),
+  .luxury-bundles__grid.luxury-bundles__grid--3 > .luxury-bundle-card:nth-child(2),
+  .luxury-bundles__grid.luxury-bundles__grid--3 > .luxury-bundle-card:nth-child(3) {
     grid-column: auto;
     grid-row: auto;
   }
