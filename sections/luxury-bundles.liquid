@@ -11,76 +11,218 @@
       </div>
     {%- endunless -%}
     
-  {% assign bundle_count = section.blocks | size %}
-  <div class="luxury-bundles__grid{% if bundle_count == 3 %} luxury-bundles__grid--split{% endif %}">
-      {%- for block in section.blocks -%}
-        <div class="luxury-bundle-card{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" {{ block.shopify_attributes }}
-          {%- if settings.animations_reveal_on_scroll -%}
-            style="--animation-order: {{ forloop.index0 }};"
-          {%- endif -%}
-        >
-          <div class="luxury-bundle-card__inner">
-            {%- if block.settings.image != blank -%}
-              <div class="luxury-bundle-card__media">
-                <img
-                  src="{{ block.settings.image | image_url: width: 600 }}"
-                  alt="{{ block.settings.image.alt | escape }}"
-                  loading="lazy"
-                  width="{{ block.settings.image.width }}"
-                  height="{{ block.settings.image.height }}"
-                  class="luxury-bundle-card__image"
-                />
-              </div>
+    {% assign bundle_count = section.blocks | size %}
+    <div class="luxury-bundles__grid{% if bundle_count == 3 %} luxury-bundles__grid--split{% endif %}">
+      {% if bundle_count == 3 %}
+        {%- for block in section.blocks limit: 1 -%}
+          <div class="luxury-bundle-card{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" {{ block.shopify_attributes }}
+            {%- if settings.animations_reveal_on_scroll -%}
+              style="--animation-order: {{ forloop.index0 }};"
             {%- endif -%}
-            
-            <div class="luxury-bundle-card__content">
-              {%- if block.settings.badge != blank -%}
-                <div class="luxury-bundle-card__badge">{{ block.settings.badge }}</div>
+          >
+            <div class="luxury-bundle-card__inner">
+              {%- if block.settings.image != blank -%}
+                <div class="luxury-bundle-card__media">
+                  <img
+                    src="{{ block.settings.image | image_url: width: 600 }}"
+                    alt="{{ block.settings.image.alt | escape }}"
+                    loading="lazy"
+                    width="{{ block.settings.image.width }}"
+                    height="{{ block.settings.image.height }}"
+                    class="luxury-bundle-card__image"
+                  />
+                </div>
               {%- endif -%}
               
-              {%- if block.settings.title != blank -%}
-                <h3 class="luxury-bundle-card__title">{{ block.settings.title }}</h3>
-              {%- endif -%}
-              
-              {%- if block.settings.description != blank -%}
-                <div class="luxury-bundle-card__description">{{ block.settings.description }}</div>
-              {%- endif -%}
-              
-              {%- if block.settings.features != blank -%}
-                <ul class="luxury-bundle-card__features">
-                  {%- assign features = block.settings.features | split: ',' -%}
-                  {%- for feature in features -%}
-                    <li class="luxury-bundle-card__feature">
-                      <svg class="luxury-bundle-card__feature-icon" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                      </svg>
-                      {{ feature | strip }}
-                    </li>
-                  {%- endfor -%}
-                </ul>
-              {%- endif -%}
-              
-              <div class="luxury-bundle-card__pricing">
-                {%- if block.settings.original_price != blank -%}
-                  <span class="luxury-bundle-card__original-price">{{ block.settings.original_price }}</span>
+              <div class="luxury-bundle-card__content">
+                {%- if block.settings.badge != blank -%}
+                  <div class="luxury-bundle-card__badge">{{ block.settings.badge }}</div>
                 {%- endif -%}
-                {%- if block.settings.sale_price != blank -%}
-                  <span class="luxury-bundle-card__sale-price">{{ block.settings.sale_price }}</span>
+                
+                {%- if block.settings.title != blank -%}
+                  <h3 class="luxury-bundle-card__title">{{ block.settings.title }}</h3>
                 {%- endif -%}
-                {%- if block.settings.discount != blank -%}
-                  <span class="luxury-bundle-card__discount">{{ block.settings.discount }}</span>
+                
+                {%- if block.settings.description != blank -%}
+                  <div class="luxury-bundle-card__description">{{ block.settings.description }}</div>
+                {%- endif -%}
+                
+                {%- if block.settings.features != blank -%}
+                  <ul class="luxury-bundle-card__features">
+                    {%- assign features = block.settings.features | split: ',' -%}
+                    {%- for feature in features -%}
+                      <li class="luxury-bundle-card__feature">
+                        <svg class="luxury-bundle-card__feature-icon" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                        {{ feature | strip }}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+                
+                <div class="luxury-bundle-card__pricing">
+                  {%- if block.settings.original_price != blank -%}
+                    <span class="luxury-bundle-card__original-price">{{ block.settings.original_price }}</span>
+                  {%- endif -%}
+                  {%- if block.settings.sale_price != blank -%}
+                    <span class="luxury-bundle-card__sale-price">{{ block.settings.sale_price }}</span>
+                  {%- endif -%}
+                  {%- if block.settings.discount != blank -%}
+                    <span class="luxury-bundle-card__discount">{{ block.settings.discount }}</span>
+                  {%- endif -%}
+                </div>
+                
+                {%- if block.settings.button_label != blank -%}
+                  <a href="{{ block.settings.button_link }}" class="luxury-bundle-card__button">
+                    {{ block.settings.button_label | escape }}
+                  </a>
                 {%- endif -%}
               </div>
-              
-              {%- if block.settings.button_label != blank -%}
-                <a href="{{ block.settings.button_link }}" class="luxury-bundle-card__button">
-                  {{ block.settings.button_label | escape }}
-                </a>
-              {%- endif -%}
             </div>
           </div>
+        {%- endfor -%}
+
+        <div class="luxury-bundles__col luxury-bundles__col--right">
+          {%- for block in section.blocks offset: 1 -%}
+            <div class="luxury-bundle-card{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" {{ block.shopify_attributes }}
+              {%- if settings.animations_reveal_on_scroll -%}
+                style="--animation-order: {{ forloop.index | plus: 1 }};"
+              {%- endif -%}
+            >
+              <div class="luxury-bundle-card__inner">
+                {%- if block.settings.image != blank -%}
+                  <div class="luxury-bundle-card__media">
+                    <img
+                      src="{{ block.settings.image | image_url: width: 600 }}"
+                      alt="{{ block.settings.image.alt | escape }}"
+                      loading="lazy"
+                      width="{{ block.settings.image.width }}"
+                      height="{{ block.settings.image.height }}"
+                      class="luxury-bundle-card__image"
+                    />
+                  </div>
+                {%- endif -%}
+                
+                <div class="luxury-bundle-card__content">
+                  {%- if block.settings.badge != blank -%}
+                    <div class="luxury-bundle-card__badge">{{ block.settings.badge }}</div>
+                  {%- endif -%}
+                  
+                  {%- if block.settings.title != blank -%}
+                    <h3 class="luxury-bundle-card__title">{{ block.settings.title }}</h3>
+                  {%- endif -%}
+                  
+                  {%- if block.settings.description != blank -%}
+                    <div class="luxury-bundle-card__description">{{ block.settings.description }}</div>
+                  {%- endif -%}
+                  
+                  {%- if block.settings.features != blank -%}
+                    <ul class="luxury-bundle-card__features">
+                      {%- assign features = block.settings.features | split: ',' -%}
+                      {%- for feature in features -%}
+                        <li class="luxury-bundle-card__feature">
+                          <svg class="luxury-bundle-card__feature-icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                          </svg>
+                          {{ feature | strip }}
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                  
+                  <div class="luxury-bundle-card__pricing">
+                    {%- if block.settings.original_price != blank -%}
+                      <span class="luxury-bundle-card__original-price">{{ block.settings.original_price }}</span>
+                    {%- endif -%}
+                    {%- if block.settings.sale_price != blank -%}
+                      <span class="luxury-bundle-card__sale-price">{{ block.settings.sale_price }}</span>
+                    {%- endif -%}
+                    {%- if block.settings.discount != blank -%}
+                      <span class="luxury-bundle-card__discount">{{ block.settings.discount }}</span>
+                    {%- endif -%}
+                  </div>
+                  
+                  {%- if block.settings.button_label != blank -%}
+                    <a href="{{ block.settings.button_link }}" class="luxury-bundle-card__button">
+                      {{ block.settings.button_label | escape }}
+                    </a>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
         </div>
-      {%- endfor -%}
+      {% else %}
+        {%- for block in section.blocks -%}
+          <div class="luxury-bundle-card{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" {{ block.shopify_attributes }}
+            {%- if settings.animations_reveal_on_scroll -%}
+              style="--animation-order: {{ forloop.index0 }};"
+            {%- endif -%}
+          >
+            <div class="luxury-bundle-card__inner">
+              {%- if block.settings.image != blank -%}
+                <div class="luxury-bundle-card__media">
+                  <img
+                    src="{{ block.settings.image | image_url: width: 600 }}"
+                    alt="{{ block.settings.image.alt | escape }}"
+                    loading="lazy"
+                    width="{{ block.settings.image.width }}"
+                    height="{{ block.settings.image.height }}"
+                    class="luxury-bundle-card__image"
+                  />
+                </div>
+              {%- endif -%}
+              
+              <div class="luxury-bundle-card__content">
+                {%- if block.settings.badge != blank -%}
+                  <div class="luxury-bundle-card__badge">{{ block.settings.badge }}</div>
+                {%- endif -%}
+                
+                {%- if block.settings.title != blank -%}
+                  <h3 class="luxury-bundle-card__title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+                
+                {%- if block.settings.description != blank -%}
+                  <div class="luxury-bundle-card__description">{{ block.settings.description }}</div>
+                {%- endif -%}
+                
+                {%- if block.settings.features != blank -%}
+                  <ul class="luxury-bundle-card__features">
+                    {%- assign features = block.settings.features | split: ',' -%}
+                    {%- for feature in features -%}
+                      <li class="luxury-bundle-card__feature">
+                        <svg class="luxury-bundle-card__feature-icon" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                        {{ feature | strip }}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+                
+                <div class="luxury-bundle-card__pricing">
+                  {%- if block.settings.original_price != blank -%}
+                    <span class="luxury-bundle-card__original-price">{{ block.settings.original_price }}</span>
+                  {%- endif -%}
+                  {%- if block.settings.sale_price != blank -%}
+                    <span class="luxury-bundle-card__sale-price">{{ block.settings.sale_price }}</span>
+                  {%- endif -%}
+                  {%- if block.settings.discount != blank -%}
+                    <span class="luxury-bundle-card__discount">{{ block.settings.discount }}</span>
+                  {%- endif -%}
+                </div>
+                
+                {%- if block.settings.button_label != blank -%}
+                  <a href="{{ block.settings.button_link }}" class="luxury-bundle-card__button">
+                    {{ block.settings.button_label | escape }}
+                  </a>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {% endif %}
     </div>
   </div>
 </section>
