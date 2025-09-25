@@ -33,7 +33,7 @@
         "bundle_samples": {
           "type": "bundle",
           "settings": {
-            "image": "shopify://shop_images/Untitled_design-18.png",
+            "image": "",
             "badge": "",
             "title": "<strong>Sample Bundle 5 x 2ml</strong>",
             "description": "<p>Perfect for discovering your new signature scent</p>",
