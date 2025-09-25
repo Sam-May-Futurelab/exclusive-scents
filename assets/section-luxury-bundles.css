@@ -96,6 +96,30 @@
   z-index: 1;
 }
 
+/* Split layout: first card left, two stacked cards on the right */
+.luxury-bundles__grid--split {
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 3rem;
+}
+
+.luxury-bundles__grid--split > .luxury-bundle-card:nth-child(1) {
+  grid-row: span 2;
+}
+
+.luxury-bundles__grid--split > .luxury-bundle-card:nth-child(2),
+.luxury-bundles__grid--split > .luxury-bundle-card:nth-child(3) {
+  align-self: stretch;
+}
+
+@media (max-width: 990px) {
+  .luxury-bundles__grid--split {
+    grid-template-columns: 1fr;
+  }
+  .luxury-bundles__grid--split > .luxury-bundle-card:nth-child(1) {
+    grid-row: auto;
+  }
+}
+
 .luxury-bundle-card {
   position: relative;
   height: 100%;
