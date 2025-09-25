@@ -33,27 +33,29 @@
         "bundle_samples": {
           "type": "bundle",
           "settings": {
+            "image": "",
             "badge": "",
-            "title": "<strong>Sample Bundle</strong>",
+            "title": "<strong>Sample Bundle 5 x 2ml</strong>",
             "description": "<p>Perfect for discovering your new signature scent</p>",
             "features": "5 x 2ml Samples, Long Lasting Formula, Great Way To Try, Perfect for Discovery",
             "original_price": "",
             "sale_price": "",
             "discount": "5x2ml Sample bundle for £12.99 Free Shipping",
-            "button_label": "Shop Sample bundle",
+            "button_label": "Sample bundle",
             "button_link": "shopify://products/tropical-kirkee-copy"
           }
         },
         "bundle_15ml": {
           "type": "bundle",
           "settings": {
+            "image": "",
             "badge": "",
-            "title": "15ml Spray Bundle",
+            "title": "15ml Extrait Spray Bundle",
             "description": "<p>Perfect for discovering your new signature scent</p>",
-            "features": "3 x 15ml Extrait Sprays, Premium Concentration, Designer Inspired, Great For Handbags/Gym Bags",
+            "features": "3 x 15ml Extrait Sprays, Premium Concentration, Designer Inspired",
             "original_price": "",
             "sale_price": "",
-            "discount": "3 x 15ml Extrait Sprays For £44.99 Free Shipping",
+            "discount": "",
             "button_label": "Shop 15ml Bundle",
             "button_link": "https://www.exclusive-scents.co.uk/products/15ml-extrait-spray-bundle"
           }
@@ -69,7 +71,7 @@
             "sale_price": "",
             "discount": "3 x 50ml Extrait Sprays For £89.99 Free Shipping",
             "button_label": "Shop 50ml Bundle",
-            "button_link": "shopify://collections/extrait-sprays"
+            "button_link": "https://www.exclusive-scents.co.uk/products/50ml-extrait-spray-bundle"
           }
         }
       },
