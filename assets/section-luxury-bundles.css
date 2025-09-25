@@ -102,6 +102,8 @@
    - No spanning on the left, so it won't stretch to the height of both right cards combined */
 .luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) {
   grid-template-columns: 1.15fr 0.85fr;
+  /* Prevent items from stretching to row height in split layout */
+  align-items: start;
 }
 
 .luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(1) {
@@ -117,6 +119,16 @@
 .luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) > .luxury-bundle-card:nth-child(3) {
   grid-column: 2;
   grid-row: 2;
+}
+
+/* In split layout, let cards size to their content instead of filling rows */
+.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) .luxury-bundle-card,
+.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) .luxury-bundle-card__inner {
+  height: auto;
+}
+
+.luxury-bundles__grid:has(> .luxury-bundle-card:nth-child(3):last-child) .luxury-bundle-card__content {
+  align-content: start;
 }
 
 /* Responsive: revert to single-column on small screens */
