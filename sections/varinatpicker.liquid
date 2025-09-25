@@ -1,0 +1,267 @@
+{% comment %}
+  Section: Collection Scent Picker (Multi-Slot)
+  Builds selectable slots ("Sample 1", "Sample 2", …) from a chosen collection.
+  Adds all chosen items to cart via AJAX in one click.
+
+  Notes:
+  - Uses first_available_variant for each product.
+  - Filters out products with no available variants (sold out).
+  - If you want thumbnails in the dropdown, set SHOW_THUMBS = true (renders emoji thumbnail block).
+{% endcomment %}
+
+{% assign SHOW_THUMBS = false %}
+
+<section id="scent-picker-{{ section.id }}" class="sp sp--{{ section.id }}">
+  <style>
+    .sp.sp--{{ section.id }}{
+      --ink:#111; --muted:#6b7280; --bg:#fff; --br:#e5e7eb; --pill:#f9fafb; --accent:#111; --accent-ink:#fff;
+      --ok:#10b981; --err:#ef4444;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    .sp__wrap{ max-width: 900px; margin: 0 auto; padding: 12px 16px; }
+    .sp__head{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:10px; }
+    .sp__title{ font-weight:800; font-size: clamp(18px, 2.6vw, 22px); color:var(--ink); letter-spacing:-.01em; margin:0; }
+    .sp__sub{ color:var(--muted); font-size:14px; margin:0; }
+
+    .sp__grid{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+    @media (max-width:700px){ .sp__grid{ grid-template-columns:1fr; } }
+
+    .sp__slot{
+      background:var(--bg); border:1px solid var(--br); border-radius:14px; padding:10px;
+      display:grid; grid-template-columns: 1fr; gap:8px;
+    }
+    .sp__label{
+      font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted);
+      display:flex; align-items:center; gap:8px;
+    }
+    .sp__select{
+      width:100%; padding:10px 12px; border-radius:12px; background:var(--pill); border:1px solid var(--br);
+      font-size:15px; color:var(--ink);
+    }
+    .sp__row{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .sp__price{ font-weight:700; font-size:14px; color:var(--ink); }
+    .sp__thumb{ width:34px; height:34px; border-radius:8px; background:#f3f4f6; overflow:hidden; display:none; }
+    .sp__thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+    {% if SHOW_THUMBS %}.sp__thumb{ display:block; }{% endif %}
+
+    .sp__footer{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:14px; flex-wrap:wrap;
+      padding-top:10px; border-top:1px dashed var(--br);
+    }
+    .sp__total{ font-weight:800; font-size:16px; }
+    .sp__btn{
+      appearance:none; -webkit-appearance:none;
+      padding:12px 18px; border-radius:12px; border:1px solid var(--ink);
+      background:var(--accent); color:var(--accent-ink); font-weight:800; letter-spacing:.02em; cursor:pointer;
+      transition: transform .05s ease, opacity .2s ease;
+    }
+    .sp__btn[disabled]{ opacity:.5; cursor:not-allowed; }
+    .sp__msg{ font-size:13px; color:var(--muted); }
+    .sp__msg.--ok{ color:var(--ok); }
+    .sp__msg.--err{ color:var(--err); }
+  </style>
+
+  {% liquid
+    assign col = section.settings.collection
+    assign prefix = section.settings.label_prefix | default: 'Sample'
+    assign slots  = section.settings.slot_count | default: 3
+    assign allow_dupes = section.settings.allow_duplicates
+  %}
+
+  <div class="sp__wrap" data-allow-dupes="{{ allow_dupes }}">
+    <div class="sp__head">
+      <h3 class="sp__title">{{ section.settings.heading | default: 'Build Your Sample Pack' }}</h3>
+      <p class="sp__sub">{{ section.settings.subheading | default: 'Pick your favourite scents from the collection' }}</p>
+    </div>
+
+    {% if col and col.products_count > 0 %}
+      {%- comment -%}
+        Build an options dataset (only products with at least one available variant)
+      {%- endcomment -%}
+      {% assign options_json = '' %}
+      {% assign items = '' %}
+      {% for p in col.products %}
+        {% assign fav = p.first_available_variant %}
+        {% if fav %}
+          {% capture one %}
+            {
+              "product_id": {{ p.id }},
+              "title": {{ p.title | json }},
+              "handle": {{ p.handle | json }},
+              "variant_id": {{ fav.id }},
+              "price": {{ fav.price | default: p.price | json }},
+              "available": {{ fav.available | json }},
+              "image": {{ p.featured_image | img_url: '160x160', crop: 'center' | json }}
+            }
+          {% endcapture %}
+          {% assign items = items | append: one | append: ',' %}
+        {% endif %}
+      {% endfor %}
+      {% assign options_json = items | strip | strip_newlines | remove_last: ',' %}
+
+      {% if options_json == '' %}
+        <p class="sp__msg --err">No available items in this collection.</p>
+      {% else %}
+        <div class="sp__grid" id="sp-grid-{{ section.id }}"
+             data-products='[{{ options_json }}]'
+             data-currency-symbol="{{ cart.currency.symbol }}"
+             data-money-format="{{ shop.money_format | escape }}">
+          {% for i in (1..slots) %}
+            <div class="sp__slot" data-slot="{{ i }}">
+              <div class="sp__label">{{ prefix }} {{ i }}</div>
+              <div class="sp__row">
+                {% if SHOW_THUMBS %}<div class="sp__thumb"><img alt=""></div>{% endif %}
+                <select class="sp__select" aria-label="{{ prefix }} {{ i }}">
+                  <option value="">Select a scent…</option>
+                </select>
+                <div class="sp__price" data-price>—</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <div class="sp__footer">
+          <div class="sp__total">Total: <span id="sp-total-{{ section.id }}">—</span></div>
+          <button class="sp__btn" id="sp-add-{{ section.id }}" disabled>Add selected to cart</button>
+          <div class="sp__msg" id="sp-msg-{{ section.id }}"></div>
+        </div>
+      {% endif %}
+    {% else %}
+      <p class="sp__msg --err">Select a collection in the section settings.</p>
+    {% endif %}
+  </div>
+
+  <script>
+    (() => {
+      const root   = document.getElementById('sp-grid-{{ section.id }}');
+      if (!root) return;
+
+      const SYMBOL = root.dataset.currencySymbol || '£';
+      const moneyFormat = "{{ shop.money_format | replace: '"', '\"' }}";
+      const products = JSON.parse(root.dataset.products || '[]');
+      const allowDupes = (document.querySelector('#scent-picker-{{ section.id }} .sp__wrap')?.dataset.allowDupes === 'true');
+
+      const formatMoney = (cents) => {
+        try {
+          // Use Shopify money_format fallback
+          const amount = (cents / 100).toFixed(2);
+          return moneyFormat.replace('{{amount}}', amount).replace('{{ amount }}', amount);
+        } catch(e){ return SYMBOL + (cents/100).toFixed(2); }
+      };
+
+      // Populate all selects
+      const selects = root.querySelectorAll('.sp__select');
+      const totalsEl = document.getElementById('sp-total-{{ section.id }}');
+      const btn = document.getElementById('sp-add-{{ section.id }}');
+      const msg = document.getElementById('sp-msg-{{ section.id }}');
+
+      const renderOptions = (sel) => {
+        const curVal = sel.value;
+        sel.innerHTML = '<option value="">Select a scent…</option>' +
+          products.map(p => `<option value="${p.variant_id}" data-price="${p.price}" data-image="${p.image}" data-title="${p.title}">${p.title} — ${formatMoney(p.price)}</option>`).join('');
+        if (curVal) sel.value = curVal;
+      };
+      selects.forEach(renderOptions);
+
+      const updateSlotUI = (slot) => {
+        const select = slot.querySelector('.sp__select');
+        const priceEl = slot.querySelector('[data-price]');
+        const opt = select.selectedOptions[0];
+        if (!opt || !opt.value) {
+          priceEl.textContent = '—';
+          {% if SHOW_THUMBS %}slot.querySelector('img').src = '';{% endif %}
+          return 0;
+        }
+        const price = parseInt(opt.dataset.price || '0', 10);
+        priceEl.textContent = formatMoney(price);
+        {% if SHOW_THUMBS %}slot.querySelector('img').src = opt.dataset.image || '';{% endif %}
+        return price;
+      };
+
+      const getChosenVariantIds = () => {
+        const ids = [];
+        selects.forEach(s => {
+          const v = s.value;
+          if (v) ids.push(v);
+        });
+        return ids;
+      };
+
+      const refresh = () => {
+        // Prevent duplicate choices if not allowed
+        if (!allowDupes) {
+          const chosen = new Set(getChosenVariantIds().filter(Boolean));
+          selects.forEach(s => {
+            [...s.options].forEach(o => {
+              if (!o.value) return;
+              o.disabled = (!chosen.has(o.value)) ? false : (s.value !== o.value);
+            });
+          });
+        }
+
+        // Update totals + slot UI
+        let total = 0, filled = 0;
+        root.querySelectorAll('.sp__slot').forEach(slot => {
+          const price = updateSlotUI(slot);
+          const hasVal = !!slot.querySelector('.sp__select').value;
+          if (hasVal) { total += price; filled++; }
+        });
+        totalsEl.textContent = filled ? formatMoney(total) : '—';
+
+        // Enable CTA only when all slots are chosen
+        btn.disabled = (filled < {{ slots }});
+      };
+
+      root.addEventListener('change', (e) => {
+        if (e.target.classList.contains('sp__select')) refresh();
+      });
+      refresh();
+
+      // Add to cart (AJAX)
+      btn.addEventListener('click', async () => {
+        msg.textContent = '';
+        const variantIds = getChosenVariantIds();
+        if (variantIds.length < {{ slots }}) return;
+
+        const items = variantIds.map(id => ({ id: Number(id), quantity: 1 }));
+        btn.disabled = true;
+        btn.textContent = 'Adding…';
+
+        try {
+          const res = await fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ items })
+          });
+          if (!res.ok) throw new Error('Add to cart failed');
+          msg.textContent = 'Added to cart ✓';
+          msg.className = 'sp__msg --ok';
+          btn.textContent = 'Added!';
+          setTimeout(() => { btn.textContent = 'Add selected to cart'; btn.disabled = false; }, 1200);
+          // Optional: open cart drawer if your theme supports it
+          document.dispatchEvent(new CustomEvent('cart:updated'));
+        } catch (err) {
+          msg.textContent = 'Could not add to cart. Please try again.';
+          msg.className = 'sp__msg --err';
+          btn.textContent = 'Add selected to cart';
+          btn.disabled = false;
+        }
+      });
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Collection Scent Picker",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Build Your Sample Pack" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Pick your favourite scents from the collection" },
+    { "type": "collection", "id": "collection", "label": "Collection (source of scents)" },
+    { "type": "range", "id": "slot_count", "min": 1, "max": 10, "step": 1, "default": 5, "label": "Number of slots" },
+    { "type": "text", "id": "label_prefix", "label": "Label prefix", "default": "Sample" },
+    { "type": "checkbox", "id": "allow_duplicates", "label": "Allow duplicate selections", "default": true }
+  ],
+  "presets": [{ "name": "Collection Scent Picker" }]
+}
+{% endschema %}

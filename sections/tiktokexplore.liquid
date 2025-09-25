@@ -1,0 +1,168 @@
+<!-- sections/announcement-bar.liquid -->
+{% comment %} Speed map: Level 1 = 1000ms (fast), Level 70 = 600000ms (slow) {% endcomment %}
+{% assign lvl = section.settings.speed_level | default: 4 %}
+{% if lvl < 1 %}{% assign lvl = 1 %}{% endif %}
+{% if lvl > 70 %}{% assign lvl = 70 %}{% endif %}
+{% assign min_ms = 1000 %}
+{% assign max_ms = 600000 %}
+{% assign intervals = 69 %}
+{% assign span_ms = max_ms | minus: min_ms %}
+{% assign step_ms = span_ms | divided_by: intervals %}
+{% assign steps = lvl | minus: 1 %}
+{% assign mult = step_ms | times: steps %}
+{% assign duration_ms = min_ms | plus: mult %}
+{% if lvl == 70 %}{% assign duration_ms = max_ms %}{% endif %}
+
+<style>
+  .announcement-bar {
+    width: 100%;
+    background-color: #FAF300; /* promo yellow */
+    color: #000;               /* black text */
+    height: {{ section.settings.height }}px;
+    min-height: {{ section.settings.height }}px; /* guard against clipping */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    font-size: 15px;           /* compact */
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    line-height: 1.22;         /* prevents emoji trim */
+    padding: 0;
+    position: relative;
+    z-index: 50;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Optional highlight layers (toggle in settings) */
+  .announcement-bar.has-highlight::before {
+    content: "";
+    position: absolute; inset: 0; pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+  .announcement-bar.soft_gloss::before {
+    background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.00) 60%);
+  }
+  .announcement-bar.gold_sheen::before {
+    background: linear-gradient(120deg,
+      rgba(255,245,200,0.35) 0%,
+      rgba(255,233,150,0.45) 35%,
+      rgba(247,215,110,0.35) 60%,
+      rgba{240,196,65,0.35} 100%);
+  }
+
+  .announcement-track-wrapper {
+    display: flex;
+    width: max-content;
+    padding-inline: 8px;                /* prevents edge clipping */
+    animation: scroll-left {{ duration_ms }}ms linear infinite; /* LOWER = FASTER */
+    will-change: transform;
+    direction: rtl;
+    transform: translateZ(0);           /* GPU hint */
+    backface-visibility: hidden;
+  }
+
+  .announcement-track {
+    display: flex;
+    direction: ltr;
+    contain: content;                   /* isolate layout/paint */
+  }
+
+  .announcement-item {
+    flex: 0 0 auto;
+    display: inline-flex;               /* stable baseline for emoji */
+    align-items: center;
+    padding: 2px {{ section.settings.item_spacing }}px;  /* add vertical padding */
+    white-space: nowrap;
+    text-transform: uppercase;          /* ALL CAPS */
+  }
+
+  /* Dedicated emoji fix */
+  .announcement-item .emoji {
+    display: inline-block;
+    line-height: 1;
+    margin-right: 0.5ch;
+    transform: translateY(0.02em);      /* subtle baseline nudge */
+    font-family: "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji", emoji;
+  }
+
+  .announcement-item strong { font-weight: 800; }
+
+  @keyframes scroll-left {
+    0%   { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+  }
+
+  @media (max-width: 480px) {
+    .announcement-bar { font-size: 14px; }
+    .announcement-item { padding: 2px {{ section.settings.item_spacing_mobile }}px; }
+  }
+
+  /* Accessibility: reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .announcement-track-wrapper { animation: none !important; }
+  }
+
+  /* GOLD GRADIENT (ADDED) */
+  .announcement-bar {
+    background: linear-gradient(135deg,
+      #C9B037 0%,
+      #E6D365 25%,
+      #F4E67B 50%,
+      #E6D365 75%,
+      #C9B037 100%
+    ) !important;
+    background-attachment: fixed;
+  }
+</style>
+
+<div class="announcement-bar{% if section.settings.highlight_style != 'none' %} has-highlight {{ section.settings.highlight_style }}{% endif %}" role="region" aria-label="Promotions">
+  <div class="announcement-track-wrapper">
+    <div class="announcement-track">
+      {% for i in (1..70) %}
+        {% assign mod = i | modulo: 3 %}
+        {% if mod == 1 %}
+          <div class="announcement-item"><span class="emoji" aria-hidden="true">📦 </span> FREE SHIPPING (UK)</div>
+        {% elsif mod == 2 %}
+          <div class="announcement-item"><span class="emoji" aria-hidden="true">🎁</span> FREE SAMPLE WITH EVERY PURCHASE</div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="announcement-track">
+      {% for i in (1..70) %}
+        {% assign mod = i | modulo: 3 %}
+        {% if mod == 1 %}
+          <div class="announcement-item"><span class="emoji" aria-hidden="true">📦 </span> FREE SHIPPING (UK)</div>
+        {% elsif mod == 2 %}
+          <div class="announcement-item"><span class="emoji" aria-hidden="true">🎁</span> FREE SAMPLE WITH EVERY PURCHASE</div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Promo Ticker",
+  "class": "section-announcement",
+  "settings": [
+    { "type": "range", "id": "height", "min": 36, "max": 72, "step": 4, "default": 44, "label": "Bar Height (px)" },
+    { "type": "range", "id": "speed_level", "min": 1, "max": 70, "step": 1, "default": 4, "label": "Speed Level (1 = Fast • 70 = Slowest ≈ 600s)" },
+    { "type": "range", "id": "item_spacing", "min": 8, "max": 40, "step": 2, "default": 16, "label": "Item Spacing (px, desktop)" },
+    { "type": "range", "id": "item_spacing_mobile", "min": 6, "max": 28, "step": 2, "default": 12, "label": "Item Spacing (px, mobile)" },
+    {
+      "type": "select",
+      "id": "highlight_style",
+      "label": "Background Highlight",
+      "default": "none",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "soft_gloss", "label": "Soft Gloss" },
+        { "value": "gold_sheen", "label": "Gold Sheen" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Promo Ticker" }]
+}
+{% endschema %}

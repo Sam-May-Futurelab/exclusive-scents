@@ -1,1 +1,385 @@
-{"sections":{"main":{"type":"main-product","blocks":{"title":{"type":"title","settings":{}},"price":{"type":"price","settings":{}},"variant_picker":{"type":"variant_picker","settings":{"picker_type":"dropdown","swatch_shape":"circle"}},"quantity_selector":{"type":"quantity_selector","settings":{}},"buy_buttons":{"type":"buy_buttons","settings":{"show_dynamic_checkout":true,"show_gift_card_recipient":true}},"description":{"type":"description","settings":{}},"share":{"type":"share","settings":{"share_label":"Share"}},"collapsible_tab_nw9KQd":{"type":"collapsible_tab","settings":{"heading":"Comparative Advertising Disclaimer","icon":"none","content":"<h5>Please be advised that the items listed on our website are only examples and should under no circumstances be construed to represent the actual high street, designer, or niche brand. Used or unused, trademarks and copyrights belong to the companies that created them. To be clear, they aren't ‘exactly’ or ‘identical’ like any other fragrances or originals, they are simply inspirations. To avoid any misunderstanding, Exclusive-Scents do not represent the actual brand, and we have no connection to any of the unidentified designer brand names mentioned above.It is the responsibility of the respective owners of all trademarks, whether they are utilised or not, to ensure that they are protected. Trademark holders cited or not referenced herein are not associated with, maintained, authorised, or sponsored by us. The use of any product name is strictly for identification and reference reasons and does not indicate any affiliation with the trademark holder.<\/h5>","page":""}}},"block_order":["title","price","variant_picker","quantity_selector","buy_buttons","description","share","collapsible_tab_nw9KQd"],"settings":{"enable_sticky_info":false,"color_scheme":"scheme-1","media_size":"small","constrain_to_viewport":true,"media_fit":"contain","gallery_layout":"thumbnail_slider","mobile_thumbnails":"hide","media_position":"left","image_zoom":"none","hide_variants":true,"enable_video_looping":false,"padding_top":0,"padding_bottom":0}},"65b08af6d50845c6d240":{"type":"apps","settings":{"include_margins":true}},"related-products":{"type":"related-products","disabled":true,"settings":{"heading":"You may also like","heading_size":"h2","products_to_show":4,"columns_desktop":4,"columns_mobile":"2","color_scheme":"scheme-1","image_ratio":"portrait","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":false,"padding_top":0,"padding_bottom":60}},"17500186121167c49a":{"type":"apps","settings":{"include_margins":true}},"1750097515c2384e6a":{"type":"apps","settings":{"include_margins":true}}},"order":["main","65b08af6d50845c6d240","related-products","17500186121167c49a","1750097515c2384e6a"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "judge_me_reviews_preview_badge_TTYi3e": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "custom_liquid_B4CXFg": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% comment %}\n  Premium badges (Custom Liquid safe)\n  - Truck: gentle glide + suspension bob (no wheels)\n  - UPDATED COPY: \"FREE SHIPPING ON ORDERS OVER £25+ - SAME DAY DISPATCH\"\n  - UPDATED COPY: \"FREE SAMPLE WITH A 50ML PURCHASE\"\n  - SALE row fixed to start text right after the icon (left-aligned)\n  - Hidden on product handle: tropical-kirkee-copy\n{% endcomment %}\n\n{%- comment -%}\n  Optional scalable approach for multiple exclusions:\n  {% liquid\n    assign excluded_handles = \"tropical-kirkee-copy|another-handle|third-handle\" | split: \"|\"\n  %}\n  {% unless product and excluded_handles contains product.handle %}\n    ...badges block...\n  {% endunless %}\n{%- endcomment -%}\n\n{% unless product and product.handle == 'tropical-kirkee-copy' %}\n\n{% assign threshold = 10 %}\n{% assign drive_duration_s = 2.8 %}\n{% assign bob_duration_s  = 3.2 %}\n\n{%- comment -%} Controls {%- endcomment -%}\n{% assign show_minimum = true %}\n{% assign minimum_amount = 25 %}\n\n{%- comment -%} Detect selected variant (for stock only) {%- endcomment -%}\n{% assign v = nil %}\n{% if product %}\n  {% if product.selected_or_first_available_variant %}\n    {% assign v = product.selected_or_first_available_variant %}\n  {% elsif product.variants and product.variants.first %}\n    {% assign v = product.variants.first %}\n  {% endif %}\n{% endif %}\n\n{% assign qty = blank %}\n{% if v %}\n  {% assign qty = v.inventory_quantity %}\n{% endif %}\n\n{% assign show_qty = false %}\n{% if qty and qty > 0 and qty <= threshold %}\n  {% assign show_qty = true %}\n{% endif %}\n\n<style>\n  .as-badges{\n    --pad:12px; --radius:14px; --shadow:0 8px 22px rgba(0,0,0,.06);\n    --bg:#fff; --txt:#0b0b0b; --muted:#6b7280;\n    --ok:#10b981; --ok-deep:#065f46;\n    --blue:#3b82f6;\n    --sale:#f59e0b;\n    --br:#e5e7eb;\n    --drive: {{ drive_duration_s }}s;\n    --bob:   {{ bob_duration_s }}s;\n    --spray: 2.6s;\n    --iconW:34px;\n    --gap:10px;\n    display:grid; gap:10px;\n  }\n  .as-line{\n    display:flex; align-items:center; gap:var(--gap);\n    padding:var(--pad); border-radius:var(--radius);\n    background:var(--bg); border:1px solid var(--br); box-shadow:var(--shadow);\n    position: relative; overflow: hidden;\n    text-align:left;\n  }\n  .as-text{\n    font-weight:800; letter-spacing:-.01em; color:var(--txt);\n    font-size:clamp(14px,1.6vw,16px); line-height:1.2; margin:0;\n  }\n\n  /* Shipping (truck) */\n  .as-ship{ border-color: rgba(16,185,129,.28); }\n  .as-truck{\n    position:relative; display:inline-flex; align-items:center; justify-content:center;\n    width:var(--iconW); height:24px; color:var(--ok-deep);\n    animation: as-drive var(--drive) ease-in-out infinite alternate;\n    flex:0 0 var(--iconW);\n  }\n  @keyframes as-drive{ 0%{ transform:translateX(0)} 100%{ transform:translateX(4px)} }\n  .as-truck-svg{ width:var(--iconW); height:24px; display:block; animation: as-bob var(--bob) ease-in-out infinite; }\n  @keyframes as-bob{ 0%,100%{ transform:translateY(0)} 50%{ transform:translateY(-1.2px)} }\n\n  .as-streak{\n    position:absolute; left:-8px; top:50%; height:2px; width:12px; background:currentColor;\n    border-radius:2px; opacity:.35; transform:translateY(-50%);\n    animation:as-streak 1.6s linear infinite;\n  }\n  .as-streak.s2{ left:-14px; width:9px; animation-delay:.25s; opacity:.25; }\n  .as-streak.s3{ left:-19px; width:7px; animation-delay:.5s; opacity:.2; }\n  @keyframes as-streak{ 0%{ transform:translate(-2px,-50%); opacity:.35 } 100%{ transform:translate(-16px,-50%); opacity:0 } }\n\n  /* Sample (bottle + spray) */\n  .as-sample{ border-color: color-mix(in srgb, var(--blue) 28%, transparent); }\n  .as-perfume{\n    width:var(--iconW); height:24px; color:var(--blue);\n    display:inline-flex; align-items:center; justify-content:center; flex:0 0 var(--iconW);\n  }\n  .as-perfume svg{ width:var(--iconW); height:24px; display:block; }\n  .spray path, .spray circle{ fill:currentColor; stroke:none; opacity:.0; }\n  .spray .arc1 > circle{ animation: as-spray var(--spray) ease-out infinite; }\n  .spray .arc2 > circle{ animation: as-spray var(--spray) ease-out infinite .15s; }\n  .spray .arc3 > circle{ animation: as-spray var(--spray) ease-out infinite .3s; }\n  @keyframes as-spray{\n    0%   { transform: translateX(0) translateY(0) scale(.85); opacity: 0; }\n    18%  { transform: translateX(2px) translateY(-.3px) scale(.95); opacity: .55; }\n    60%  { transform: translateX(6px) translateY(-.6px) scale(1.05); opacity: .28; }\n    100% { transform: translateX(10px) translateY(-1px) scale(1.1);  opacity: 0; }\n  }\n\n  /* SALE badge */\n  .as-sale{ border-color: color-mix(in srgb, var(--sale) 28%, transparent); }\n\n  /* 🔧 HARD FIX: force icon + text flush-left using grid */\n  .as-line.as-sale{\n    display:grid;\n    grid-template-columns: var(--iconW) 1fr;\n    align-items:center;\n    column-gap: var(--gap);\n  }\n  .as-line.as-sale .as-tag{ grid-column:1; }\n  .as-line.as-sale .as-text{\n    grid-column:2;\n    text-align:center !important; /* fixed */\n    margin:0 !important;\n  }\n\n  .as-tag{\n    width:var(--iconW); height:24px; color:var(--sale);\n    display:inline-flex; align-items:center; justify-content:center;\n    animation: as-bob var(--bob) ease-in-out infinite;\n  }\n  .as-tag svg{ width:var(--iconW); height:24px; display:block; }\n\n  /* Floating currency accents (decorative) */\n  .as-currencies{\n    position:absolute; inset:0; pointer-events:none;\n  }\n  .as-currencies .coin{\n    position:absolute; font-weight:800; opacity:.18;\n    font-size:14px; line-height:1; user-select:none;\n    animation: coin-drift 4.8s ease-in-out infinite;\n    will-change: transform, opacity;\n  }\n  .coin.c1{ left:8%;  top:8%;  animation-delay:.0s }\n  .coin.c2{ left:78%; top:12%; animation-delay:.6s }\n  .coin.c3{ left:22%; top:60%; animation-delay:1.2s }\n  .coin.c4{ left:64%; top:68%; animation-delay:1.8s }\n  .coin.c5{ left:44%; top:24%; animation-delay:2.4s }\n  .coin.c6{ left:90%; top:42%; animation-delay:3.0s }\n  @keyframes coin-drift{\n    0%   { transform: translateY(0) translateX(0) rotate(0deg);   opacity:.14; }\n    50%  { transform: translateY(-6px) translateX(4px) rotate(10deg); opacity:.24; }\n    100% { transform: translateY(0) translateX(0) rotate(0deg);   opacity:.14; }\n  }\n\n  /* Motion accessibility */\n  @media (prefers-reduced-motion: reduce){\n    .as-truck, .as-truck-svg, .as-streak, .spray circle, .as-tag, .as-currencies .coin{\n      animation:none !important; opacity:1 !important;\n    }\n  }\n</style>\n\n<div class=\"as-badges\" aria-label=\"Product highlights\">\n  <!-- Shipping / dispatch -->\n  <div class=\"as-line as-ship\">\n    <span class=\"as-truck\" aria-hidden=\"true\">\n      <svg class=\"as-truck-svg\" viewBox=\"0 0 64 44\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n        <rect x=\"4\" y=\"12\" width=\"36\" height=\"18\" rx=\"3\"></rect>\n        <path d=\"M40 18h10l8 7v5H40z\"></path>\n        <rect x=\"45\" y=\"19\" width=\"6\" height=\"5\" rx=\"1\"></rect>\n        <path d=\"M7 30h9\"></path>\n      </svg>\n      <span class=\"as-streak\"></span>\n      <span class=\"as-streak s2\"></span>\n      <span class=\"as-streak s3\"></span>\n    </span>\n    <span class=\"as-text\">\n      {% if show_minimum %}\n        <b>FREE SHIPPING</b> ON ORDERS OVER £{{ minimum_amount }} · <b>SAME DAY</b> DISPATCH\n      {% else %}\n        <b>SAME DAY</b> DISPATCH\n      {% endif %}\n    </span>\n  </div>\n\n  <!-- Free sample -->\n  <div class=\"as-line as-sample\">\n    <span class=\"as-perfume\" aria-hidden=\"true\">\n      <svg viewBox=\"0 0 64 44\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">\n        <path d=\"M12 19 q0-4 4-4h12q4 0 4 4v10 q0 4-4 4H16q-4 0-4-4Z\"></path>\n        <rect x=\"20\" y=\"14\" width=\"8\" height=\"5\" rx=\"2\"></rect>\n        <rect x=\"18\" y=\"9\" width=\"12\" height=\"5\" rx=\"1.5\"></rect>\n        <path d=\"M19 9h10\"></path>\n        <path d=\"M28 15 L35 13\"></path>\n        <circle cx=\"36\" cy=\"12.8\" r=\"1.2\" fill=\"currentColor\" stroke=\"none\"></circle>\n        <rect x=\"18\" y=\"22\" width=\"12\" height=\"6\" rx=\"2\"></rect>\n        <g class=\"spray\" transform=\"translate(36,12)\">\n          <g class=\"arc1\">\n            <circle cx=\"4.5\" cy=\"-0.3\" r=\"1.2\"></circle>\n            <circle cx=\"7.5\" cy=\"-0.5\" r=\"1.0\"></circle>\n            <circle cx=\"10.5\" cy=\"-0.8\" r=\"0.9\"></circle>\n          </g>\n          <g class=\"arc2\">\n            <circle cx=\"4.0\" cy=\"1.0\" r=\"1.1\"></circle>\n            <circle cx=\"7.0\" cy=\"0.8\" r=\"0.95\"></circle>\n            <circle cx=\"10.0\" cy=\"0.5\" r=\"0.85\"></circle>\n          </g>\n          <g class=\"arc3\">\n            <circle cx=\"4.2\" cy=\"2.0\" r=\"1.0\"></circle>\n            <circle cx=\"7.2\" cy=\"1.7\" r=\"0.9\"></circle>\n            <circle cx=\"10.2\" cy=\"1.3\" r=\"0.8\"></circle>\n          </g>\n        </g>\n      </svg>\n    </span>\n    <span class=\"as-text\">\n      <b>FREE SAMPLE</b> WITH A 50ML PURCHASE\n    </span>\n  </div>\n\n  <!-- End of Summer SALE -->\n  <div class=\"as-line as-sale\" aria-label=\"Seasonal promotion\">\n    <span class=\"as-tag\" aria-hidden=\"true\">\n      <svg viewBox=\"0 0 64 44\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n        <path d=\"M18 26 L30 14 q2-2 4 0 l8 8 q2 2 0 4 l-12 12 q-2 2-4 0 l-8-8 q-2-2 0-4 Z\"></path>\n        <circle cx=\"26\" cy=\"22\" r=\"2.4\"></circle>\n        <path d=\"M35 19 l-10 10\"></path>\n        <circle cx=\"37.5\" cy=\"25.5\" r=\"2.4\"></circle>\n      </svg>\n    </span>\n\n    <span class=\"as-text\">\n      <b>END OF SUMMER SALE: 20% OFF CODE AUTO-APPLIED AT CHECKOUT</b>\n    </span>\n\n    <!-- decorative currencies -->\n    <span class=\"as-currencies\" aria-hidden=\"true\">\n      <span class=\"coin c1\">£</span>\n      <span class=\"coin c2\">€</span>\n      <span class=\"coin c3\">$</span>\n      <span class=\"coin c4\">£</span>\n      <span class=\"coin c5\">€</span>\n      <span class=\"coin c6\">$</span>\n    </span>\n  </div>\n</div>\n\n{% endunless %}"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "custom_liquid_dxteDL": {
+          "type": "custom_liquid",
+          "disabled": true,
+          "settings": {
+            "custom_liquid": "{% if product and product.handle == 'tropical-kirkee-copy' %}\n{%- comment -%}\n  Custom Liquid: Collection Scent Picker (names only, no prices)\n  - Runs only on product handle: tropical-kirkee-copy\n  - Uses page's existing Add to cart form (no extra CTA)\n  - Adds selected scents as separate line items\n  - Also writes selected names as properties on the main product line\n{%- endcomment -%}\n\n{%- assign collection_handle = 'extrait-sprays' -%}\n{%- assign slot_count       = 5 -%}        {%- comment -%} how many slots (1–10 recommended) {%- endcomment -%}\n{%- assign label_prefix     = 'Sample' -%} {%- comment -%} use 'Bottle' for Bottle 1/2/3… {%- endcomment -%}\n{%- assign allow_duplicates = true -%}     {%- comment -%} false = force unique selections {%- endcomment -%}\n{%- assign show_thumbs      = false -%}    {%- comment -%} true = small image chip per slot {%- endcomment -%}\n\n{%- assign sp_uid = 'sp-' | append: request.path | replace: '/', '-' | replace: '.', '-' -%}\n{%- assign col = collections[collection_handle] -%}\n\n{%- comment -%} Build one reusable <option> list from collection (available variants only), names only. {%- endcomment -%}\n{%- capture options_html -%}\n  <option value=\"\">Select a scent…</option>\n  {%- if col and col.products_count > 0 -%}\n    {%- for p in col.products -%}\n      {%- assign fav = p.first_available_variant -%}\n      {%- if fav -%}\n        <option\n          value=\"{{ fav.id }}\"\n          data-title=\"{{ p.title | escape }}\"\n          data-image=\"{{ p.featured_image | img_url: '160x160', crop: 'center' }}\"\n        >{{ p.title }}</option>\n      {%- endif -%}\n    {%- endfor -%}\n  {%- endif -%}\n{%- endcapture -%}\n\n<style>\n  #{{ sp_uid }}{\n    --ink:#111; --muted:#6b7280; --bg:#fff; --br:#e5e7eb; --pill:#f9fafb;\n    font-family:-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif;\n  }\n  #{{ sp_uid }} .sp-wrap{ max-width:900px; margin:0 auto; padding:12px 16px; }\n  #{{ sp_uid }} .sp-head{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:10px; }\n  #{{ sp_uid }} .sp-title{ font-weight:800; font-size:clamp(18px,2.6vw,22px); color:var(--ink); margin:0; }\n  #{{ sp_uid }} .sp-sub{ color:var(--muted); font-size:14px; margin:0; }\n\n  #{{ sp_uid }} .sp-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }\n  @media (max-width:700px){ #{{ sp_uid }} .sp-grid{ grid-template-columns:1fr; } }\n\n  #{{ sp_uid }} .sp-slot{\n    background:var(--bg); border:1px solid var(--br); border-radius:14px; padding:10px;\n    display:grid; gap:8px;\n  }\n  #{{ sp_uid }} .sp-label{ font-size:12px; font-weight:700; text-transform:uppercase; color:var(--muted); }\n  #{{ sp_uid }} .sp-row{ display:flex; align-items:center; gap:10px; }\n  #{{ sp_uid }} .sp-select{\n    width:100%; padding:10px 12px; border-radius:12px; background:var(--pill); border:1px solid var(--br);\n    font-size:15px; color:var(--ink);\n  }\n  #{{ sp_uid }} .sp-msg{ font-size:13px; color:var(--muted); margin-top:10px; }\n  #{{ sp_uid }} .sp-msg.--ok{ color:#10b981; }\n  #{{ sp_uid }} .sp-msg.--err{ color:#ef4444; }\n</style>\n\n<div id=\"{{ sp_uid }}\">\n  <div class=\"sp-wrap\" data-allow-dupes=\"{{ allow_duplicates }}\">\n    <div class=\"sp-head\">\n      <h3 class=\"sp-title\">Build Your Sample Pack</h3>\n      <p class=\"sp-sub\">Pick your favourite scents from the collection</p>\n    </div>\n\n    {% if col and col.products_count > 0 %}\n      <div class=\"sp-grid\">\n        {%- for i in (1..slot_count) -%}\n          <div class=\"sp-slot\">\n            <div class=\"sp-label\">{{ label_prefix }} {{ i }}</div>\n            <div class=\"sp-row\">\n              {% if show_thumbs %}<div class=\"sp-thumb\"><img alt=\"\"></div>{% endif %}\n              <select class=\"sp-select\" aria-label=\"{{ label_prefix }} {{ i }}\">\n                {{ options_html }}\n              </select>\n            </div>\n          </div>\n        {%- endfor -%}\n      </div>\n      <div class=\"sp-msg\"></div>\n    {% else %}\n      <p class=\"sp-msg --err\">No products found in {{ collection_handle }}</p>\n    {% endif %}\n  </div>\n</div>\n\n<script>\n(() => {\n  const root = document.getElementById('{{ sp_uid }}');\n  if (!root) return;\n\n  // Find the product Add to cart form on this PDP\n  const productForm = document.querySelector('form[action*=\"/cart/add\"]');\n  const allowDupes = root.querySelector('.sp-wrap')?.dataset.allowDupes === 'true';\n  const selects = [...root.querySelectorAll('.sp-select')];\n\n  // Prepare hidden property inputs on the main product form (mirror selected names)\n  if (productForm) {\n    // Pass config to JS\n    root.dataset.slotCount = '{{ slot_count }}';\n    root.dataset.labelPrefix = '{{ label_prefix }}';\n\n    const slotCount = parseInt(root.dataset.slotCount || '0', 10);\n    const labelPrefix = root.dataset.labelPrefix || 'Sample';\n\n    for (let i = 1; i <= slotCount; i++) {\n      const input = document.createElement('input');\n      input.type = 'hidden';\n      input.name = `properties[${labelPrefix} ${i}]`;\n      input.value = '';\n      input.dataset.sampleProp = String(i);\n      productForm.appendChild(input);\n    }\n  }\n\n  const updatePropsFromSelects = () => {\n    if (!productForm) return;\n    selects.forEach((sel, idx) => {\n      const input = productForm.querySelector(`input[data-sample-prop=\"${idx+1}\"]`);\n      if (!input) return;\n      const opt = sel.selectedOptions && sel.selectedOptions[0];\n      input.value = (opt && opt.value) ? (opt.dataset.title || opt.textContent.trim()) : '';\n    });\n  };\n\n  const currentSelections = () => selects.map(s => s.value).filter(Boolean);\n\n  const refresh = () => {\n    // Prevent duplicates if not allowed\n    if (!allowDupes) {\n      const chosen = new Set(currentSelections());\n      selects.forEach(sel => {\n        [...sel.options].forEach(o => {\n          if (!o.value) return;\n          o.disabled = (chosen.has(o.value) && sel.value !== o.value);\n        });\n      });\n    }\n    // Keep properties synced as user picks\n    updatePropsFromSelects();\n  };\n\n  root.addEventListener('change', (e) => {\n    if (e.target.classList.contains('sp-select')) refresh();\n  });\n  refresh();\n\n  // Intercept the ATC to add selected scents as their own line items, then submit the main form\n  if (productForm && !productForm.dataset.scentHooked) {\n    productForm.dataset.scentHooked = 'true';\n\n    productForm.addEventListener('submit', async (ev) => {\n      const ids = currentSelections().map(id => Number(id)).filter(Boolean);\n\n      // Ensure properties reflect final choices\n      updatePropsFromSelects();\n\n      if (!ids.length) return; // no picks; continue normal flow\n\n      try {\n        ev.preventDefault();\n        // Add all selected variants as separate line items (quantity 1 each)\n        await fetch('/cart/add.js', {\n          method: 'POST',\n          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },\n          body: JSON.stringify({ items: ids.map(id => ({ id, quantity: 1 })) })\n        });\n\n        // Now submit the native form to add the main product (with properties)\n        productForm.submit();\n      } catch (e) {\n        // On failure, still submit the main product so customer proceeds\n        productForm.submit();\n      }\n    }, { capture: true });\n  }\n})();\n</script>\n{% endif %}"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "custom_liquid_KeLkxx": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n  .pay-btn{\n    display:inline-flex;\n    align-items:center;\n    justify-content:center;\n    gap:4px;\n\n    /* 🚫 No top padding (and no padding anywhere) */\n    padding:0 !important;\n    padding-block:0 !important; /* handles logical top/bottom */\n    margin:0 !important;\n\n    background:transparent !important;\n    border:0 !important;\n    box-shadow:none !important;\n    outline:none !important;\n    appearance:none !important;\n    -webkit-appearance:none !important;\n\n    line-height:1;\n    vertical-align:top;\n    min-height:0;\n    height:auto;\n  }\n  .pay-btn:hover{ background:transparent !important; }\n\n  .pay-btn .icons{\n    display:inline-flex;\n    align-items:center;\n    gap:4px;\n    padding:0;\n    margin:0;\n  }\n  .pay-btn .icons .icon-svg,\n  .pay-btn .icons svg{\n    height:20px !important;\n    width:auto !important;\n    display:block;\n    margin:0;\n    padding:0;\n  }\n</style>\n\n<button type=\"button\" class=\"pay-btn\" aria-label=\"Accepted payment methods\">\n  <span class=\"icons\">\n    {{ 'visa'             | payment_type_svg_tag: class: 'icon-svg' }}\n    {{ 'master'           | payment_type_svg_tag: class: 'icon-svg' }}\n    {{ 'apple_pay'        | payment_type_svg_tag: class: 'icon-svg' }}\n    {{ 'paypal'           | payment_type_svg_tag: class: 'icon-svg' }}\n    {{ 'shopify_pay'      | payment_type_svg_tag: class: 'icon-svg' }}\n    {{ 'google_pay'       | payment_type_svg_tag: class: 'icon-svg' }}\n    {{ 'klarna'           | payment_type_svg_tag: class: 'icon-svg' }}\n    {{ 'diners_club'      | payment_type_svg_tag: class: 'icon-svg' }}\n    {{ 'american_express' | payment_type_svg_tag: class: 'icon-svg' }}\n    {{ 'discover'         | payment_type_svg_tag: class: 'icon-svg' }}\n  </span>\n</button>"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        },
+        "collapsible_tab_nw9KQd": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Comparative Advertising Disclaimer",
+            "icon": "none",
+            "content": "<h5>Please be advised that the items listed on our website are only examples and should under no circumstances be construed to represent the actual high street, designer, or niche brand. Used or unused, trademarks and copyrights belong to the companies that created them. To be clear, they aren't ‘exactly’ or ‘identical’ like any other fragrances or originals, they are simply inspirations. To avoid any misunderstanding, Exclusive-Scents do not represent the actual brand, and we have no connection to any of the unidentified designer brand names mentioned above.It is the responsibility of the respective owners of all trademarks, whether they are utilised or not, to ensure that they are protected. Trademark holders cited or not referenced herein are not associated with, maintained, authorised, or sponsored by us. The use of any product name is strictly for identification and reference reasons and does not indicate any affiliation with the trademark holder.</h5>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "judge_me_reviews_preview_badge_TTYi3e",
+        "price",
+        "custom_liquid_B4CXFg",
+        "variant_picker",
+        "quantity_selector",
+        "custom_liquid_dxteDL",
+        "buy_buttons",
+        "custom_liquid_KeLkxx",
+        "description",
+        "share",
+        "collapsible_tab_nw9KQd"
+      ],
+      "settings": {
+        "enable_sticky_info": false,
+        "color_scheme": "scheme-1",
+        "media_size": "small",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "none",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 0,
+        "padding_bottom": 40
+      }
+    },
+    "samplesection_fmFe4J": {
+      "type": "samplesection",
+      "name": "Sample Bundle + 50ml Carousel",
+      "settings": {
+        "heading": "Unsure which 50ml to purchase?",
+        "subheading": "Try five 2ml samples and discover your favourite.",
+        "banner_title": "Sample Bundle",
+        "banner_text": "Build your own discovery set with any five fragrances in 2ml vials.",
+        "banner_cta": "Build your 5 x 2ml set",
+        "cta_link": "shopify://products/build-your-own-discovery-set-5-x-2ml-sprays",
+        "bundle_handle": "build-your-own-discovery-set-5x2ml",
+        "collection": "extrait-sprays",
+        "filter_mode": "title",
+        "filter_value": "",
+        "show_price": false,
+        "autoplay": true,
+        "autoplay_ms": 3500,
+        "color_scheme": "",
+        "accent": "#111111"
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 20,
+        "padding_bottom": 0
+      }
+    },
+    "tiktokreviews_NNez8r": {
+      "type": "Tiktokreviews",
+      "blocks": {
+        "slide_MGyjTP": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5521.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_hLVhGc": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5542.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_k7TU3b": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5540.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_RyF8TA": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5543.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_AnyHx6": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5523.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_L4ViQn": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5536.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_n7aYey": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5524.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_CTTxKa": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5543_2.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_tfy86C": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5527.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_QzE9dR": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5529.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_zrQXxt": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5548.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_Vr6ReR": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5525.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_XdDAy6": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5531.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_KyiBrx": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5539_2.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_k9EcnG": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5522.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_pgaaVp": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5541_2.jpg",
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_Dtypjh": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_CmY7kT": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_bJaRxm": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_rJbpVB": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        },
+        "slide_HfApVJ": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "alt": "Customer review screenshot",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_MGyjTP",
+        "slide_hLVhGc",
+        "slide_k7TU3b",
+        "slide_RyF8TA",
+        "slide_AnyHx6",
+        "slide_L4ViQn",
+        "slide_n7aYey",
+        "slide_CTTxKa",
+        "slide_tfy86C",
+        "slide_QzE9dR",
+        "slide_zrQXxt",
+        "slide_Vr6ReR",
+        "slide_XdDAy6",
+        "slide_KyiBrx",
+        "slide_k9EcnG",
+        "slide_pgaaVp",
+        "slide_Dtypjh",
+        "slide_CmY7kT",
+        "slide_bJaRxm",
+        "slide_rJbpVB",
+        "slide_HfApVJ"
+      ],
+      "name": "TikTok Reviews Slideshow",
+      "settings": {
+        "title": "TikTok Shop Reviews",
+        "show_stars": true,
+        "star_copy": "100+ Reviews",
+        "max_height": "380",
+        "gap": "12",
+        "radius": "14",
+        "shadow": "0 6px 18px rgba(0,0,0,.06)"
+      }
+    },
+    "1753193282b23ee83d": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_9GKcAH": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_9GKcAH"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "samplesection_fmFe4J",
+    "related-products",
+    "tiktokreviews_NNez8r",
+    "1753193282b23ee83d"
+  ]
+}

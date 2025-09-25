@@ -9,9 +9,9 @@
  */
 {
   "current": {
-    "logo": "shopify://shop_images/Exclusive_Scents_Fragrances_Logo.png",
-    "logo_width": 150,
-    "favicon": "shopify://shop_images/exclusive-scents-favicon.png",
+    "logo": "shopify://shop_images/Screenshot_20250821_084117_Gallery_a96046d1-b970-4cfe-903d-ac27ca72ae7c.jpg",
+    "logo_width": 300,
+    "favicon": "shopify://shop_images/Dark_Color-7_9656722f-ddd5-4d48-9a08-c2c84e60681c.png",
     "type_header_font": "shantell_sans_n4",
     "heading_scale": 115,
     "type_body_font": "red_hat_display_n4",
@@ -154,11 +154,6 @@
           "custom_js": ""
         }
       },
-      "1513253815146976218": {
-        "type": "shopify://apps/omnisend-email-marketing-sms/blocks/app-embed/44704aa2-794f-4c5d-8c8e-039c841158e9",
-        "disabled": false,
-        "settings": {}
-      },
       "14060646107696862457": {
         "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
         "disabled": false,
@@ -184,6 +179,26 @@
         "settings": {
           "position": "right"
         }
+      },
+      "13768625480086291342": {
+        "type": "shopify://apps/forms/blocks/forms/8744a304-fcb1-4347-b211-bb6b4759a76a",
+        "disabled": false,
+        "settings": {}
+      },
+      "18408366429334172745": {
+        "type": "shopify://apps/pop-convert-pop-ups-banners/blocks/app-embed/ed587aec-4936-43ae-a1b3-1c9e0d08f185",
+        "disabled": false,
+        "settings": {}
+      },
+      "14952540001915115444": {
+        "type": "shopify://apps/upcart-cart-drawer/blocks/app-embed/af3da5fb-f5f7-40ec-8273-41bf50059d4b",
+        "disabled": false,
+        "settings": {}
+      },
+      "316487575649303945": {
+        "type": "shopify://apps/easify-options/blocks/app-embed-block/d2288b18-c1ba-42f5-b3b3-26c75c8820bf",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
@@ -224,7 +239,7 @@
         "settings": {
           "background": "#000000",
           "background_gradient": "",
-          "text": "#ffffff",
+          "text": "#faf300",
           "button": "#ffffff",
           "button_label": "#ffffff",
           "secondary_button_label": "#ffffff",
