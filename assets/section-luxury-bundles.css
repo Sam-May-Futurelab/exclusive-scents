@@ -96,28 +96,6 @@
   z-index: 1;
 }
 
-/* Split layout: first card left, two stacked cards on the right */
-.luxury-bundles__grid--split {
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 3rem;
-}
-
-.luxury-bundles__col--right {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  gap: 3rem;
-}
-
-@media (max-width: 990px) {
-  .luxury-bundles__grid--split {
-    grid-template-columns: 1fr;
-  }
-  .luxury-bundles__col--right {
-    grid-template-rows: none;
-    grid-auto-rows: auto;
-  }
-}
-
 .luxury-bundle-card {
   position: relative;
   height: 100%;
