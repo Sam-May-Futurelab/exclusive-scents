@@ -11,6 +11,7 @@
   "sections": {
     "luxury_hero_main": {
       "type": "luxury-hero",
+      "custom_css": [],
       "settings": {
         "image": "shopify://shop_images/Designer_inspired_scents_at_prices_you_ll_love._6.png",
         "overlay_opacity": 30,
@@ -39,7 +40,7 @@
             "features": "5 x 2ml Samples, Long Lasting Formula, Great Way To Try, Perfect for Discovery",
             "original_price": "",
             "sale_price": "",
-            "discount": "5x2ml Sample bundle for £12.99 Free Shipping",
+            "discount": "5 x 2ml Sample bundle for £12.99",
             "button_label": "Sample bundle",
             "button_link": "shopify://products/tropical-kirkee-copy"
           }
