@@ -57,18 +57,6 @@
     },
     "announcement_bar_gFGELc": {
       "type": "announcement-bar",
-      "blocks": {
-        "announcement_UUctAA": {
-          "type": "announcement",
-          "settings": {
-            "text": "END OF SUMMER SALE 20% OFF YOUR ENTIRE CART",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "announcement_UUctAA"
-      ],
       "custom_css": [],
       "name": "t:sections.announcement-bar.presets.name",
       "settings": {
