@@ -99,7 +99,7 @@
       "type": "headstatic",
       "name": "Static Announcement Bar",
       "settings": {
-        "message": "20% OFF Early Black Friday",
+        "message": "20% OFF Early Black Friday sale",
         "link": "",
         "link_new_tab": false,
         "full_width": true,
