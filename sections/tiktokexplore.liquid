@@ -107,11 +107,7 @@
   /* GOLD GRADIENT (ADDED) */
   .announcement-bar {
     background: linear-gradient(135deg,
-      #C9B037 0%,
-      #E6D365 25%,
-      #F4E67B 50%,
-      #E6D365 75%,
-      #C9B037 100%
+QQ
     ) !important;
     background-attachment: fixed;
   }
@@ -123,19 +119,24 @@
       {% for i in (1..70) %}
         {% assign mod = i | modulo: 3 %}
         {% if mod == 1 %}
-          <div class="announcement-item"><span class="emoji" aria-hidden="true">📦 </span> FREE SHIPPING (UK) ON ORDERS OVER £50</div>
+          <div class="announcement-item"><span class="emoji" aria-hidden="true">🚚</span> FREE SHIPPING (UK) ON ORDERS OVER £50</div>
         {% elsif mod == 2 %}
-          <div class="announcement-item"><span class="emoji" aria-hidden="true">🎁</span> FREE SAMPLE WITH EVERY PURCHASE</div>
+          <div class="announcement-item"><span class="emoji" aria-hidden="true">✨</span> FREE SAMPLE WITH EVERY PURCHASE</div>
+        {% else %}
+          <div class="announcement-item"><span class="emoji" aria-hidden="true">🛍️</span> EARLY BLACK FRIDAY — 20% OFF SALE</div>
         {% endif %}
       {% endfor %}
     </div>
+
     <div class="announcement-track">
       {% for i in (1..70) %}
         {% assign mod = i | modulo: 3 %}
         {% if mod == 1 %}
-          <div class="announcement-item"><span class="emoji" aria-hidden="true">📦 </span> FREE SHIPPING (UK) ON ORDERS OVER £50</div>
+          <div class="announcement-item"><span class="emoji" aria-hidden="true">🚚</span> FREE SHIPPING (UK) ON ORDERS OVER £50</div>
         {% elsif mod == 2 %}
-          <div class="announcement-item"><span class="emoji" aria-hidden="true">🎁</span> FREE SAMPLE WITH EVERY PURCHASE</div>
+          <div class="announcement-item"><span class="emoji" aria-hidden="true">✨</span> FREE SAMPLE WITH EVERY PURCHASE</div>
+        {% else %}
+          <div class="announcement-item"><span class="emoji" aria-hidden="true">🛍️</span> EARLY BLACK FRIDAY — 20% OFF SALE</div>
         {% endif %}
       {% endfor %}
     </div>
