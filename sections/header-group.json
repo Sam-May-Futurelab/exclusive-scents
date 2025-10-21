@@ -11,6 +11,32 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
+    "announcement_bar_c8mcDB": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_b4M6kJ": {
+          "type": "announcement",
+          "settings": {
+            "text": "Welcome to our store",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement_b4M6kJ"
+      ],
+      "disabled": true,
+      "name": "t:sections.announcement-bar.presets.name",
+      "settings": {
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "color_scheme": "scheme-3",
+        "show_line_separator": true,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
+    },
     "tiktokexplore_WGjkKW": {
       "type": "tiktokexplore",
       "name": "Promo Ticker",
@@ -68,12 +94,36 @@
         "enable_country_selector": false,
         "enable_language_selector": false
       }
+    },
+    "headstatic_x4AtHG": {
+      "type": "headstatic",
+      "name": "Static Announcement Bar",
+      "settings": {
+        "message": "20% OFF Early Black Friday",
+        "link": "",
+        "link_new_tab": false,
+        "full_width": true,
+        "content_max_width": 1200,
+        "bar_height": 48,
+        "alignment": "center",
+        "sticky": false,
+        "font_size": 19,
+        "font_size_mobile": 13,
+        "font_weight": 800,
+        "letter_spacing": 0.2,
+        "text_align": "center",
+        "uppercase": true,
+        "bg": "#000000",
+        "text_color": "#ffffff"
+      }
     }
   },
   "order": [
+    "announcement_bar_c8mcDB",
     "tiktokexplore_WGjkKW",
     "header",
     "announcement_bar_D6Yf3D",
-    "announcement_bar_gFGELc"
+    "announcement_bar_gFGELc",
+    "headstatic_x4AtHG"
   ]
 }
