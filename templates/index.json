@@ -68,7 +68,7 @@
             "features": "3 x 50ml Extrait Sprays, Premium Concentration, Designer Inspired",
             "original_price": "",
             "sale_price": "",
-            "discount": "3 x 50ml Extrait Sprays For £79.99 Free Shipping",
+            "discount": "3 x 50ml Extrait Sprays For £89.99 Free Shipping",
             "button_label": "Shop 50ml Bundle",
             "button_link": "https://www.exclusive-scents.co.uk/products/50ml-extrait-spray-bundle"
           }
@@ -263,17 +263,6 @@
     },
     "17501054157be840f6": {
       "type": "apps",
-      "blocks": {
-        "judge_me_reviews_featured_carousel_Q93486": {
-          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "maxwidth": 1080
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_featured_carousel_Q93486"
-      ],
       "settings": {
         "include_margins": true
       }
