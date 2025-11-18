@@ -40,9 +40,9 @@
             "features": "5 x 2ml Samples, Long Lasting Formula, Great Way To Try, Perfect for Discovery",
             "original_price": "",
             "sale_price": "",
-            "discount": "Add 5 x 2ml Samples To Your Cart To Automatically Get 30% Off",
+            "discount": "Add 5 or more 2ml Samples To Your Cart To Automatically Get 30% Off",
             "button_label": "",
-            "button_link": "shopify://products/tropical-kirkee-copy"
+            "button_link": ""
           }
         },
         "bundle_15ml": {
@@ -54,7 +54,7 @@
             "features": "3 x 15ml Extrait Sprays, Premium Concentration, Designer Inspired",
             "original_price": "",
             "sale_price": "",
-            "discount": "Add 3 x 15ml Sprays To Your Cart To Automatically Get 20% Off",
+            "discount": "Add 3 or more 15ml Sprays To Your Cart To Automatically Get 20% Off",
             "button_label": "",
             "button_link": "https://www.exclusive-scents.co.uk/products/15ml-extrait-spray-bundle"
           }
@@ -68,7 +68,7 @@
             "features": "3 x 50ml Extrait Sprays, Premium Concentration, Designer Inspired",
             "original_price": "",
             "sale_price": "",
-            "discount": "Add 3 x 50ml sprays to your cart to automatically get 10% off",
+            "discount": "Add 3 or more 50ml sprays to your cart to automatically get 10% off",
             "button_label": "",
             "button_link": ""
           }
