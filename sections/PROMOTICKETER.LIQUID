@@ -1,0 +1,103 @@
+<section id="pt-{{ section.id }}" role="region" aria-label="{{ section.settings.aria_label | escape }}">
+  {%- assign block_count = section.blocks.size | default: 0 -%}
+  {%- assign target = section.settings.target_min_items | default: 90 -%}
+  {%- if block_count == 0 -%}{%- assign block_count = 1 -%}{%- endif -%}
+  {%- assign base_loops = target | divided_by: block_count -%}
+  {%- assign remainder  = target | modulo: block_count -%}
+  {%- if remainder > 0 -%}{%- assign loops_needed = base_loops | plus: 1 -%}{%- else -%}{%- assign loops_needed = base_loops -%}{%- endif -%}
+
+  <style>
+    #pt-{{ section.id }}{
+      --bg: {{ section.settings.bg_color }};
+      --ink: {{ section.settings.text_color }};
+      --gap: {{ section.settings.item_gap }}rem;
+      --dur: {{ section.settings.scroll_duration }}s;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+      background: var(--bg);
+      color: var(--ink);
+    }
+    #pt-{{ section.id }} .pt-bar{
+      height: {{ section.settings.bar_height }}px;
+      display:flex; align-items:center; overflow:hidden; width:100%;
+      font-weight: {{ section.settings.font_weight }};
+      letter-spacing:.04em; font-size: {{ section.settings.font_size }}px;
+      -webkit-font-smoothing:antialiased;
+      {% if section.settings.uppercase %}text-transform:uppercase;{% endif %}
+    }
+    #pt-{{ section.id }} .pt-wrap{
+      display:flex; width:max-content; direction:rtl;
+      animation: pt-scroll-{{ section.id }} var(--dur) linear infinite;
+      will-change: transform;
+      {% if section.settings.pause_on_hover %}transition: animation-play-state .15s ease;{% endif %}
+    }
+    #pt-{{ section.id }} .pt-track{ display:flex; direction:ltr; }
+    #pt-{{ section.id }} .pt-item{ flex:0 0 auto; padding:0 var(--gap); white-space:nowrap; }
+    #pt-{{ section.id }} .pt-dot{ opacity:.35; margin:0 .25rem; }
+    @keyframes pt-scroll-{{ section.id }}{ 0%{transform:translateX(0%)} 100%{transform:translateX(-50%)} }
+    {% if section.settings.pause_on_hover %}
+    #pt-{{ section.id }}:hover .pt-wrap{ animation-play-state: paused; }
+    {% endif %}
+    @media (max-width: 480px){
+      #pt-{{ section.id }} .pt-bar{ height: {{ section.settings.bar_height | minus: 4 }}px; font-size: {{ section.settings.font_size | minus: 1 }}px; }
+      #pt-{{ section.id }} .pt-item{ padding:0 calc(var(--gap)*.7); }
+    }
+  </style>
+
+  <div class="pt-bar" aria-live="polite">
+    <div class="pt-wrap">
+      <div class="pt-track" aria-hidden="true">
+        {%- for n in (1..loops_needed) -%}
+          {%- for block in section.blocks -%}
+            <span class="pt-item" {{ block.shopify_attributes }}>{{ block.settings.text }}</span><span class="pt-dot">•</span>
+          {%- endfor -%}
+        {%- endfor -%}
+      </div>
+      <div class="pt-track" aria-hidden="true">
+        {%- for n in (1..loops_needed) -%}
+          {%- for block in section.blocks -%}
+            <span class="pt-item">{{ block.settings.text }}</span><span class="pt-dot">•</span>
+          {%- endfor -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Promo Ticker",
+  "class": "section-promo-ticker",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "Accessibility label", "default": "Promotions" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#ffffff" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#111111" },
+    { "type": "range", "id": "bar_height", "label": "Bar height (px)", "min": 32, "max": 80, "step": 2, "default": 44 },
+    { "type": "range", "id": "font_size", "label": "Font size (px)", "min": 12, "max": 22, "step": 1, "default": 15 },
+    { "type": "select", "id": "font_weight", "label": "Font weight", "default": "700", "options": [
+      { "label": "Medium (500)", "value": "500" },
+      { "label": "Semibold (600)", "value": "600" },
+      { "label": "Bold (700)", "value": "700" }
+    ]},
+    { "type": "checkbox", "id": "uppercase", "label": "Uppercase text", "default": true },
+    { "type": "range", "id": "item_gap", "label": "Gap between items (rem)", "min": 1, "max": 6, "step": 0.5, "default": 3 },
+    { "type": "range", "id": "scroll_duration", "label": "Scroll duration (seconds)", "min": 8, "max": 300, "step": 4, "default": 24 },
+    { "type": "checkbox", "id": "pause_on_hover", "label": "Pause on hover", "default": false },
+    { "type": "range", "id": "target_min_items", "label": "Target minimum items", "min": 30, "max": 200, "step": 5, "default": 90 }
+  ],
+  "blocks": [
+    { "type": "msg", "name": "Message", "settings": [
+      { "type": "text", "id": "text", "label": "Text", "default": "FREE NEXT DAY DELIVERY" }
+    ]}
+  ],
+  "presets": [
+    {
+      "name": "Promo Ticker (Numeric Speed)",
+      "blocks": [
+        { "type": "msg", "settings": { "text": "FREE NEXT DAY DELIVERY" } },
+        { "type": "msg", "settings": { "text": "25% OFF BLACK FRIDAY SALE!" } },
+        { "type": "msg", "settings": { "text": "OFFER ENDS SOON!" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
