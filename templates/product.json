@@ -113,6 +113,48 @@
         "padding_bottom": 24
       }
     },
+    "promoticketer_Jj8njc": {
+      "type": "PROMOTICKETER",
+      "blocks": {
+        "msg_3PJVxA": {
+          "type": "msg",
+          "settings": {
+            "text": "NEXT DAY DELIVERY AVAILABLE"
+          }
+        },
+        "msg_cwpmpU": {
+          "type": "msg",
+          "settings": {
+            "text": "35% OFF BLACK FRIDAY SALE!"
+          }
+        },
+        "msg_acHhdc": {
+          "type": "msg",
+          "settings": {
+            "text": "OFFER ENDS SOON!"
+          }
+        }
+      },
+      "block_order": [
+        "msg_3PJVxA",
+        "msg_cwpmpU",
+        "msg_acHhdc"
+      ],
+      "name": "Promo Ticker (Numeric Speed)",
+      "settings": {
+        "aria_label": "Promotions",
+        "bg_color": "#ffffff",
+        "text_color": "#111111",
+        "bar_height": 44,
+        "font_size": 15,
+        "font_weight": "700",
+        "uppercase": true,
+        "item_gap": 3,
+        "scroll_duration": 176,
+        "pause_on_hover": false,
+        "target_min_items": 90
+      }
+    },
     "samplesection_fmFe4J": {
       "type": "samplesection",
       "name": "Sample Bundle + 50ml Carousel",
@@ -382,6 +424,7 @@
   },
   "order": [
     "main",
+    "promoticketer_Jj8njc",
     "samplesection_fmFe4J",
     "related-products",
     "tiktokreviews_NNez8r",
