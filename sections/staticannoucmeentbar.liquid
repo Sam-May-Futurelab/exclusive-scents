@@ -1,0 +1,59 @@
+{% comment %}
+Static Announcement Bar — Customizable Colours (no schema errors)
+{% endcomment %}
+
+<section class="announcement-bar" role="region" aria-label="Store announcement"
+  style="background: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};">
+  <div class="announcement-bar__inner">
+    {% if section.settings.link != blank %}
+      <a href="{{ section.settings.link }}" class="announcement-bar__text" style="color: {{ section.settings.text_color }};">
+        {{ section.settings.text }}
+      </a>
+    {% else %}
+      <span class="announcement-bar__text">{{ section.settings.text }}</span>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .announcement-bar{width:100%;font-family:inherit}
+  .announcement-bar__inner{max-width:var(--page-width,1200px);margin:0 auto;padding:.65rem 1rem;text-align:center}
+  .announcement-bar__text{display:inline-block;font-weight:800;letter-spacing:.04em;text-transform:uppercase;line-height:1.1;font-size:clamp(13px,2.6vw,15px);text-decoration:none}
+  .announcement-bar__text:hover{opacity:.85}
+</style>
+
+{% schema %}
+{
+  "name": "CustomizBar",
+  "tag": "section",
+  "class": "custom-announcement-bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement text",
+      "default": "40% BLACK FRIDAY SALE"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background colour",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text colour",
+      "default": "#ffffff"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Optional link"
+    }
+  ],
+  "presets": [
+    { "name": "Customizable Announcement Bar" }
+  ]
+}
+{% endschema %}
