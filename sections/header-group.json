@@ -48,17 +48,6 @@
         "highlight_style": "none"
       }
     },
-    "staticannoucmeentbar_GhJ6h4": {
-      "type": "staticannoucmeentbar",
-      "disabled": true,
-      "name": "Customizable Announcement Bar",
-      "settings": {
-        "text": "40% BLACK FRIDAY SALE",
-        "bg_color": "#000000",
-        "text_color": "#ffffff",
-        "link": ""
-      }
-    },
     "header": {
       "type": "header",
       "settings": {
@@ -105,37 +94,13 @@
         "enable_country_selector": false,
         "enable_language_selector": false
       }
-    },
-    "headstatic_x4AtHG": {
-      "type": "headstatic",
-      "name": "Static Announcement Bar",
-      "settings": {
-        "message": "35% OFF Black Friday sale - automatic code",
-        "link": "",
-        "link_new_tab": false,
-        "full_width": true,
-        "content_max_width": 1200,
-        "bar_height": 48,
-        "alignment": "center",
-        "sticky": false,
-        "font_size": 19,
-        "font_size_mobile": 13,
-        "font_weight": 800,
-        "letter_spacing": 0.8,
-        "text_align": "center",
-        "uppercase": true,
-        "bg": "#000000",
-        "text_color": "#faf300"
-      }
     }
   },
   "order": [
     "announcement_bar_c8mcDB",
     "tiktokexplore_WGjkKW",
-    "staticannoucmeentbar_GhJ6h4",
     "header",
     "announcement_bar_D6Yf3D",
-    "announcement_bar_gFGELc",
-    "headstatic_x4AtHG"
+    "announcement_bar_gFGELc"
   ]
 }
