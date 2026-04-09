@@ -94,16 +94,6 @@
         "enable_country_selector": false,
         "enable_language_selector": false
       }
-    },
-    "staticannoucmeentbar_rWKwGJ": {
-      "type": "staticannoucmeentbar",
-      "name": "Customizable Announcement Bar",
-      "settings": {
-        "text": "30% OFF MOTHERS DAY : CODE - MOTHERSDAY30",
-        "bg_color": "#000000",
-        "text_color": "#ffffff",
-        "link": ""
-      }
     }
   },
   "order": [
@@ -111,7 +101,6 @@
     "tiktokexplore_WGjkKW",
     "header",
     "announcement_bar_D6Yf3D",
-    "announcement_bar_gFGELc",
-    "staticannoucmeentbar_rWKwGJ"
+    "announcement_bar_gFGELc"
   ]
 }
