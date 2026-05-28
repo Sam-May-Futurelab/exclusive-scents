@@ -9,6 +9,54 @@
  */
 {
   "sections": {
+    "image_banner_nAqdm9": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_cGMYac": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Luxury Inspired Fragrances</strong>",
+            "heading_size": "h1"
+          }
+        },
+        "text_fcAwWr": {
+          "type": "text",
+          "settings": {
+            "text": "<strong>Without The Luxury Price Tag</strong>",
+            "text_style": "body"
+          }
+        },
+        "buttons_TpjtTQ": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "SHOP MEN",
+            "button_link_1": "shopify://collections/mens",
+            "button_style_secondary_1": true,
+            "button_label_2": "SHOP WOMEN",
+            "button_link_2": "shopify://collections/womens",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_cGMYac",
+        "text_fcAwWr",
+        "buttons_TpjtTQ"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": true,
+        "color_scheme": "",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
     "luxury_hero_main": {
       "type": "luxury-hero",
       "custom_css": [],
@@ -299,6 +347,7 @@
     }
   },
   "order": [
+    "image_banner_nAqdm9",
     "luxury_hero_main",
     "luxury_bundles_main",
     "collection_list_yJhE7U",
