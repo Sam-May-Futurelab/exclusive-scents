@@ -16,7 +16,7 @@
     "heading_scale": 125,
     "type_body_font": "montserrat_n4",
     "body_scale": 105,
-    "page_width": 1200,
+    "page_width": 1100,
     "spacing_sections": 0,
     "spacing_grid_horizontal": 28,
     "spacing_grid_vertical": 28,
@@ -46,7 +46,7 @@
     "card_style": "standard",
     "card_image_padding": 16,
     "card_text_alignment": "center",
-    "card_color_scheme": "scheme-1",
+    "card_color_scheme": "scheme-4",
     "card_border_thickness": 1,
     "card_border_opacity": 100,
     "card_corner_radius": 18,
@@ -57,7 +57,7 @@
     "collection_card_style": "card",
     "collection_card_image_padding": 0,
     "collection_card_text_alignment": "center",
-    "collection_card_color_scheme": "scheme-1",
+    "collection_card_color_scheme": "scheme-4",
     "collection_card_border_thickness": 1,
     "collection_card_border_opacity": 100,
     "collection_card_corner_radius": 10,
@@ -68,7 +68,7 @@
     "blog_card_style": "card",
     "blog_card_image_padding": 16,
     "blog_card_text_alignment": "center",
-    "blog_card_color_scheme": "scheme-1",
+    "blog_card_color_scheme": "scheme-4",
     "blog_card_border_thickness": 1,
     "blog_card_border_opacity": 100,
     "blog_card_corner_radius": 18,
@@ -181,11 +181,6 @@
       "855628211100114053": {
         "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
         "disabled": false,
-        "settings": {}
-      },
-      "14952540001915115444": {
-        "type": "shopify://apps/upcart-cart-drawer/blocks/app-embed/af3da5fb-f5f7-40ec-8273-41bf50059d4b",
-        "disabled": true,
         "settings": {}
       }
     },

@@ -117,13 +117,13 @@
       "settings": {
         "title": "Shop By Category",
         "heading_size": "h2",
-        "image_ratio": "adapt",
+        "image_ratio": "portrait",
         "columns_desktop": 3,
-        "color_scheme": "background-1",
-        "show_view_all": true,
+        "color_scheme": "scheme-4",
+        "show_view_all": false,
         "columns_mobile": "2",
         "swipe_on_mobile": false,
-        "padding_top": 80,
+        "padding_top": 72,
         "padding_bottom": 40
       }
     },
@@ -169,8 +169,8 @@
         "desktop_content_position": "middle",
         "desktop_content_alignment": "center",
         "mobile_content_alignment": "center",
-        "section_color_scheme": "",
-        "color_scheme": "",
+        "section_color_scheme": "scheme-4",
+        "color_scheme": "scheme-4",
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -227,7 +227,7 @@
         "show_testimonial": true,
         "testimonial_text": "Amazing quality fragrances that last all day. I've tried many expensive brands but these are just as good for a fraction of the price!",
         "testimonial_author": "Sarah M., Verified Customer",
-        "color_scheme": "background-1",
+        "color_scheme": "inverse",
         "padding_top": 80,
         "padding_bottom": 80
       }
@@ -248,7 +248,7 @@
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
-        "color_scheme": "background-2",
+        "color_scheme": "scheme-4",
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": true,
@@ -280,7 +280,7 @@
         "show_image": true,
         "show_date": true,
         "show_author": false,
-        "color_scheme": "",
+        "color_scheme": "scheme-4",
         "padding_top": 36,
         "padding_bottom": 36
       }
