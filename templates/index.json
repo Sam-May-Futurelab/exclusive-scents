@@ -18,14 +18,14 @@
         "desktop_height": 70,
         "mobile_height": 60,
         "subheading": "Designer Inspired Fragrances",
-        "heading": "Without The Luxury Price Tag",
+        "heading": "<strong>Without The Luxury Price Tag</strong>",
         "text": "<p>Discover our collection of premium Extrait De Parfum - strong, long-lasting, and ethically made for the modern fragrance lover.</p>",
         "button_label_1": "Shop Now",
         "button_link_1": "shopify://collections/all",
         "button_label_2": "SHOP WOMEN",
         "button_link_2": "shopify://collections/womens",
-        "trust_badges": true,
-        "color_scheme": "background-1"
+        "trust_badges": false,
+        "color_scheme": "inverse"
       }
     },
     "luxury_bundles_main": {
