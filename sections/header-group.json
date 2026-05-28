@@ -66,41 +66,11 @@
         "padding_top": 16,
         "padding_bottom": 12
       }
-    },
-    "announcement_bar_D6Yf3D": {
-      "type": "announcement-bar",
-      "disabled": true,
-      "name": "t:sections.announcement-bar.presets.name",
-      "settings": {
-        "auto_rotate": false,
-        "change_slides_speed": 5,
-        "color_scheme": "scheme-4",
-        "show_line_separator": true,
-        "show_social": false,
-        "enable_country_selector": false,
-        "enable_language_selector": false
-      }
-    },
-    "announcement_bar_gFGELc": {
-      "type": "announcement-bar",
-      "custom_css": [],
-      "name": "t:sections.announcement-bar.presets.name",
-      "settings": {
-        "auto_rotate": false,
-        "change_slides_speed": 5,
-        "color_scheme": "scheme-4",
-        "show_line_separator": true,
-        "show_social": false,
-        "enable_country_selector": false,
-        "enable_language_selector": false
-      }
     }
   },
   "order": [
     "announcement_bar_c8mcDB",
     "tiktokexplore_WGjkKW",
-    "header",
-    "announcement_bar_D6Yf3D",
-    "announcement_bar_gFGELc"
+    "header"
   ]
 }
