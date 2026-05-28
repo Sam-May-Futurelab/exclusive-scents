@@ -14,7 +14,7 @@
     "favicon": "shopify://shop_images/Dark_Color-8_1.png",
     "type_header_font": "montserrat_n4",
     "heading_scale": 125,
-    "type_body_font": "red_hat_display_n4",
+    "type_body_font": "montserrat_n4",
     "body_scale": 105,
     "page_width": 1200,
     "spacing_sections": 0,
