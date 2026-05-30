@@ -21,11 +21,21 @@
         "heading": "<strong>Without The Designer Markup</strong>",
         "text": "<p>Experience the intensity Of Extrait de Parfum. Handcrafted, long-lasting, and cruelty free. Your signature scent is waiting.</p>",
         "button_label_1": "Shop Best Sellers",
-        "button_link_1": "shopify://collections/all",
+        "button_link_1": "shopify://collections/extrait-sprays",
         "button_label_2": "SHOP WOMEN",
         "button_link_2": "shopify://collections/womens",
         "trust_badges": false,
         "color_scheme": "inverse"
+      }
+    },
+    "staticannoucmeentbar_pp8CdC": {
+      "type": "staticannoucmeentbar",
+      "name": "Customizable Announcement Bar",
+      "settings": {
+        "text": "FREE SAMPLE WITH EVERY PURCHASE",
+        "bg_color": "#000000",
+        "text_color": "#ffffff",
+        "link": ""
       }
     },
     "luxury_bundles_main": {
@@ -300,6 +310,7 @@
   },
   "order": [
     "luxury_hero_main",
+    "staticannoucmeentbar_pp8CdC",
     "luxury_bundles_main",
     "collection_list_yJhE7U",
     "image_with_text_mq8cNC",
