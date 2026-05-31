@@ -17,12 +17,12 @@
         "overlay_opacity": 30,
         "desktop_height": 70,
         "mobile_height": 60,
-        "subheading": "Luxury Fragrances",
-        "heading": "<strong>Without The Designer Markup</strong>",
-        "text": "<p>Experience the intensity Of Extrait de Parfum. Handcrafted, long-lasting, and cruelty free. Your signature scent is waiting.</p>",
+        "subheading": "Premium Extrait de Parfum Fragrances",
+        "heading": "<strong>Luxury Fragrances Without The Designer Markup</strong>",
+        "text": "<p>Experience the intensity of Extrait de Parfum. Handcrafted, long-lasting, and cruelty-free. Your signature scent is waiting—at a fraction of designer prices.</p>",
         "button_label_1": "Shop Best Sellers",
         "button_link_1": "shopify://collections/extrait-sprays",
-        "button_label_2": "SHOP WOMEN",
+        "button_label_2": "Explore Women's",
         "button_link_2": "shopify://collections/womens",
         "trust_badges": false,
         "color_scheme": "inverse"
@@ -32,7 +32,7 @@
       "type": "staticannoucmeentbar",
       "name": "Customizable Announcement Bar",
       "settings": {
-        "text": "FREE SAMPLE WITH EVERY PURCHASE",
+        "text": "FREE SAMPLE WITH EVERY PURCHASE • FAST UK SHIPPING",
         "bg_color": "#000000",
         "text_color": "#ffffff",
         "link": ""
@@ -91,7 +91,7 @@
       ],
       "settings": {
         "title": "Exclusive <em>Bundle Offers</em>",
-        "subtitle": "Save more when you bundle your favorite luxury scents",
+        "subtitle": "Save more when you bundle your favorite luxury scents. Limited time offers on curated collections.",
         "color_scheme": "background-2",
         "padding_top": 40,
         "padding_bottom": 80
@@ -150,14 +150,14 @@
         "text_JFTU4q": {
           "type": "text",
           "settings": {
-            "text": "<p>Handcrafted to inspire confidence.</p><p>Explore our designer-inspired perfumes - long-lasting, cruelty-free, and made for those who stand out.</p>",
+            "text": "<p>Handcrafted to inspire confidence. Explore our designer-inspired perfumes—long-lasting, cruelty-free, and made for those who stand out.</p>",
             "text_style": "body"
           }
         },
         "button_4AEpeA": {
           "type": "button",
           "settings": {
-            "button_label": "Shop the Collection",
+            "button_label": "Explore All Fragrances",
             "button_link": "shopify://collections/all",
             "button_style_secondary": true
           }
@@ -233,11 +233,11 @@
       ],
       "settings": {
         "title": "Why Choose <em>Exclusive Scents</em>?",
-        "subtitle": "Established in 2022, we believe luxury shouldn't cost a fortune",
+        "subtitle": "Established in 2022, we deliver luxury fragrances at prices that make sense. Premium quality, ethical sourcing, and exceptional customer service.",
         "show_testimonial": true,
-        "testimonial_text": "Amazing quality fragrances that last all day. I've tried many expensive brands but these are just as good for a fraction of the price!",
+        "testimonial_text": "Amazing quality fragrances that last all day. I've tried many expensive brands but these are just as good for a fraction of the price! The customer service is outstanding too.",
         "testimonial_author": "Sarah M., Verified Customer",
-        "color_scheme": "inverse",
+        "color_scheme": "background-1",
         "padding_top": 80,
         "padding_bottom": 80
       }
@@ -247,10 +247,10 @@
       "custom_css": [],
       "settings": {
         "collection": "extrait-sprays",
-        "products_to_show": 10,
+        "products_to_show": 8,
         "title": "Discover Our Best Sellers",
-        "heading_size": "h2",
-        "description": "<p>Hand-picked fragrances loved by our customers worldwide</p>",
+        "heading_size": "h1",
+        "description": "<p>Hand-picked fragrances loved by our customers worldwide. Premium quality, exceptional longevity, and unforgettable scents.</p>",
         "show_description": true,
         "description_style": "body",
         "columns_desktop": 4,
@@ -267,8 +267,8 @@
         "quick_add": "standard",
         "columns_mobile": "2",
         "swipe_on_mobile": true,
-        "padding_top": 80,
-        "padding_bottom": 40
+        "padding_top": 100,
+        "padding_bottom": 60
       }
     },
     "17501054157be840f6": {
@@ -283,10 +283,10 @@
       "settings": {
         "blog": "news",
         "post_limit": 3,
-        "heading": "Blog posts",
+        "heading": "Fragrance Tips & Stories",
         "heading_size": "h1",
         "columns_desktop": 3,
-        "show_view_all": true,
+        "show_view_all": false,
         "show_image": true,
         "show_date": true,
         "show_author": false,

@@ -17,14 +17,14 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "JOIN THE CLUB!",
-            "heading_size": "h2"
+            "heading": "JOIN THE EXCLUSIVE SCENTS CLUB",
+            "heading_size": "h1"
           }
         },
         "paragraph": {
           "type": "paragraph",
           "settings": {
-            "text": "<p>Be the first to know about new collections and exclusive offers.</p>"
+            "text": "<p>Get 15% off your first order + exclusive early access to new collections. Be the first to know about limited editions and special offers.</p>"
           }
         },
         "email-form": {
@@ -40,8 +40,8 @@
       "settings": {
         "color_scheme": "scheme-4",
         "full_width": true,
-        "padding_top": 32,
-        "padding_bottom": 24
+        "padding_top": 60,
+        "padding_bottom": 60
       }
     },
     "footer": {

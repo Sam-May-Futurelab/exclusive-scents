@@ -22,13 +22,13 @@
     "spacing_grid_vertical": 28,
     "animations_reveal_on_scroll": true,
     "animations_hover_elements": "none",
-    "buttons_border_thickness": 1,
+    "buttons_border_thickness": 2,
     "buttons_border_opacity": 100,
-    "buttons_radius": 40,
-    "buttons_shadow_opacity": 0,
+    "buttons_radius": 8,
+    "buttons_shadow_opacity": 15,
     "buttons_shadow_horizontal_offset": 0,
     "buttons_shadow_vertical_offset": 4,
-    "buttons_shadow_blur": 5,
+    "buttons_shadow_blur": 10,
     "variant_pills_border_thickness": 1,
     "variant_pills_border_opacity": 55,
     "variant_pills_radius": 40,
@@ -43,17 +43,17 @@
     "inputs_shadow_horizontal_offset": 0,
     "inputs_shadow_vertical_offset": 4,
     "inputs_shadow_blur": 5,
-    "card_style": "standard",
+    "card_style": "card",
     "card_image_padding": 16,
     "card_text_alignment": "center",
     "card_color_scheme": "scheme-4",
     "card_border_thickness": 1,
     "card_border_opacity": 100,
-    "card_corner_radius": 18,
-    "card_shadow_opacity": 0,
+    "card_corner_radius": 12,
+    "card_shadow_opacity": 10,
     "card_shadow_horizontal_offset": 0,
-    "card_shadow_vertical_offset": 4,
-    "card_shadow_blur": 5,
+    "card_shadow_vertical_offset": 8,
+    "card_shadow_blur": 10,
     "collection_card_style": "card",
     "collection_card_image_padding": 0,
     "collection_card_text_alignment": "center",
@@ -238,6 +238,17 @@
           "button_label": "#e32402",
           "secondary_button_label": "#ffffff",
           "shadow": "#0e1b4d"
+        }
+      },
+      "scheme-teal-luxury": {
+        "settings": {
+          "background": "#ffffff",
+          "background_gradient": "",
+          "text": "#000000",
+          "button": "#008B8B",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#008B8B",
+          "shadow": "#000000"
         }
       }
     }
