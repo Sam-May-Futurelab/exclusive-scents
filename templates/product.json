@@ -99,7 +99,7 @@
       ],
       "settings": {
         "enable_sticky_info": false,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "media_size": "small",
         "constrain_to_viewport": true,
         "media_fit": "contain",
@@ -143,8 +143,8 @@
       "name": "Promo Ticker (Numeric Speed)",
       "settings": {
         "aria_label": "Promotions",
-        "bg_color": "#ffffff",
-        "text_color": "#111111",
+        "bg_color": "#000000",
+        "text_color": "#ffffff",
         "bar_height": 44,
         "font_size": 15,
         "font_weight": "700",
@@ -155,27 +155,6 @@
         "target_min_items": 90
       }
     },
-    "samplesection_fmFe4J": {
-      "type": "samplesection",
-      "name": "Sample Bundle + 50ml Carousel",
-      "settings": {
-        "heading": "Unsure which 50ml to purchase?",
-        "subheading": "Try five 2ml samples and discover your favourite.",
-        "banner_title": "Sample Bundle",
-        "banner_text": "Build your own discovery set with any five fragrances in 2ml vials.",
-        "banner_cta": "Build your 5 x 2ml set",
-        "cta_link": "shopify://products/build-your-own-discovery-set-5-x-2ml-sprays",
-        "bundle_handle": "build-your-own-discovery-set-5x2ml",
-        "collection": "extrait-sprays",
-        "filter_mode": "title",
-        "filter_value": "",
-        "show_price": false,
-        "autoplay": true,
-        "autoplay_ms": 3500,
-        "color_scheme": "",
-        "accent": "#111111"
-      }
-    },
     "related-products": {
       "type": "related-products",
       "settings": {
@@ -184,7 +163,7 @@
         "products_to_show": 4,
         "columns_desktop": 4,
         "columns_mobile": "2",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "image_ratio": "portrait",
         "image_shape": "default",
         "show_secondary_image": true,
@@ -425,7 +404,6 @@
   "order": [
     "main",
     "promoticketer_Jj8njc",
-    "samplesection_fmFe4J",
     "related-products",
     "tiktokreviews_NNez8r",
     "1753193282b23ee83d",
