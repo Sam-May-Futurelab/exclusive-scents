@@ -113,48 +113,6 @@
         "padding_bottom": 24
       }
     },
-    "promoticketer_Jj8njc": {
-      "type": "PROMOTICKETER",
-      "blocks": {
-        "msg_3PJVxA": {
-          "type": "msg",
-          "settings": {
-            "text": "NEXT DAY DELIVERY AVAILABLE"
-          }
-        },
-        "msg_cwpmpU": {
-          "type": "msg",
-          "settings": {
-            "text": "35% OFF BLACK FRIDAY SALE!"
-          }
-        },
-        "msg_acHhdc": {
-          "type": "msg",
-          "settings": {
-            "text": "OFFER ENDS SOON!"
-          }
-        }
-      },
-      "block_order": [
-        "msg_3PJVxA",
-        "msg_cwpmpU",
-        "msg_acHhdc"
-      ],
-      "name": "Promo Ticker (Numeric Speed)",
-      "settings": {
-        "aria_label": "Promotions",
-        "bg_color": "#000000",
-        "text_color": "#ffffff",
-        "bar_height": 44,
-        "font_size": 15,
-        "font_weight": "700",
-        "uppercase": true,
-        "item_gap": 3,
-        "scroll_duration": 176,
-        "pause_on_hover": false,
-        "target_min_items": 90
-      }
-    },
     "related-products": {
       "type": "related-products",
       "settings": {
@@ -403,7 +361,6 @@
   },
   "order": [
     "main",
-    "promoticketer_Jj8njc",
     "related-products",
     "tiktokreviews_NNez8r",
     "1753193282b23ee83d",
