@@ -1,0 +1,224 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.bp{background:#FDFCFA;font-family:'Jost',sans-serif;color:#1C1C1A}
+.serif{font-family:'Playfair Display',serif}
+.gold{color:#B8955A}
+.muted{color:#8A8780}
+.bp-hero{text-align:center;padding:56px 40px 48px;border-bottom:0.5px solid rgba(28,28,26,0.08)}
+.bp-eyebrow{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#B8955A;margin-bottom:14px}
+.bp-title{font-family:'Playfair Display',serif;font-size:40px;font-weight:300;color:#1C1C1A;line-height:1.15;margin-bottom:10px}
+.bp-title em{font-style:italic;color:#8A8780}
+.bp-sub{font-size:13px;color:#8A8780;line-height:1.7;max-width:520px;margin:0 auto 24px}
+.bp-trust{display:flex;justify-content:center;gap:28px;flex-wrap:wrap}
+.bp-trust-item{display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#8A8780}
+.bp-trust-dot{width:4px;height:4px;border-radius:50%;background:#B8955A;flex-shrink:0}
+.bp-how{padding:40px;background:#F7F5F1;border-bottom:0.5px solid rgba(28,28,26,0.08)}
+.bp-how-title{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:#B8955A;text-align:center;margin-bottom:24px}
+.bp-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(28,28,26,0.08)}
+.bp-step{background:#F7F5F1;padding:24px;text-align:center}
+.bp-step-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:300;color:rgba(28,28,26,0.12);margin-bottom:8px}
+.bp-step-title{font-size:12px;font-weight:500;color:#1C1C1A;letter-spacing:0.05em;margin-bottom:6px}
+.bp-step-desc{font-size:11px;color:#8A8780;line-height:1.6}
+.bp-bundles{padding:48px 40px}
+.bp-bundles-header{text-align:center;margin-bottom:36px}
+.bp-bundles-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:300;color:#1C1C1A;margin-bottom:6px}
+.bp-bundles-sub{font-size:12px;color:#8A8780}
+.bp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(28,28,26,0.08)}
+.bp-card{background:#FDFCFA;padding:0;display:flex;flex-direction:column;position:relative}
+.bp-card.featured{background:#1C1C1A}
+.bp-badge{background:#B8955A;color:#1C1C1A;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;padding:5px 0;text-align:center;font-family:'Jost',sans-serif}
+.bp-card-img{aspect-ratio:4/3;background:#F0EDE8;display:flex;align-items:center;justify-content:center}
+.bp-card.featured .bp-card-img{background:#2a2a28}
+.bp-card-img-ph{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#8A8780}
+.bp-card.featured .bp-card-img-ph{color:rgba(253,252,250,0.2)}
+.bp-card-body{padding:24px;flex:1;display:flex;flex-direction:column}
+.bp-card-size{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:#B8955A;margin-bottom:8px}
+.bp-card-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:300;color:#1C1C1A;margin-bottom:6px}
+.bp-card.featured .bp-card-name{color:#FDFCFA}
+.bp-card-desc{font-size:11px;color:#8A8780;line-height:1.6;margin-bottom:20px}
+.bp-card.featured .bp-card-desc{color:rgba(253,252,250,0.4)}
+.bp-includes{margin-bottom:20px}
+.bp-includes-label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(28,28,26,0.3);margin-bottom:8px}
+.bp-card.featured .bp-includes-label{color:rgba(253,252,250,0.2)}
+.bp-include{display:flex;align-items:center;gap:8px;font-size:11px;color:#8A8780;margin-bottom:6px}
+.bp-card.featured .bp-include{color:rgba(253,252,250,0.5)}
+.bp-include::before{content:'';width:4px;height:4px;background:#B8955A;border-radius:50%;flex-shrink:0}
+.bp-divider{height:0.5px;background:rgba(28,28,26,0.08);margin-bottom:20px}
+.bp-card.featured .bp-divider{background:rgba(253,252,250,0.08)}
+.bp-price-row{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+.bp-price{font-family:'Playfair Display',serif;font-size:28px;font-weight:300;color:#1C1C1A}
+.bp-card.featured .bp-price{color:#FDFCFA}
+.bp-per{font-size:10px;color:#8A8780;letter-spacing:0.08em}
+.bp-saving{font-size:10px;color:#B8955A;letter-spacing:0.08em;margin-bottom:20px}
+.bp-btn{display:block;text-align:center;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;padding:13px;cursor:pointer;font-family:'Jost',sans-serif;text-decoration:none;margin-top:auto;background:transparent;border:0.5px solid rgba(28,28,26,0.25);color:#1C1C1A;transition:all 0.2s}
+.bp-btn:hover{background:#1C1C1A;color:#FDFCFA;-webkit-text-fill-color:#FDFCFA}
+.bp-card.featured .bp-btn{background:#B8955A;border-color:#B8955A;color:#1C1C1A}
+.bp-card.featured .bp-btn:hover{opacity:0.85}
+.bp-faq{padding:48px 40px;background:#F7F5F1;border-top:0.5px solid rgba(28,28,26,0.08)}
+.bp-faq-header{text-align:center;margin-bottom:28px}
+.bp-faq-eyebrow{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#B8955A;margin-bottom:12px}
+.bp-faq-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:300;color:#1C1C1A}
+.bp-faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(28,28,26,0.08)}
+.bp-faq-item{background:#F7F5F1;padding:20px 24px}
+.bp-faq-q{font-size:12px;font-weight:500;color:#1C1C1A;margin-bottom:8px;letter-spacing:0.02em}
+.bp-faq-a{font-size:11px;color:#8A8780;line-height:1.7}
+.bp-cta{padding:56px 40px;text-align:center;background:#1C1C1A}
+.bp-cta-eyebrow{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#B8955A;margin-bottom:12px}
+.bp-cta-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:300;color:#FDFCFA;margin-bottom:8px}
+.bp-cta-sub{font-size:12px;color:rgba(253,252,250,0.4);margin-bottom:24px;line-height:1.6}
+.bp-cta-btn{display:inline-block;background:#B8955A;color:#1C1C1A;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;padding:14px 40px;font-family:'Jost',sans-serif;text-decoration:none}
+</style>
+
+<div class="bp">
+
+  <div class="bp-hero">
+    <p class="bp-eyebrow">Exclusive Scents Bundles</p>
+    <h1 class="bp-title serif">Try before you <em>commit</em></h1>
+    <p class="bp-sub">Sample, explore, and find your signature scent. Every bundle is handpicked for value — luxury extrait de parfum at a fraction of designer prices.</p>
+    <div class="bp-trust">
+      <div class="bp-trust-item"><span class="bp-trust-dot"></span>35% extrait concentration</div>
+      <div class="bp-trust-item"><span class="bp-trust-dot"></span>Free sample with every order</div>
+      <div class="bp-trust-item"><span class="bp-trust-dot"></span>Same day dispatch before 1pm</div>
+      <div class="bp-trust-item"><span class="bp-trust-dot"></span>Free UK shipping over £50</div>
+    </div>
+  </div>
+
+  <div class="bp-how">
+    <p class="bp-how-title">How it works</p>
+    <div class="bp-steps">
+      <div class="bp-step">
+        <p class="bp-step-num serif">01</p>
+        <p class="bp-step-title">Choose your bundle</p>
+        <p class="bp-step-desc">Pick the size that suits you — sample, purse spray, or full size.</p>
+      </div>
+      <div class="bp-step">
+        <p class="bp-step-num serif">02</p>
+        <p class="bp-step-title">Select your scents</p>
+        <p class="bp-step-desc">After checkout, you'll be asked to choose which fragrances you'd like.</p>
+      </div>
+      <div class="bp-step">
+        <p class="bp-step-num serif">03</p>
+        <p class="bp-step-title">We dispatch same day</p>
+        <p class="bp-step-desc">Order before 1pm Mon–Sat and your bundle ships the same day.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bp-bundles">
+    <div class="bp-bundles-header">
+      <p class="bp-eyebrow">Our bundles</p>
+      <h2 class="bp-bundles-title serif">Choose your collection</h2>
+      <p class="bp-bundles-sub">All bundles include free gift packaging and a scent guide</p>
+    </div>
+    <div class="bp-grid">
+      <div class="bp-card">
+        <div class="bp-card-img"><span class="bp-card-img-ph">Product image</span></div>
+        <div class="bp-card-body">
+          <p class="bp-card-size">5 × 3ml · Sample vials</p>
+          <p class="bp-card-name serif">Discovery Set</p>
+          <p class="bp-card-desc">Perfect for first-timers. Explore five bestselling fragrances before committing to a full size.</p>
+          <div class="bp-includes">
+            <p class="bp-includes-label">Includes</p>
+            <div class="bp-include">5 × 3ml travel vials</div>
+            <div class="bp-include">Choose any 5 scents</div>
+            <div class="bp-include">Gift-ready packaging</div>
+            <div class="bp-include">Scent guide included</div>
+          </div>
+          <div class="bp-divider"></div>
+          <div class="bp-price-row">
+            <span class="bp-price serif">£14.99</span>
+            <span class="bp-per">· £3.00 per scent</span>
+          </div>
+          <p class="bp-saving">Save vs individual samples</p>
+          <a class="bp-btn" href="/products/discovery-set">Shop Discovery Set</a>
+        </div>
+      </div>
+      <div class="bp-card featured">
+        <div class="bp-badge">Most Popular</div>
+        <div class="bp-card-img"><span class="bp-card-img-ph">Product image</span></div>
+        <div class="bp-card-body">
+          <p class="bp-card-size">3 × 15ml · Purse sprays</p>
+          <p class="bp-card-name serif">Signature Trio</p>
+          <p class="bp-card-desc">Your everyday carry. Three purse-sized sprays that last weeks — ideal for gifting or daily rotation.</p>
+          <div class="bp-includes">
+            <p class="bp-includes-label">Includes</p>
+            <div class="bp-include">3 × 15ml sprays</div>
+            <div class="bp-include">Choose any 3 scents</div>
+            <div class="bp-include">Premium gift box</div>
+            <div class="bp-include">Free ribbon wrapping</div>
+          </div>
+          <div class="bp-divider"></div>
+          <div class="bp-price-row">
+            <span class="bp-price serif">£34.99</span>
+            <span class="bp-per">· £11.66 per bottle</span>
+          </div>
+          <p class="bp-saving">Save £15 vs buying separately</p>
+          <a class="bp-btn" href="/products/signature-trio">Shop Signature Trio</a>
+        </div>
+      </div>
+      <div class="bp-card">
+        <div class="bp-card-img"><span class="bp-card-img-ph">Product image</span></div>
+        <div class="bp-card-body">
+          <p class="bp-card-size">3 × 50ml · Full size</p>
+          <p class="bp-card-name serif">Luxury Collection</p>
+          <p class="bp-card-desc">The complete experience. Three full-size bottles — enough to last months of all-day wear.</p>
+          <div class="bp-includes">
+            <p class="bp-includes-label">Includes</p>
+            <div class="bp-include">3 × 50ml full bottles</div>
+            <div class="bp-include">Choose any 3 scents</div>
+            <div class="bp-include">Luxury presentation box</div>
+            <div class="bp-include">Priority shipping</div>
+          </div>
+          <div class="bp-divider"></div>
+          <div class="bp-price-row">
+            <span class="bp-price serif">£74.99</span>
+            <span class="bp-per">· £25.00 per bottle</span>
+          </div>
+          <p class="bp-saving">Save £45 vs buying separately</p>
+          <a class="bp-btn" href="/products/luxury-collection">Shop Luxury Collection</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bp-faq">
+    <div class="bp-faq-header">
+      <p class="bp-faq-eyebrow">Got questions?</p>
+      <h2 class="bp-faq-title serif">Everything you need to know</h2>
+    </div>
+    <div class="bp-faq-grid">
+      <div class="bp-faq-item">
+        <p class="bp-faq-q">How do I choose my scents?</p>
+        <p class="bp-faq-a">After placing your order you'll receive an email asking you to choose your fragrances from our full collection. You have 24 hours to respond before we dispatch.</p>
+      </div>
+      <div class="bp-faq-item">
+        <p class="bp-faq-q">Can I mix men's and women's scents?</p>
+        <p class="bp-faq-a">Absolutely — all our fragrances are available in every bundle. Mix and match however you like across our full catalogue.</p>
+      </div>
+      <div class="bp-faq-item">
+        <p class="bp-faq-q">What concentration are the fragrances?</p>
+        <p class="bp-faq-a">All our fragrances are 35% extrait de parfum concentration — significantly stronger than standard eau de parfum, giving you longer lasting scent.</p>
+      </div>
+      <div class="bp-faq-item">
+        <p class="bp-faq-q">Can I use a discount code on bundles?</p>
+        <p class="bp-faq-a">Bundles are already heavily discounted so discount codes cannot be applied. The saving is built into the bundle price.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bp-cta">
+    <p class="bp-cta-eyebrow">Not sure which bundle?</p>
+    <h2 class="bp-cta-title serif">Find your perfect match</h2>
+    <p class="bp-cta-sub">Use our fragrance finder to discover which scents suit you before you buy.</p>
+    <a class="bp-cta-btn" href="/pages/find-your-fragrance">Find My Fragrance</a>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Bundles Page",
+  "settings": []
+}
+{% endschema %}
