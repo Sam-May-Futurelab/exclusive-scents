@@ -9,15 +9,10 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "main-page",
-      "settings": {
-        "padding_top": 56,
-        "padding_bottom": 56
-      }
+    "bundles-page": {
+      "type": "bundles-page",
+      "settings": {}
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["bundles-page"]
 }
